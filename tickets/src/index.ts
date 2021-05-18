@@ -5,6 +5,7 @@ const start = async () => {
   if (!process.env.JWT_KEY) {
     throw new Error("Environment variable 'JWT_KEY' is not defined.");
   }
+
   if (!process.env.MONGO_URI) {
     throw new Error("Environment variable 'MONGO_URI' is not defined.");
   }

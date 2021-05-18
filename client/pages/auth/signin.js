@@ -23,27 +23,29 @@ export default () => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <h1>Sign up</h1>
-      {errors}
-      <div className="form-group">
-        <label>Email Address</label>
-        <input
-          className="form-control"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-        />
-      </div>
-      <div className="form-group">
-        <label>Password</label>
-        <input
-          className="form-control"
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-        />
-      </div>
-      <button className="btn btn-primary">Sign In</button>
-    </form>
+    <div className="d-flex justify-content-center">
+      <form onSubmit={onSubmit}>
+        <h1>Sign In</h1>
+        {errors}
+        <div className="form-group">
+          <label>Email Address</label>
+          <input
+            className="form-control"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+          />
+        </div>
+        <div className="form-group">
+          <label>Password</label>
+          <input
+            className="form-control"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+          />
+        </div>
+        <button className="btn btn-primary w-100">Sign In</button>
+      </form>
+    </div>
   );
 };

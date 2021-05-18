@@ -6,7 +6,7 @@ export default () => {
   const { doRequest } = useRequest({
     url: "/api/users/signout",
     method: "post",
-    body: {},
+    body: { data: {} },
     onSuccess: () => Router.push("/"),
   });
 
