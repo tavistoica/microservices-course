@@ -1,10 +1,12 @@
 import request from "supertest";
 import { app } from "../../app";
 import { Ticket } from "../../model/ticket.model";
+import mongoose from "mongoose";
 
 it("fetches the order", async () => {
   //  Create ticket
   const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
   });
@@ -31,6 +33,7 @@ it("fetches the order", async () => {
 it("it returns an error if a user tries to fetch other user's order", async () => {
   //  Create ticket
   const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
   });
@@ -45,9 +48,9 @@ it("it returns an error if a user tries to fetch other user's order", async () =
     .expect(201);
 
   //  make request to fetch the order
-  await request(app)
+  const response = await request(app)
     .get(`/api/orders/${order.id}`)
     .set("Cookie", global.signin())
-    .send()
-    .expect(401);
+    .send();
+  expect(response).toMatchObject({ pitong: "pitong" });
 });

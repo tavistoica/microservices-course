@@ -3,6 +3,7 @@ import { app } from "../../app";
 import mongoose from "mongoose";
 import { Order, OrderStatus } from "../../model/order.model";
 import { Ticket } from "../../model/ticket.model";
+import { natsWrapper } from "../../nats-wrapper";
 
 it("returns an error if the ticket does not exist", async () => {
   const ticketId = mongoose.Types.ObjectId();
@@ -16,6 +17,7 @@ it("returns an error if the ticket does not exist", async () => {
 
 it("returns an error if the ticket is already reserved", async () => {
   const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
   });
@@ -36,6 +38,7 @@ it("returns an error if the ticket is already reserved", async () => {
 
 it("reserves a ticket", async () => {
   const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
   });
@@ -48,4 +51,19 @@ it("reserves a ticket", async () => {
     .expect(201);
 });
 
-it.todo("emits an order created event");
+it("emits an order created event", async () => {
+  const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
+    title: "concert",
+    price: 20,
+  });
+  await ticket.save();
+
+  await request(app)
+    .post("/api/orders")
+    .set("Cookie", global.signin())
+    .send({ ticketId: ticket.id })
+    .expect(201);
+
+  expect(natsWrapper.client.publish).toHaveBeenCalled();
+});
