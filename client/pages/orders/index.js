@@ -3,8 +3,8 @@ const OrderIndex = ({ orders }) => {
     <ul>
       {orders.map((item) => {
         return (
-          <li key={orders.id}>
-            {orders.ticket.title} - {orders.status}
+          <li key={item.id}>
+            {item.ticket} - {item.status}
           </li>
         );
       })}

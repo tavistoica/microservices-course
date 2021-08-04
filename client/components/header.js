@@ -11,7 +11,7 @@ export default ({ currentUser }) => {
     .filter((linkConfig) => linkConfig)
     .map(({ label, href }) => {
       return (
-        <li key={href} className="nav-item">
+        <li key={href} className="nav-link">
           <Link href={href} className="nav-link">
             {label}
           </Link>

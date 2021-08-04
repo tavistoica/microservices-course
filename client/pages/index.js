@@ -3,15 +3,12 @@ import Link from "next/link";
 const LandingPage = ({ currentUser, tickets }) => {
   const ticketList = tickets.map((item) => {
     return (
-      <tr key={item.idkubce}>
-        <th>
-          <Link href="/tickets/[ticketId]" as={`/tickets/${item.id}`}>
-            <a>{item.title}</a>
-          </Link>
-        </th>
-        <th>{item.price}</th>
-        <th>randpm</th>
-      </tr>
+      <Link href="/tickets/[ticketId]" as={`/tickets/${item.id}`}>
+        <tr key={item.id}>
+          <th>{item.title}</th>
+          <th>{item.price}</th>
+        </tr>
+      </Link>
     );
   });
 

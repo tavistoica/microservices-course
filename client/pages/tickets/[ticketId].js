@@ -24,7 +24,7 @@ const TicketShow = ({ ticket }) => {
   );
 };
 
-TicketShow.getInitialProps = async (contect, client) => {
+TicketShow.getInitialProps = async (context, client) => {
   const { ticketId } = context.query;
   const { data } = await client.get(`/api/tickets/${ticketId}`);
 
