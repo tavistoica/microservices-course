@@ -3,7 +3,7 @@ import Router from "next/router";
 import useRequest from "../../hooks/use-request";
 import { route } from "next/dist/next-server/server/router";
 
-export default () => {
+const signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { doRequest, errors } = useRequest({
@@ -48,3 +48,5 @@ export default () => {
     </form>
   );
 };
+
+export default signup;
