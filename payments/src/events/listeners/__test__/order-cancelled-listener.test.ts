@@ -1,7 +1,7 @@
 import { OrderCancelledEvent, OrderStatus } from "@omstickets/common";
 import mongoose from "mongoose";
 import { Message } from "node-nats-streaming";
-import { natsWrapper } from "../../../nats-wrapper";
+import { natsWrapper } from "@omstickets/common";
 import { OrderCancelledListener } from "../order-cancelled-listener";
 import { Order } from "../../../model/order.model";
 
