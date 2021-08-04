@@ -7,12 +7,12 @@ import {
   NotFoundError,
   NotAuthorizedError,
   OrderStatus,
+  natsWrapper,
 } from "@omstickets/common";
 import { Order } from "../model/order.model";
 import { stripe } from "../stripe";
 import { Payment } from "../model/payments.model";
 import { PaymentCreatedPublisher } from "../events/publishers/payment-created-publisher";
-import { natsWrapper } from "../nats-wrapper";
 
 const router = express.Router();
 

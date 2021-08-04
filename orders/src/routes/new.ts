@@ -5,13 +5,13 @@ import {
   validateRequest,
   OrderStatus,
   BadRequestError,
+  natsWrapper,
 } from "@omstickets/common";
 import { body } from "express-validator";
 import mongoose from "mongoose";
 import { Ticket } from "../model/ticket.model";
 import { Order } from "../model/order.model";
 import { OrderCreatedPublisher } from "../events/publishers/order-created-publisher";
-import { natsWrapper } from "@omstickets/common";
 
 const router = express.Router();
 
