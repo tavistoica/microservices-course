@@ -10,8 +10,25 @@ declare global {
   }
 }
 
-jest.mock("../nats-wrapper");
+jest.mock("@omstickets/common", () => {
+  const original = jest.requireActual("@omstickets/common");
 
+  return {
+    __esmodule: true,
+    ...original,
+    natsWrapper: {
+      client: {
+        publish: jest
+          .fn()
+          .mockImplementation(
+            (subject: string, data: string, callback: () => void) => {
+              callback();
+            }
+          ),
+      },
+    },
+  };
+});
 let mongo: any;
 beforeAll(async () => {
   process.env.JWT_KEY = "asdefge";

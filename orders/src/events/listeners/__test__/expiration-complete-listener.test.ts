@@ -1,4 +1,4 @@
-import { natsWrapper } from "../../../nats-wrapper";
+import { natsWrapper } from "@omstickets/common";
 import { Message } from "node-nats-streaming";
 import { ExpirationCompleteListener } from "../expiration-complete-listener";
 import { Order } from "../../../model/order.model";

@@ -1,10 +1,5 @@
 import express, { Request, Response } from "express";
-import {
-  CustomError,
-  requireAuth,
-  validateRequest,
-  NotFoundError,
-} from "@omstickets/common";
+import { NotFoundError } from "@omstickets/common";
 import { body } from "express-validator";
 import { Ticket } from "../models/ticket.model";
 

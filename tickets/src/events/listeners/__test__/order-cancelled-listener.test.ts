@@ -1,8 +1,7 @@
 import { OrderCancelledListener } from "../order-cancelled-listener";
 import { Ticket } from "../../../models/ticket.model";
 import mongoose from "mongoose";
-import { natsWrapper } from "../../../nats-wrapper";
-import { OrderCancelledEvent } from "@omstickets/common";
+import { OrderCancelledEvent, natsWrapper } from "@omstickets/common";
 
 const setup = async () => {
   const listener = new OrderCancelledListener(natsWrapper.client);
@@ -38,7 +37,7 @@ it("updateds the ticket, publishes an event, and acks the message", async () => 
   await listener.onMessage(data, msg);
 
   const updatedTicket = await Ticket.findById(ticket.id);
-  expect(updatedTicket!.orderid).not.toBeDefined();
+  expect(updatedTicket!.orderId).not.toBeDefined();
   expect(msg.ack).toHaveBeenCalled();
 
   expect(natsWrapper.client.publish).toHaveBeenCalled();

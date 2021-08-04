@@ -10,8 +10,25 @@ declare global {
   }
 }
 
-jest.mock("../nats-wrapper");
+jest.mock("@omstickets/common", () => {
+  const original = jest.requireActual("@omstickets/common");
 
+  return {
+    __esmodule: true,
+    ...original,
+    natsWrapper: {
+      client: {
+        publish: jest
+          .fn()
+          .mockImplementation(
+            (subject: string, data: string, callback: () => void) => {
+              callback();
+            }
+          ),
+      },
+    },
+  };
+});
 process.env.STRIPE_KEY =
   "sk_test_51JGhaeAltPmlu6DoTpE3nvOGjd6KrXQ8JRxAFN6oLQU3o8sUav5l1WGMbNn4leXuEbpOEjDQ2w6nmGIffReuTkWh00yKBsUKEJ";
 

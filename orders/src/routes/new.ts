@@ -5,17 +5,17 @@ import {
   validateRequest,
   OrderStatus,
   BadRequestError,
+  natsWrapper,
 } from "@omstickets/common";
 import { body } from "express-validator";
 import mongoose from "mongoose";
 import { Ticket } from "../model/ticket.model";
 import { Order } from "../model/order.model";
 import { OrderCreatedPublisher } from "../events/publishers/order-created-publisher";
-import { natsWrapper } from "../nats-wrapper";
 
 const router = express.Router();
 
-const EXPIRATION_WINDOW_SECONDS = 15 * 60;
+const EXPIRATION_WINDOW_SECONDS = 5 * 60;
 
 router.post(
   "/api/orders",

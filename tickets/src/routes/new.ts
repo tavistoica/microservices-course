@@ -1,9 +1,8 @@
 import express, { Request, Response } from "express";
-import { requireAuth, validateRequest } from "@omstickets/common";
+import { requireAuth, validateRequest, natsWrapper } from "@omstickets/common";
 import { body } from "express-validator";
 import { Ticket } from "../models/ticket.model";
 import { TicketCreatedPublisher } from "../events/publishers/ticket-created-publisher";
-import { natsWrapper } from "../nats-wrapper";
 
 const router = express.Router();
 

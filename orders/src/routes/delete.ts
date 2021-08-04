@@ -6,7 +6,7 @@ import {
 } from "@omstickets/common";
 import { Order, OrderStatus } from "../model/order.model";
 import { OrderCancelledPublisher } from "../events/publishers/order-cancelled-publisher";
-import { natsWrapper } from "../nats-wrapper";
+import { natsWrapper } from "@omstickets/common";
 
 const router = express.Router();
 

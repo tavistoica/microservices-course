@@ -2,7 +2,7 @@ import request from "supertest";
 import { app } from "../../app";
 import { Order, OrderStatus } from "../../model/order.model";
 import { Ticket } from "../../model/ticket.model";
-import { natsWrapper } from "../../nats-wrapper";
+import { natsWrapper } from "@omstickets/common";
 import mongoose from "mongoose";
 
 it("marks an order as cancelled", async () => {
