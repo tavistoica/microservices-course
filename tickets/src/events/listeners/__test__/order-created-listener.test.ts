@@ -1,5 +1,8 @@
-import { natsWrapper } from "../../../nats-wrapper";
-import { OrderCreatedEvent, OrderStatus } from "@omstickets/common";
+import {
+  OrderCreatedEvent,
+  OrderStatus,
+  natsWrapper,
+} from "@omstickets/common";
 import { OrderCreatedListener } from "../order-created-listener";
 import { Ticket } from "../../../models/ticket.model";
 import mongoose from "mongoose";

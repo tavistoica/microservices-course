@@ -48,9 +48,9 @@ it("it returns an error if a user tries to fetch other user's order", async () =
     .expect(201);
 
   //  make request to fetch the order
-  const response = await request(app)
+  await request(app)
     .get(`/api/orders/${order.id}`)
     .set("Cookie", global.signin())
-    .send();
-  expect(response).toMatchObject({ pitong: "pitong" });
+    .send()
+    .expect(401);
 });

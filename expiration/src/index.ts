@@ -1,4 +1,4 @@
-import { natsWrapper } from "./nats-wrapper";
+import { natsWrapper } from "@omstickets/common";
 import { OrderCreatedListener } from "./events/listener/order-created-listener";
 
 const start = async () => {
