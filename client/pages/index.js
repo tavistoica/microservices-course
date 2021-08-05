@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const LandingPage = ({ currentUser, tickets }) => {
+const LandingPage = ({ tickets }) => {
   const ticketList = tickets.map((item) => {
     return (
       <Link href="/tickets/[ticketId]" as={`/tickets/${item.id}`}>

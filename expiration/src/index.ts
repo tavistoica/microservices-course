@@ -2,6 +2,7 @@ import { natsWrapper } from "@omstickets/common";
 import { OrderCreatedListener } from "./events/listener/order-created-listener";
 
 const start = async () => {
+  console.log("started");
   if (!process.env.NATS_CLIENT_ID) {
     throw new Error("Environment variable 'NATS_CLIENT_ID' is not defined.");
   }
