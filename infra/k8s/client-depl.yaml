@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: client
-          image: us.gcr.io/tickets-dev-312815/client
+          image: tavistoica/client
           env:
             - name: JWT_KEY
               valueFrom:
