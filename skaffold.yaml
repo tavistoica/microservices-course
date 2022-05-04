@@ -8,10 +8,10 @@ deploy:
 build:
   # local:
   #   push: false
-  googleCloudBuild:
-    projectId: tickets-dev-312815
+  # googleCloudBuild:
+  #   projectId: tickets-dev-312815
   artifacts:
-    - image: us.gcr.io/tickets-dev-312815/auth
+    - image: tavistoica/auth
       context: auth
       docker:
         dockerfile: Dockerfile
@@ -19,7 +19,7 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
-    - image: us.gcr.io/tickets-dev-312815/client
+    - image: tavistoica/client
       context: client
       docker:
         dockerfile: Dockerfile
@@ -27,7 +27,7 @@ build:
         manual:
           - src: "**/*.js"
             dest: .
-    - image: us.gcr.io/tickets-dev-312815/tickets
+    - image: tavistoica/tickets
       context: tickets
       docker:
         dockerfile: Dockerfile
@@ -35,7 +35,7 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
-    - image: us.gcr.io/tickets-dev-312815/orders
+    - image: tavistoica/orders
       context: orders
       docker:
         dockerfile: Dockerfile
@@ -43,7 +43,7 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .\
-    - image: us.gcr.io/tickets-dev-312815/expiration
+    - image: tavistoica/expiration
       context: expiration
       docker:
         dockerfile: Dockerfile
@@ -51,7 +51,7 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
-    - image: us.gcr.io/tickets-dev-312815/payments
+    - image: tavistoica/payments
       context: payments
       docker:
         dockerfile: Dockerfile
