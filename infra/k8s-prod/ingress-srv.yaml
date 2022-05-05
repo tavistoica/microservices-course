@@ -12,7 +12,7 @@ spec:
         - tavistoica.xyz
       secretName: prod-tls
   rules:
-    - host: tavistoica.xyz
+    - host: www.tavistoica.xyz
       http:
         paths:
           - path: /api/payments/?(.*)
