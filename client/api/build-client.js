@@ -1,11 +1,11 @@
 import axios from "axios";
 
 export default ({ req }) => {
-  console.log("req.headers", req.headers);
+  console.log("req.headers");
   if (typeof window === "undefined") {
     //  we are on the server
     return axios.create({
-      baseURL: "https://www.tavistoica.xyz",
+      baseURL: "http://tavistoica.xyz",
       headers: req.headers,
     });
   } else {
