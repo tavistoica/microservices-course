@@ -5,7 +5,7 @@ export default ({ req }) => {
   if (typeof window === "undefined") {
     //  we are on the server
     return axios.create({
-      baseURL: "http://tavistoica.xyz",
+      baseURL: "http://www.tavistoica.xyz",
       headers: req.headers,
     });
   } else {
