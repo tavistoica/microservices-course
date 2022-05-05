@@ -10,7 +10,6 @@ spec:
   tls:
     - hosts:
         - www.tavistoica.xyz
-        - tavistoica.xyz
       secretName: prod-tls
   rules:
     - host: www.tavistoica.xyz
@@ -57,7 +56,7 @@ kind: Service
 metadata:
   annotations:
     service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
-    service.beta.kubernetes.io/do-loadbalancer-hostname: "tavistoica.xyz"
+    service.beta.kubernetes.io/do-loadbalancer-hostname: "www.tavistoica.xyz"
   labels:
     helm.sh/chart: ingress-nginx-2.11.1
     app.kubernetes.io/name: ingress-nginx
