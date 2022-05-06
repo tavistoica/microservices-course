@@ -14,7 +14,6 @@ const LandingPage = ({ tickets }) => {
 
   return (
     <div>
-      <h1>Smart Food</h1>
       <table className="table">
         <thead>
           <tr>
