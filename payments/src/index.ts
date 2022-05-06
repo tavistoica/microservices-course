@@ -23,33 +23,29 @@ const start = async () => {
     throw new Error("Environment variable 'NATS_CLUSTER_ID' is not defined.");
   }
 
-  try {
-    await natsWrapper.connect(
-      process.env.NATS_CLUSTER_ID,
-      process.env.NATS_CLIENT_ID,
-      process.env.NATS_URL
-    );
+  await natsWrapper.connect(
+    process.env.NATS_CLUSTER_ID,
+    process.env.NATS_CLIENT_ID,
+    process.env.NATS_URL
+  );
 
-    natsWrapper.client.on("close", () => {
-      console.log("NATS connection closed!");
-      process.exit();
-    });
+  natsWrapper.client.on("close", () => {
+    console.log("NATS connection closed!");
+    process.exit();
+  });
 
-    process.on("SIGINT", () => natsWrapper.client.close());
-    process.on("SIGTERM", () => natsWrapper.client.close());
+  process.on("SIGINT", () => natsWrapper.client.close());
+  process.on("SIGTERM", () => natsWrapper.client.close());
 
-    new OrderCreatedListener(natsWrapper.client).listen();
-    new OrderCancelledListener(natsWrapper.client).listen();
+  new OrderCreatedListener(natsWrapper.client).listen();
+  new OrderCancelledListener(natsWrapper.client).listen();
 
-    await mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-    });
-    console.log("connected to MongoDB");
-  } catch (err) {
-    console.error(err);
-  }
+  await mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  });
+  console.log("connected to MongoDB");
 
   app.listen(3000, () => {
     console.log("listening on port 3000");
