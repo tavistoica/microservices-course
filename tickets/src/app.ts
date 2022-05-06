@@ -10,12 +10,13 @@ import { updateTicketRouter } from "./routes/update";
 
 //mongoose //5.10.19
 const app = express();
+console.log("test secure response", process.env.NODE_ENV);
 app.set("trust proxy", true);
 app.use(json());
 app.use(
   cookieSession({
     signed: false,
-    secure: false,
+    secure: process.env.NODE_ENV === "production",
   })
 );
 
