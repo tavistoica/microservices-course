@@ -14,6 +14,7 @@ declare global {
 const mockedUser = {
   email: "test@test.com",
   password: "password",
+  role: "User",
 };
 
 let mongo: any;
@@ -44,7 +45,7 @@ afterAll(async () => {
 
 global.signin = async () => {
   const response = await request(app)
-    .post("/api/users/signup")
+    .post("/api/users/register")
     .send(mockedUser)
     .expect(201);
 

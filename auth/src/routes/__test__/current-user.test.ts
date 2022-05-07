@@ -4,6 +4,7 @@ import { app } from "../../app";
 const mockedUser = {
   email: "test@test.com",
   password: "password",
+  role: "User",
 };
 
 it("responds with details about the current user", async () => {
