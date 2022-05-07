@@ -1,9 +1,12 @@
 import mongoose from "mongoose";
 import { Password } from "../services/password";
 
+type UserRole = "Admin" | "User" | "Seller";
+
 interface UserAttrs {
   email: string;
   password: string;
+  role: UserRole;
 }
 
 interface UserModel extends mongoose.Model<UserDoc> {
@@ -13,6 +16,7 @@ interface UserModel extends mongoose.Model<UserDoc> {
 interface UserDoc extends mongoose.Document {
   email: string;
   password: string;
+  role: UserRole;
 }
 
 const userSchema = new mongoose.Schema(
@@ -22,6 +26,10 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
     password: {
+      type: String,
+      require: true,
+    },
+    role: {
       type: String,
       require: true,
     },
