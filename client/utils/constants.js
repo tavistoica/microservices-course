@@ -18,3 +18,7 @@ export const HEADER = {
   ORDERS: "My Orders",
   LOGOUT: "Log Out",
 };
+
+export const LOGOUT_PAGE = {
+  MESSAGE: "Signing you out...",
+};
