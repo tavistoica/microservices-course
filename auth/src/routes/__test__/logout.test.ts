@@ -4,13 +4,14 @@ import { app } from "../../app";
 const mockedUser = {
   email: "test@test.com",
   password: "password",
+  role: "User",
 };
 
 it("clears the cookie after signing out", async () => {
-  await request(app).post("/api/users/signup").send(mockedUser).expect(201);
+  await request(app).post("/api/users/logout").send(mockedUser).expect(200);
 
   const response = await request(app)
-    .post("/api/users/signout")
+    .post("/api/users/logout")
     .send({})
     .expect(200);
 
