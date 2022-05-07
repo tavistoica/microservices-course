@@ -4,7 +4,14 @@ import { Button } from "../Button/Button";
 
 import styles from "./Register.module.css";
 
-export const Register = ({ onSubmit, email, password, errors }) => {
+export const Register = ({
+  onSubmit,
+  email,
+  password,
+  errors,
+  setEmail,
+  setPassword,
+}) => {
   return (
     <div className={`${styles.margintop} d-flex justify-content-center`}>
       <form className={styles.registerform} onSubmit={onSubmit}>
