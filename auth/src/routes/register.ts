@@ -18,4 +18,4 @@ router.post(
   registerController
 );
 
-export { router as signUpRouter };
+export { router as registerRouter };

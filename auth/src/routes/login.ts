@@ -18,4 +18,4 @@ router.post(
   loginController
 );
 
-export { router as signInRouter };
+export { router as loginRouter };
