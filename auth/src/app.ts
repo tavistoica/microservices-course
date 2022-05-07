@@ -4,9 +4,9 @@ import { json } from "body-parser";
 import cookieSession from "cookie-session";
 
 import { currentUserRouter } from "./routes/current-user";
-import { signInRouter } from "./routes/signin";
-import { signOutRouter } from "./routes/signout";
-import { signUpRouter } from "./routes/signup";
+import { loginRouter } from "./routes/login";
+import { logoutRouter } from "./routes/logout";
+import { registerRouter } from "./routes/register";
 import { errorHandler, NotFoundError } from "@omstickets/common";
 
 //mongoose //5.10.19
@@ -21,9 +21,9 @@ app.use(
 );
 
 app.use(currentUserRouter);
-app.use(signInRouter);
-app.use(signOutRouter);
-app.use(signUpRouter);
+app.use(loginRouter);
+app.use(logoutRouter);
+app.use(registerRouter);
 
 app.all("*", async () => {
   throw new NotFoundError();

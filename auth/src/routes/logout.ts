@@ -5,4 +5,4 @@ const router = express.Router();
 
 router.post("/api/users/logout", logoutController);
 
-export { router as signOutRouter };
+export { router as logoutRouter };
