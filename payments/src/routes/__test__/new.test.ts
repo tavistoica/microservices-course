@@ -1,4 +1,4 @@
-import { OrderStatus } from "@omstickets/common";
+import { OrderStatus } from "@ostoica/common";
 import mongoose from "mongoose";
 import request from "supertest";
 import { app } from "../../app";

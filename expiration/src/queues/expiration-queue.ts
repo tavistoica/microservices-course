@@ -1,6 +1,6 @@
 import Queue from "bull";
 import { ExpirationCompletePublisher } from "../events/publisher/expiration-complete-publisher";
-import { natsWrapper } from "@omstickets/common";
+import { natsWrapper } from "@ostoica/common";
 
 interface Payload {
   orderId: string;

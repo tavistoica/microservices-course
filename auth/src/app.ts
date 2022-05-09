@@ -7,7 +7,7 @@ import { currentUserRouter } from "./routes/current-user";
 import { loginRouter } from "./routes/login";
 import { logoutRouter } from "./routes/logout";
 import { registerRouter } from "./routes/register";
-import { errorHandler, NotFoundError } from "@omstickets/common";
+import { errorHandler, NotFoundError } from "@ostoica/common";
 
 //mongoose //5.10.19
 const app = express();

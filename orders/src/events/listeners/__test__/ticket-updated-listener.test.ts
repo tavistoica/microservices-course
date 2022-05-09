@@ -1,7 +1,7 @@
 import Message from "node-nats-streaming";
 import mongoose from "mongoose";
-import { TicketUpdatedEvent } from "@omstickets/common";
-import { natsWrapper } from "@omstickets/common";
+import { TicketUpdatedEvent } from "@ostoica/common";
+import { natsWrapper } from "@ostoica/common";
 import { Ticket } from "../../../model/ticket.model";
 import { TicketUpdatedListener } from "../ticket-updated-listener";
 
@@ -13,6 +13,7 @@ const setup = async () => {
     id: new mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 10,
+    stock: 10,
   });
 
   await ticket.save();
@@ -23,6 +24,7 @@ const setup = async () => {
     title: "new title",
     price: 1000,
     userId: new mongoose.Types.ObjectId().toHexString(),
+    stock: 10,
   };
   //  create a fake message object
   //  @ts-ignore

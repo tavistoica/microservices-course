@@ -3,7 +3,7 @@ import { app } from "../../app";
 import mongoose from "mongoose";
 import { Order, OrderStatus } from "../../model/order.model";
 import { Ticket } from "../../model/ticket.model";
-import { natsWrapper } from "@omstickets/common";
+import { natsWrapper } from "@ostoica/common";
 
 it("returns an error if the ticket does not exist", async () => {
   const ticketId = mongoose.Types.ObjectId();
@@ -20,6 +20,7 @@ it("returns an error if the ticket is already reserved", async () => {
     id: new mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
+    stock: 10,
   });
   await ticket.save();
   const order = Order.build({
@@ -27,6 +28,7 @@ it("returns an error if the ticket is already reserved", async () => {
     ticket,
     status: OrderStatus.Created,
     expiresAt: new Date(),
+    itemAmount: 10,
   });
   await order.save();
   await request(app)
@@ -41,6 +43,7 @@ it("reserves a ticket", async () => {
     id: new mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
+    stock: 10,
   });
   await ticket.save();
 
@@ -56,6 +59,7 @@ it("emits an order created event", async () => {
     id: new mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
+    stock: 10,
   });
   await ticket.save();
 

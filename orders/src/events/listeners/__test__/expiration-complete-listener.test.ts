@@ -1,10 +1,10 @@
-import { natsWrapper } from "@omstickets/common";
+import { natsWrapper } from "@ostoica/common";
 import { Message } from "node-nats-streaming";
 import { ExpirationCompleteListener } from "../expiration-complete-listener";
 import { Order } from "../../../model/order.model";
 import { Ticket } from "../../../model/ticket.model";
 import mongoose from "mongoose";
-import { OrderStatus, ExpirationCompleteEvent } from "@omstickets/common";
+import { OrderStatus, ExpirationCompleteEvent } from "@ostoica/common";
 
 const setup = async () => {
   const listener = new ExpirationCompleteListener(natsWrapper.client);
@@ -13,6 +13,7 @@ const setup = async () => {
     id: mongoose.Types.ObjectId().toHexString(),
     title: "music",
     price: 20,
+    stock: 5,
   });
   await ticket.save();
   const order = Order.build({
@@ -20,6 +21,7 @@ const setup = async () => {
     userId: "random",
     expiresAt: new Date(),
     ticket,
+    itemAmount: 3,
   });
   await order.save();
 

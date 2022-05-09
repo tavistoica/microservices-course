@@ -2,7 +2,7 @@ import express from "express";
 import "express-async-errors";
 import { json } from "body-parser";
 import cookieSession from "cookie-session";
-import { errorHandler, NotFoundError, currentUser } from "@omstickets/common";
+import { errorHandler, NotFoundError, currentUser } from "@ostoica/common";
 import { deleteOrderRouter } from "./routes/delete";
 import { indexOrderRouter } from "./routes/index";
 import { showOrderRouter } from "./routes/show";

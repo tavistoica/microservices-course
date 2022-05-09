@@ -1,5 +1,5 @@
 import { Message } from "node-nats-streaming";
-import { Subjects, Listener, TicketUpdatedEvent } from "@omstickets/common";
+import { Subjects, Listener, TicketUpdatedEvent } from "@ostoica/common";
 import { queueGroupName } from "./queue-group-name";
 import { Ticket } from "../../model/ticket.model";
 
@@ -14,8 +14,8 @@ export class TicketUpdatedListener extends Listener<TicketUpdatedEvent> {
       throw new Error("Ticket not found");
     }
 
-    const { title, price } = data;
-    ticket.set({ title, price });
+    const { title, price, stock } = data;
+    ticket.set({ title, price, stock });
     await ticket.save();
 
     msg.ack();

@@ -3,10 +3,10 @@ import {
   NotFoundError,
   requireAuth,
   NotAuthorizedError,
-} from "@omstickets/common";
+} from "@ostoica/common";
 import { Order, OrderStatus } from "../model/order.model";
 import { OrderCancelledPublisher } from "../events/publishers/order-cancelled-publisher";
-import { natsWrapper } from "@omstickets/common";
+import { natsWrapper } from "@ostoica/common";
 
 const router = express.Router();
 
@@ -35,7 +35,9 @@ router.patch(
       version: order.version,
       ticket: {
         id: order.ticket.id,
+        stock: order.ticket.stock,
       },
+      itemAmount: order.ticket.stock,
     });
 
     res.status(204).send(order);

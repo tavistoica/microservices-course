@@ -1,4 +1,4 @@
-import { Publisher, Subjects, TicketUpdatedEvent } from "@omstickets/common";
+import { Publisher, Subjects, TicketUpdatedEvent } from "@ostoica/common";
 
 export class TicketUpdatedPublisher extends Publisher<TicketUpdatedEvent> {
   readonly subject = Subjects.TicketUpdated;

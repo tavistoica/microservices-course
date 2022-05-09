@@ -3,7 +3,7 @@ import {
   NotFoundError,
   requireAuth,
   NotAuthorizedError,
-} from "@omstickets/common";
+} from "@ostoica/common";
 import { Order } from "../model/order.model";
 
 const router = express.Router();

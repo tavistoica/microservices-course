@@ -1,4 +1,4 @@
-import { Listener, OrderCancelledEvent, Subjects } from "@omstickets/common";
+import { Listener, OrderCancelledEvent, Subjects } from "@ostoica/common";
 import { Message } from "node-nats-streaming";
 import { queueGroupName } from "./queue-croup-name";
 import { Ticket } from "../../models/ticket.model";
@@ -25,6 +25,7 @@ export class OrderCancelledListener extends Listener<OrderCancelledEvent> {
       userId: ticket.userId,
       price: ticket.price,
       title: ticket.title,
+      stock: ticket.stock + data.itemAmount,
       version: ticket.version,
     });
 

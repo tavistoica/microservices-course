@@ -5,6 +5,7 @@ const createTicket = () => {
   return request(app).post("/api/tickets").set("Cookie", global.signin()).send({
     title: "sdgege",
     price: 10,
+    stock: 10,
   });
 };
 

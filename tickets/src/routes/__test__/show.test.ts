@@ -9,11 +9,12 @@ it("returns a 404 if the ticket is not found", async () => {
 it("returns the ticket if the ticket is found", async () => {
   const title = "concert";
   const price = 50;
+  const stock = 10;
 
   const response = await request(app)
     .post("/api/tickets")
     .set("Cookie", global.signin())
-    .send({ title, price })
+    .send({ title, price, stock })
     .expect(201);
 
   const ticketResponse = await request(app)

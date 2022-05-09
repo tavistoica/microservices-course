@@ -1,7 +1,7 @@
-import { OrderCancelledEvent, OrderStatus } from "@omstickets/common";
+import { OrderCancelledEvent, OrderStatus } from "@ostoica/common";
 import mongoose from "mongoose";
 import { Message } from "node-nats-streaming";
-import { natsWrapper } from "@omstickets/common";
+import { natsWrapper } from "@ostoica/common";
 import { OrderCancelledListener } from "../order-cancelled-listener";
 import { Order } from "../../../model/order.model";
 
@@ -22,7 +22,9 @@ const setup = async () => {
     version: 1,
     ticket: {
       id: "randomId",
+      stock: 10,
     },
+    itemAmount: 5,
   };
 
   //    @ts-ignore

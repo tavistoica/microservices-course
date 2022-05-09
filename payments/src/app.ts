@@ -2,7 +2,7 @@ import express from "express";
 import "express-async-errors";
 import { json } from "body-parser";
 import cookieSession from "cookie-session";
-import { errorHandler, NotFoundError, currentUser } from "@omstickets/common";
+import { errorHandler, NotFoundError, currentUser } from "@ostoica/common";
 import { createChargeRouter } from "./routes/new";
 
 //mongoose //5.10.19

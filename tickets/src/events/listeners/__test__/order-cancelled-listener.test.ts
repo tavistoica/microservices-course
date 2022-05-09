@@ -1,7 +1,7 @@
 import { OrderCancelledListener } from "../order-cancelled-listener";
 import { Ticket } from "../../../models/ticket.model";
 import mongoose from "mongoose";
-import { OrderCancelledEvent, natsWrapper } from "@omstickets/common";
+import { OrderCancelledEvent, natsWrapper } from "@ostoica/common";
 
 const setup = async () => {
   const listener = new OrderCancelledListener(natsWrapper.client);
@@ -11,6 +11,7 @@ const setup = async () => {
     title: "concert",
     price: 20,
     userId: "random",
+    stock: 10,
   });
   ticket.set({ orderId });
   await ticket.save();
@@ -20,7 +21,9 @@ const setup = async () => {
     version: 0,
     ticket: {
       id: ticket.id,
+      stock: ticket.stock,
     },
+    itemAmount: 10,
   };
 
   // @ts-ignore

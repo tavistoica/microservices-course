@@ -3,12 +3,22 @@ import Router from "next/router";
 
 import styles from "./ticket.module.css";
 
+const buildDropdown = (stock) => {
+  const response = [];
+  for (let i = 1; i <= stock; i++) {
+    response.push(<option value={i}>{i}</option>);
+  }
+};
+
 const TicketShow = ({ ticket }) => {
+  const [itemAmount, setItemAmount] = useState(1);
+
   const { doRequest, errors } = useRequest({
     url: "/api/orders",
     method: "post",
     body: {
       ticketId: ticket.id,
+      itemAmount,
     },
     onSuccess: (order) =>
       Router.push("/orders/[orderId]", `/orders/${order.id}`),
@@ -18,6 +28,9 @@ const TicketShow = ({ ticket }) => {
     <div className={styles["ticket-page"]}>
       <h1>{ticket.title}</h1>
       <h4>{ticket.price}</h4>
+      <select value={1} onChange={(event) => setItemAmount(event.target.value)}>
+        {buildDropdown(ticket.stock)}
+      </select>
       {errors}
       <button className="btn btn-primary" onClick={() => doRequest()}>
         Purchase

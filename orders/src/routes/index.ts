@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { requireAuth } from "@omstickets/common";
+import { requireAuth } from "@ostoica/common";
 import { Order } from "../model/order.model";
 
 const router = express.Router();

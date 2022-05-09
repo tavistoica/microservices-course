@@ -1,6 +1,6 @@
 import express from "express";
 import { body } from "express-validator";
-import { validateRequest } from "@omstickets/common";
+import { validateRequest } from "@ostoica/common";
 import { registerController } from "../controllers/register";
 
 const router = express.Router();
