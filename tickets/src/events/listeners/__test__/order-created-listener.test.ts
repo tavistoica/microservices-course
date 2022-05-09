@@ -1,8 +1,4 @@
-import {
-  OrderCreatedEvent,
-  OrderStatus,
-  natsWrapper,
-} from "@omstickets/common";
+import { OrderCreatedEvent, OrderStatus, natsWrapper } from "@ostoica/common";
 import { OrderCreatedListener } from "../order-created-listener";
 import { Ticket } from "../../../models/ticket.model";
 import mongoose from "mongoose";
@@ -15,6 +11,7 @@ const setup = async () => {
     title: "concert",
     price: 20,
     userId: "random",
+    stock: 10,
   });
   await ticket.save();
 
@@ -28,7 +25,9 @@ const setup = async () => {
     ticket: {
       id: ticket.id,
       price: ticket.price,
+      stock: ticket.stock,
     },
+    itemAmount: 10,
   };
   //    @ts-ignore
   const msg: Message = {

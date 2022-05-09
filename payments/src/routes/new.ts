@@ -8,7 +8,7 @@ import {
   NotAuthorizedError,
   OrderStatus,
   natsWrapper,
-} from "@omstickets/common";
+} from "@ostoica/common";
 import { Order } from "../model/order.model";
 import { stripe } from "../stripe";
 import { Payment } from "../model/payments.model";

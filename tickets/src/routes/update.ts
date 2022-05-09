@@ -6,7 +6,7 @@ import {
   NotFoundError,
   BadRequestError,
   natsWrapper,
-} from "@omstickets/common";
+} from "@ostoica/common";
 import { body } from "express-validator";
 import { Ticket } from "../models/ticket.model";
 import { TicketUpdatedPublisher } from "../events/publishers/ticket-updated-publisher";
@@ -19,6 +19,7 @@ router.put(
   [
     body("title").not().isEmpty().withMessage("Title is required"),
     body("price").isFloat({ gt: 0 }).withMessage("Price must be grater than 0"),
+    body("stock").isInt({ gt: 0 }).withMessage("Stock must be grater than 0"),
   ],
   validateRequest,
   async (req: Request, res: Response) => {
@@ -46,6 +47,7 @@ router.put(
       title: ticket.title,
       price: ticket.price,
       userId: ticket.userId,
+      stock: ticket.stock,
     });
 
     res.json(ticket);

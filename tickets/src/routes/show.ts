@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { NotFoundError } from "@omstickets/common";
+import { NotFoundError } from "@ostoica/common";
 import { body } from "express-validator";
 import { Ticket } from "../models/ticket.model";
 

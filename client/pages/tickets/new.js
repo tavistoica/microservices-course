@@ -5,12 +5,15 @@ import useRequest from "../../hooks/use-request";
 const newTicket = () => {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
+  const [stock, setStock] = useState("");
+
   const { doRequest, errors } = useRequest({
     url: "/api/tickets",
     method: "post",
     body: {
       title,
       price,
+      stock,
     },
     onSuccess: () => Router.push("/"),
   });
@@ -51,6 +54,15 @@ const newTicket = () => {
             value={price}
             onBlur={onBlur}
             onChange={(e) => setPrice(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label>Stock</label>
+          <input
+            className="form-control"
+            value={stock}
+            onBlur={onBlur}
+            onChange={(e) => setStock(e.target.value)}
           />
         </div>
         {errors}

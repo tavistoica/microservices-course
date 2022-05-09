@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get("/api/tickets", async (req: Request, res: Response) => {
   const tickets = await Ticket.find({
-    orderId: undefined,
+    stock: { $gt: 0 },
   });
 
   res.send(tickets);

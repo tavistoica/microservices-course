@@ -2,7 +2,7 @@ import request from "supertest";
 import { app } from "../../app";
 import mongoose from "mongoose";
 import { Ticket } from "../../models/ticket.model";
-import { natsWrapper } from "@omstickets/common";
+import { natsWrapper } from "@ostoica/common";
 
 it("returns a 404 if the provided id does not exist", async () => {
   const id = new mongoose.Types.ObjectId().toHexString();
@@ -12,6 +12,7 @@ it("returns a 404 if the provided id does not exist", async () => {
     .send({
       title: "fegeg",
       price: 20,
+      stock: 10,
     })
     .expect(404);
 });
@@ -23,6 +24,7 @@ it("returns a 401 if the user is not authenticated", async () => {
     .send({
       title: "fegeg",
       price: 20,
+      stock: 10,
     })
     .expect(401);
 });
@@ -34,6 +36,7 @@ it("returns a 401 if the user does not own the ticket", async () => {
     .send({
       title: "fegeg",
       price: 20,
+      stock: 10,
     })
     .expect(201);
 
@@ -43,6 +46,7 @@ it("returns a 401 if the user does not own the ticket", async () => {
     .send({
       title: "random",
       price: 40,
+      stock: 10,
     })
     .expect(401);
 });
@@ -56,6 +60,7 @@ it("returns a 400 if the user provides an invalid title or price", async () => {
     .send({
       title: "fegeg",
       price: 20,
+      stock: 10,
     })
     .expect(201);
 
@@ -65,6 +70,7 @@ it("returns a 400 if the user provides an invalid title or price", async () => {
     .send({
       title: "",
       price: 20,
+      stock: 10,
     })
     .expect(400);
 
@@ -74,6 +80,7 @@ it("returns a 400 if the user provides an invalid title or price", async () => {
     .send({
       title: "tetete",
       price: -1,
+      stock: 10,
     })
     .expect(400);
 });
@@ -87,6 +94,7 @@ it("updates the ticket provided valid inputs", async () => {
     .send({
       title: "fegeg",
       price: 20,
+      stock: 10,
     })
     .expect(201);
 
@@ -96,6 +104,7 @@ it("updates the ticket provided valid inputs", async () => {
     .send({
       title: "random22",
       price: 50,
+      stock: 10,
     })
     .expect(200);
 
@@ -118,6 +127,7 @@ it("publishes an event", async () => {
     .send({
       title: "fegeg",
       price: 20,
+      stock: 10,
     })
     .expect(201);
 
@@ -127,6 +137,7 @@ it("publishes an event", async () => {
     .send({
       title: "random22",
       price: 50,
+      stock: 10,
     })
     .expect(200);
 
@@ -142,6 +153,7 @@ it("rejects updates if the ticket is reserved", async () => {
     .send({
       title: "fegeg",
       price: 20,
+      stock: 10,
     });
 
   const ticket = await Ticket.findById(response.body.id);
@@ -154,6 +166,7 @@ it("rejects updates if the ticket is reserved", async () => {
     .send({
       title: "random22",
       price: 50,
+      stock: 10,
     })
     .expect(400);
 });

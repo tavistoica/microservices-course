@@ -3,7 +3,7 @@ import {
   OrderCancelledEvent,
   Subjects,
   OrderStatus,
-} from "@omstickets/common";
+} from "@ostoica/common";
 import { queueGroupName } from "./queue-group-name";
 import { Message } from "node-nats-streaming";
 import { Order } from "../../model/order.model";

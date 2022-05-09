@@ -1,12 +1,13 @@
 import express, { Request, Response } from "express";
 import {
   NotFoundError,
+  NotEnoughStock,
   requireAuth,
   validateRequest,
   OrderStatus,
   BadRequestError,
   natsWrapper,
-} from "@omstickets/common";
+} from "@ostoica/common";
 import { body } from "express-validator";
 import mongoose from "mongoose";
 import { Ticket } from "../model/ticket.model";
@@ -26,14 +27,21 @@ router.post(
       .isEmpty()
       .custom((input: string) => mongoose.Types.ObjectId.isValid(input))
       .withMessage("TicketId must be provided"),
+    body("itemAmount")
+      .isInt({ gt: 0 })
+      .withMessage("Stock must be grater than 0"),
   ],
   validateRequest,
   async (req: Request, res: Response) => {
-    const { ticketId } = req.body;
+    const { ticketId, itemAmount } = req.body;
     //  Find ticket the user is trying to order
     const ticket = await Ticket.findById(ticketId);
     if (!ticket) {
       throw new NotFoundError();
+    }
+
+    if (ticket.stock < itemAmount) {
+      throw new NotEnoughStock();
     }
 
     //  Make sure the ticket is not already reserved
@@ -52,6 +60,7 @@ router.post(
       status: OrderStatus.Created,
       expiresAt: expiration,
       ticket,
+      itemAmount,
     });
 
     await order.save();
@@ -66,7 +75,9 @@ router.post(
       ticket: {
         id: ticket.id,
         price: ticket.price,
+        stock: ticket.stock,
       },
+      itemAmount,
     });
 
     res.status(201).send(order);

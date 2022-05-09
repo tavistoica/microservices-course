@@ -10,8 +10,8 @@ declare global {
   }
 }
 
-jest.mock("@omstickets/common", () => {
-  const original = jest.requireActual("@omstickets/common");
+jest.mock("@ostoica/common", () => {
+  const original = jest.requireActual("@ostoica/common");
 
   return {
     __esmodule: true,

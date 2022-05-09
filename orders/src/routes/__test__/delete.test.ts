@@ -2,7 +2,7 @@ import request from "supertest";
 import { app } from "../../app";
 import { Order, OrderStatus } from "../../model/order.model";
 import { Ticket } from "../../model/ticket.model";
-import { natsWrapper } from "@omstickets/common";
+import { natsWrapper } from "@ostoica/common";
 import mongoose from "mongoose";
 
 it("marks an order as cancelled", async () => {
@@ -11,6 +11,7 @@ it("marks an order as cancelled", async () => {
     id: new mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
+    stock: 10,
   });
   await ticket.save();
 
@@ -42,6 +43,7 @@ it("emits an order cancelled event", async () => {
     id: new mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
+    stock: 10,
   });
   await ticket.save();
 

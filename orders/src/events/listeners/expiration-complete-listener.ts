@@ -3,7 +3,7 @@ import {
   Listener,
   Subjects,
   OrderStatus,
-} from "@omstickets/common";
+} from "@ostoica/common";
 import { queueGroupName } from "./queue-group-name";
 import { Message } from "node-nats-streaming";
 import { Order } from "../../model/order.model";
@@ -33,7 +33,9 @@ export class ExpirationCompleteListener extends Listener<ExpirationCompleteEvent
       version: order.version,
       ticket: {
         id: order.ticket.id,
+        stock: order.ticket.stock,
       },
+      itemAmount: order.itemAmount,
     });
     msg.ack();
   }

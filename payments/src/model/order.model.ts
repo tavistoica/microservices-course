@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { OrderStatus } from "@omstickets/common";
+import { OrderStatus } from "@ostoica/common";
 import { updateIfCurrentPlugin } from "mongoose-update-if-current";
 
 interface OrderAttrs {
