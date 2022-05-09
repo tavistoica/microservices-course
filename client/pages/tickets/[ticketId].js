@@ -1,6 +1,8 @@
 import useRequest from "../../hooks/use-request";
 import Router from "next/router";
 
+import styles from "./ticket.module.css";
+
 const TicketShow = ({ ticket }) => {
   const { doRequest, errors } = useRequest({
     url: "/api/orders",
@@ -13,7 +15,7 @@ const TicketShow = ({ ticket }) => {
   });
 
   return (
-    <div>
+    <div className={styles["ticket-page"]}>
       <h1>{ticket.title}</h1>
       <h4>{ticket.price}</h4>
       {errors}

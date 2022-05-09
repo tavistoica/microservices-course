@@ -31,7 +31,7 @@ export const Register = ({
             type="password"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
-            placeHolder={REGISTER_PAGE.PASSWORD_PLACEHOLDER}
+            placeholder={REGISTER_PAGE.PASSWORD_PLACEHOLDER}
           />
         </div>
         <Button
