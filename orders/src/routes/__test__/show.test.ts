@@ -18,7 +18,7 @@ it("fetches the order", async () => {
   const { body: order } = await request(app)
     .post("/api/orders")
     .set("Cookie", user)
-    .send({ ticketId: ticket.id })
+    .send({ ticketId: ticket.id, itemAmount: 10 })
     .expect(201);
 
   //  make request to fetch the order
@@ -46,7 +46,7 @@ it("it returns an error if a user tries to fetch other user's order", async () =
   const { body: order } = await request(app)
     .post("/api/orders")
     .set("Cookie", user)
-    .send({ ticketId: ticket.id })
+    .send({ ticketId: ticket.id, itemAmount: 10 })
     .expect(201);
 
   //  make request to fetch the order

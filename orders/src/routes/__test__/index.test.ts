@@ -28,19 +28,19 @@ it("fetches orders for a particular user", async () => {
   await request(app)
     .post("/api/orders")
     .set("Cookie", userOne)
-    .send({ ticketId: ticketOne.id })
+    .send({ ticketId: ticketOne.id, itemAmount: 10 })
     .expect(201);
 
   //  Create two orders as User #2
   const { body: orderOne } = await request(app)
     .post("/api/orders")
     .set("Cookie", userTwo)
-    .send({ ticketId: ticketTwo.id })
+    .send({ ticketId: ticketTwo.id, itemAmount: 10 })
     .expect(201);
   const { body: orderTwo } = await request(app)
     .post("/api/orders")
     .set("Cookie", userTwo)
-    .send({ ticketId: ticketTree.id })
+    .send({ ticketId: ticketTree.id, itemAmount: 10 })
     .expect(201);
 
   //  Make request to get orders for User #2
