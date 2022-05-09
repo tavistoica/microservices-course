@@ -15,7 +15,9 @@ const signout = () => {
   });
 
   useEffect(() => {
-    doRequest();
+    setTimeout(() => {
+      doRequest();
+    }, 1000);
   }, []);
 
   return <div>{LOGOUT_PAGE.MESSAGE}</div>;

@@ -1,10 +1,12 @@
 {
   "name": "client",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "next"
+    "dev": "next",
+    "ssl-certs": "cd ./scripts && mkcert localhost && mkcert -install",
+    "dev:https": "cross-env NODE_EXTRA_CA_CERTS=\"$(mkcert -CAROOT)/rootCA.pem\" ./scripts/dev"
   },
   "author": "",
   "license": "ISC",
@@ -12,12 +14,14 @@
     "axios": "^0.21.1",
     "bootstrap": "^5.0.0-beta3",
     "isomorphic-fetch": "^3.0.0",
-    "next": "^10.2.0",
+    "next": "^12.1.6",
     "react": "^17.0.2",
+    "react-burger-menu": "^3.0.6",
     "react-dom": "^17.0.2",
     "react-stripe-checkout": "^2.6.3"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "eslint": "^8.14.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.26.0",

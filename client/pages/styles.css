@@ -1,3 +1,39 @@
 a {
   text-decoration: none !important;
 }
+
+.bm-burger-button {
+  position: fixed;
+  width: 26px;
+  height: 20px;
+  right: 36px;
+  top: 10px;
+}
+
+.bm-burger-bars {
+  background: #000;
+}
+
+.bm-cross-button {
+  height: 20px;
+  width: 20px;
+}
+
+.bm-cross {
+  background: #bdc3c7;
+}
+
+.bm-menu {
+  background: #373a47;
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+}
+
+.bm-item-list {
+  padding: 0.8em;
+}
+
+.bm-item {
+  display: block;
+  color: #bdc3c7;
+}

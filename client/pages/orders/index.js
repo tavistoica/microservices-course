@@ -1,18 +1,16 @@
+import { OrderList } from "../../components/OrderList/OrderList";
+
+import styles from "./index.module.css";
+
 const OrderIndex = ({ orders }) => {
   return (
-    <ul>
-      {orders.map((item) => {
-        return (
-          <li key={item.id}>
-            {item.ticket} - {item.status}
-          </li>
-        );
-      })}
-    </ul>
+    <div className={styles["orders-list"]}>
+      <OrderList orders={orders} />
+    </div>
   );
 };
 
-OrderIndex.getInitialProps = async (context, client) => {
+OrderIndex.getInitialProps = async (_context, client) => {
   const { data } = await client.get("/api/orders");
 
   return { orders: data };

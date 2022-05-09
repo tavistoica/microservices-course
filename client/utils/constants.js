@@ -22,3 +22,14 @@ export const HEADER = {
 export const LOGOUT_PAGE = {
   MESSAGE: "Signing you out...",
 };
+
+export const HOST_URL = {
+  DEV: {
+    SERVER_URL: "https://www.tavistoica.xyz",
+    BROWSER_URL: "https://www.tavistoica.xyz",
+  },
+  PROD: {
+    SERVER_URL: "http://www.tavistoica.xyz",
+    BROWSER_URL: "/",
+  },
+};
