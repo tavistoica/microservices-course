@@ -4,7 +4,7 @@ import { HOST_URL } from "../utils/constants";
 
 const axiosConfig = (req) => {
   const config =
-    process.env.IS_PRODUCTION !== "false" ? HOST_URL.PROD : HOST_URL.DEV;
+    process?.env?.IS_PRODUCTION !== "false" ? HOST_URL.PROD : HOST_URL.DEV;
 
   if (typeof window === "undefined")
     return { baseURL: config.SERVER_URL, headers: req.headers };
