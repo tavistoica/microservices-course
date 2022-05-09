@@ -11,7 +11,7 @@ it("returns an error if the ticket does not exist", async () => {
   await request(app)
     .post("/api/orders")
     .set("Cookie", global.signin())
-    .send({ ticketId })
+    .send({ ticketId, itemAmount: 10 })
     .expect(404);
 });
 
@@ -34,7 +34,7 @@ it("returns an error if the ticket is already reserved", async () => {
   await request(app)
     .post("/api/orders")
     .set("Cookie", global.signin())
-    .send({ ticketId: ticket.id })
+    .send({ ticketId: ticket.id, itemAmount: 10 })
     .expect(400);
 });
 
@@ -50,7 +50,7 @@ it("reserves a ticket", async () => {
   await request(app)
     .post("/api/orders")
     .set("Cookie", global.signin())
-    .send({ ticketId: ticket.id })
+    .send({ ticketId: ticket.id, itemAmount: 10 })
     .expect(201);
 });
 
@@ -66,7 +66,7 @@ it("emits an order created event", async () => {
   await request(app)
     .post("/api/orders")
     .set("Cookie", global.signin())
-    .send({ ticketId: ticket.id })
+    .send({ ticketId: ticket.id, itemAmount: 10 })
     .expect(201);
 
   expect(natsWrapper.client.publish).toHaveBeenCalled();

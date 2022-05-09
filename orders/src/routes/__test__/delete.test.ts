@@ -21,7 +21,7 @@ it("marks an order as cancelled", async () => {
   const { body: order } = await request(app)
     .post("/api/orders")
     .set("Cookie", user)
-    .send({ ticketId: ticket.id })
+    .send({ ticketId: ticket.id, itemAmount: 10 })
     .expect(201);
 
   //  make a request to cancel the order
@@ -53,7 +53,7 @@ it("emits an order cancelled event", async () => {
   const { body: order } = await request(app)
     .post("/api/orders")
     .set("Cookie", user)
-    .send({ ticketId: ticket.id })
+    .send({ ticketId: ticket.id, itemAmount: 10 })
     .expect(201);
 
   //  make a request to cancel the order
