@@ -9,6 +9,7 @@ const buildDropdown = (stock) => {
   for (let i = 1; i <= stock; i++) {
     response.push(<option value={i}>{i}</option>);
   }
+  return response;
 };
 
 const TicketShow = ({ ticket }) => {
