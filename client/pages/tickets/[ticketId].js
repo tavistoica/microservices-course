@@ -30,7 +30,10 @@ const TicketShow = ({ ticket }) => {
     <div className={styles["ticket-page"]}>
       <h1>{ticket.title}</h1>
       <h4>{ticket.price}</h4>
-      <select value={1} onChange={(event) => setItemAmount(event.target.value)}>
+      <select
+        value={itemAmount}
+        onChange={(event) => setItemAmount(event.target.value)}
+      >
         {buildDropdown(ticket.stock)}
       </select>
       {errors}
