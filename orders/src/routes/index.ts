@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import { requireAuth } from "@ostoica/common";
 import { Order } from "../model/order.model";
-import { Ticket } from "../model/ticket.model";
+// import { Ticket } from "../model/ticket.model";
 
 const router = express.Router();
 
