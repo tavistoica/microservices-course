@@ -44,6 +44,10 @@ router.post(
       throw new NotEnoughStock();
     }
 
+    if (ticket.stock === 0) {
+      throw new BadRequestError("Ticket is no longer available");
+    }
+
     //  Make sure the ticket is not already reserved
     // const isReserved = await ticket.isReserved();
     // if (isReserved) {
