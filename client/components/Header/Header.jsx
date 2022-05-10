@@ -1,10 +1,11 @@
+import { useState } from "react";
 import Link from "next/link";
 import { HEADER } from "../../utils/constants";
 import { slide as Menu } from "react-burger-menu";
 
 import styles from "./Header.module.css";
 
-const generateNavBar = (currentUser) => {
+const generateNavBar = (currentUser, setCloseSideBar = null) => {
   const links = [
     !currentUser && { label: HEADER.REGISTER, href: "/auth/register" },
     !currentUser && { label: HEADER.LOGIN, href: "/auth/login" },
@@ -20,6 +21,7 @@ const generateNavBar = (currentUser) => {
             href={href}
             style={{ textDecoration: "none" }}
             className="navigationitem"
+            onClick={setCloseSideBar}
           >
             {label}
           </Link>
@@ -31,11 +33,23 @@ const generateNavBar = (currentUser) => {
 };
 
 export const Header = ({ currentUser }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleIsOpen = () => setIsOpen(!isOpen);
+  const setCloseSideBar = () => setIsOpen(false);
+
   return (
     <nav className="navbar-light bg-light">
       <div className={styles["nav-hamburger"]}>
-        <Menu pageWrapId={"page-wrap"} outerContainerId={"App"} right>
-          {generateNavBar(currentUser)}
+        <Menu
+          pageWrapId={"page-wrap"}
+          outerContainerId={"App"}
+          right
+          isOpen={isOpen}
+          onClose={handleIsOpen}
+          onOpen={handleIsOpen}
+        >
+          {generateNavBar(currentUser, setCloseSideBar)}
         </Menu>
       </div>
       <div className={`${styles.container} ${styles.navigation}`}>
