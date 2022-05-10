@@ -17,7 +17,11 @@ export class OrderCancelledListener extends Listener<OrderCancelledEvent> {
       throw new Error("Ticket not found");
     }
 
-    ticket.set({ orderId: undefined, stock: ticket.stock + data.itemAmount });
+    const orderId = ticket.orderId
+      ? ticket.orderId.filter((item) => item !== data.id)
+      : [];
+    ticket.set({ orderId, stock: ticket.stock + data.itemAmount });
+
     await ticket.save();
     await new TicketUpdatedPublisher(this.client).publish({
       id: ticket.id,
