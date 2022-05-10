@@ -5,9 +5,10 @@ export const OrderList = ({ orders }) => {
     <div className={styles.container}>
       <ul>
         {orders.map((item) => {
+          console.log("item", item);
           return (
             <li key={item.id}>
-              {item.ticket} - {item.status}
+              {item.ticket} - {item.status} - {item.itemAmount}
             </li>
           );
         })}
