@@ -11,7 +11,8 @@ router.get("/api/orders", requireAuth, async (req: Request, res: Response) => {
   });
 
   const response = orders.map((item) => {
-    const ticket = Ticket.find({ id: item.ticket });
+    console.log("item", item);
+    const ticket = Ticket.find({ id: item.ticket.id });
     return { ...item, ticket };
   });
 
