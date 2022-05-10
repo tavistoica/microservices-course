@@ -21,9 +21,8 @@ const generateNavBar = (currentUser, setCloseSideBar = null) => {
             href={href}
             style={{ textDecoration: "none" }}
             className="navigationitem"
-            onClick={setCloseSideBar}
           >
-            {label}
+            <a onClick={setCloseSideBar}>{label}</a>
           </Link>
         </li>
       );
