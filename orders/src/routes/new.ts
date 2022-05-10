@@ -44,7 +44,7 @@ router.post(
       throw new NotEnoughStock();
     }
 
-    if (ticket.stock === 0) {
+    if (ticket.stock === 0 || itemAmount === 0) {
       throw new BadRequestError("Ticket is no longer available");
     }
 
