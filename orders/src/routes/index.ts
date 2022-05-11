@@ -9,7 +9,6 @@ router.get("/api/orders", requireAuth, async (req: Request, res: Response) => {
   const orders = await Order.find({
     userId: req.currentUser!.id,
   });
-  console.log("test", JSON.stringify(orders));
 
   // const response = orders.map(async (item) => {
   //   console.log("item", item);
