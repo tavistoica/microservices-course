@@ -15,6 +15,7 @@ export class TicketCreatedListener extends Listener<TicketCreatedEvent> {
       price,
       stock,
     });
+    console.log("ticket created", ticket);
     await ticket.save();
 
     msg.ack();
