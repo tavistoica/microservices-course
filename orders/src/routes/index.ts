@@ -12,6 +12,7 @@ router.get("/api/orders", requireAuth, async (req: Request, res: Response) => {
 
   const mappedOrders = orders.map(async (item) => {
     const ticket = await Ticket.findById(item.ticket);
+    console.log("ticket", ticket);
     if (ticket) item.ticket = ticket;
     return item;
   });
