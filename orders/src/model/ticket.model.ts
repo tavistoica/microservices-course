@@ -39,7 +39,7 @@ const ticketSchema = new mongoose.Schema(
     stock: {
       type: Number,
       required: true,
-      min: 1,
+      min: 0,
     },
   },
   {

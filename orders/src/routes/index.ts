@@ -10,20 +10,13 @@ router.get("/api/orders", requireAuth, async (req: Request, res: Response) => {
     userId: req.currentUser!.id,
   });
 
-  console.log("all tickets: ", await Ticket.find());
-
-  const mappedOrders = orders.map(async (item) => {
-    const ticket = await Ticket.findById(item.ticket);
-    console.log("ticket", ticket);
-    if (ticket) item.ticket = ticket;
-    return item;
-  });
-
-  // const response = orders.map(async (item) => {
-  //   console.log("item", item);
-  //   const ticket = await Ticket.find({ id: item.ticket.id });
-  //   return { ...item, ticket };
-  // });
+  const mappedOrders = await Promise.all(
+    orders.map(async (item) => {
+      const ticket = await Ticket.findById(item.ticket.toString());
+      if (ticket) item.ticket = ticket;
+      return item;
+    })
+  );
 
   res.send(mappedOrders);
 });
