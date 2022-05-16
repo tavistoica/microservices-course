@@ -2,11 +2,11 @@ name: tests-tickets
 
 on:
   pull_request:
+    types:
+      - opened
     paths:
       - "tickets/**"
-     branches:
-      - main
-      
+
 jobs:
   build:
     runs-on: ubuntu-latest
