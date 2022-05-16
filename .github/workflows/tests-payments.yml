@@ -4,6 +4,8 @@ on:
   pull_request:
     paths:
       - "payments/**"
+     branches:
+      - main
 
 jobs:
   build:
