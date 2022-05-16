@@ -2,10 +2,10 @@ name: tests-payments
 
 on:
   pull_request:
+    types:
+      - opened
     paths:
       - "payments/**"
-     branches:
-      - main
 
 jobs:
   build:

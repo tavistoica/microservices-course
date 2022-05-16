@@ -2,10 +2,10 @@ name: tests-orders
 
 on:
   pull_request:
+    types:
+      - opened
     paths:
       - "orders/**"
-    branches:
-      - main
 
 jobs:
   build:

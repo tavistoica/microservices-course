@@ -2,11 +2,11 @@ name: tests-auth
 
 on:
   pull_request:
+    types:
+      - opened
     paths:
       - "auth/**"
-     branches:
-      - main
-      
+
 jobs:
   build:
     runs-on: ubuntu-latest
