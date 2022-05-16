@@ -6,10 +6,10 @@ export const OrderList = ({ orders }) => {
       <div>{JSON.stringify(orders)}</div>
       <ul>
         {orders.map((item) => {
-          console.log("item", item);
           return (
             <li key={item.id}>
-              {item.ticket} - {item.status} - {item.itemAmount}
+              {item.ticket.title} - {item.status} - {item.itemAmount} -{" "}
+              {item.ticket.price}
             </li>
           );
         })}
