@@ -1,7 +1,6 @@
 import request from "supertest";
 import { app } from "../../app";
 import mongoose from "mongoose";
-import { Order, OrderStatus } from "../../model/order.model";
 import { Ticket } from "../../model/ticket.model";
 import { natsWrapper } from "@ostoica/common";
 
@@ -15,22 +14,15 @@ it("returns an error if the ticket does not exist", async () => {
     .expect(404);
 });
 
-it("returns an error if the ticket is already reserved", async () => {
+it("returns an error if the ticket has stock 0", async () => {
   const ticket = Ticket.build({
     id: new mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
-    stock: 10,
+    stock: 0,
   });
   await ticket.save();
-  const order = Order.build({
-    userId: "random",
-    ticket,
-    status: OrderStatus.Created,
-    expiresAt: new Date(),
-    itemAmount: 10,
-  });
-  await order.save();
+
   await request(app)
     .post("/api/orders")
     .set("Cookie", global.signin())

@@ -48,6 +48,9 @@ router.post(
       throw new BadRequestError("Ticket is no longer available");
     }
 
+    ticket.stock -= itemAmount;
+    await ticket.save();
+
     //  Make sure the ticket is not already reserved
     // const isReserved = await ticket.isReserved();
     // if (isReserved) {
