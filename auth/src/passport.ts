@@ -31,7 +31,7 @@ passport.use(
         role: "User",
       };
 
-      const checkUser = await User.findOne({ email });
+      const checkUser = await User.findOne({ email: email || id });
       if (!checkUser) {
         const user = await User.build(userData).save();
 
@@ -44,7 +44,7 @@ passport.use(
           process.env.JWT_KEY!
         );
 
-        done(null, profile, { jwtToken });
+        return done(null, profile, { jwtToken });
       }
 
       const jwtToken = jwt.sign(
