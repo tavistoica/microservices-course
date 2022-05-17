@@ -1,5 +1,6 @@
 import styles from "./Login.module.css";
 import { LOGIN_PAGE } from "../../utils/constants";
+import Router from "next/router";
 
 import { Button } from "../Button/Button";
 
@@ -38,6 +39,10 @@ export const Login = ({
           message={LOGIN_PAGE.LOGIN_MESSAGE}
         />
       </form>
+      <Button
+        message="Facebook"
+        onClick={() => Router.push("/auth/users/facebook")}
+      />
     </div>
   );
 };

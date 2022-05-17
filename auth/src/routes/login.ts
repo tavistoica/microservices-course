@@ -1,5 +1,6 @@
 import express from "express";
 import { body } from "express-validator";
+import passport from "passport";
 import { validateRequest } from "@ostoica/common";
 import { loginController } from "../controllers/login";
 
@@ -16,6 +17,16 @@ router.post(
   ],
   validateRequest,
   loginController
+);
+
+router.get("/api/users/facebook", passport.authenticate("facebook"));
+
+router.get(
+  "/api/users/callback",
+  passport.authenticate("facebook", {
+    successRedirect: "https://www.tavistoica.xyz/",
+    failureRedirect: "https://www.tavistoica.xyz/auth/login",
+  })
 );
 
 export { router as loginRouter };
