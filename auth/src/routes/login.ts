@@ -26,7 +26,13 @@ router.get(
   passport.authenticate("facebook", {
     successRedirect: "https://www.tavistoica.xyz/",
     failureRedirect: "https://www.tavistoica.xyz/auth/login",
-  })
+  }),
+  (req, res) => {
+    // @ts-ignore
+    const token = req.authInfo?.jwtToken;
+    req.session = { jwt: token };
+    res.redirect("https://www.tavistoica.xyz/");
+  }
 );
 
 export { router as loginRouter };
