@@ -46,8 +46,10 @@ passport.use(
           },
           process.env.JWT_KEY!
         );
+        logger.info(`!checkUser ${jwtToken} ${JSON.stringify(profile)}`);
 
-        return done(null, profile, { jwtToken });
+        done(null, profile, { jwtToken });
+        return;
       }
 
       const jwtToken = jwt.sign(
@@ -59,7 +61,9 @@ passport.use(
         process.env.JWT_KEY!
       );
 
-      return done(null, profile, { jwtToken });
+      logger.info(`data in checkUser ${jwtToken} ${JSON.stringify(profile)}`);
+
+      done(null, profile, { jwtToken });
     }
   )
 );

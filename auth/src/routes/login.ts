@@ -30,6 +30,7 @@ router.get(
     failureRedirect: "https://www.tavistoica.xyz/auth/login",
   }),
   (req, res) => {
+    logger.info("goes in next middleware");
     // @ts-ignore
     const token = req.authInfo?.jwtToken;
     logger.info(`token ${token}`);
