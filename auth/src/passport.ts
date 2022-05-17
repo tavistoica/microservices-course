@@ -25,6 +25,7 @@ passport.use(
     },
     async (_accessToken, _refreshToken, profile: strategy.Profile, done) => {
       const { email } = profile._json;
+      console.log("test profile", profile._json);
       const userData: { email: string; role: UserRole } = {
         email,
         role: "User",
