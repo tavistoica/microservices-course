@@ -26,15 +26,15 @@ passport.use(
     },
     async (_accessToken, _refreshToken, profile: strategy.Profile, done) => {
       const { email, id } = profile._json;
-      logger.info(`test profile ${profile._json}`);
+      logger.info(`test profile ${JSON.stringify(profile._json)}`);
       const userData: { email: string; role: UserRole } = {
         email: email || id,
         role: "User",
       };
-      logger.info(`userData ${userData}`);
+      logger.info(`userData ${JSON.stringify(userData)}`);
 
       const checkUser = await User.findOne({ email: email || id });
-      logger.info(`checkUser ${checkUser}`);
+      logger.info(`checkUser ${JSON.stringify(checkUser)}`);
       if (!checkUser) {
         const user = await User.build(userData).save();
 
@@ -52,14 +52,14 @@ passport.use(
 
       const jwtToken = jwt.sign(
         {
-          id: checkUser!.id,
+          id: checkUser!._id,
           email: checkUser!.email,
           role: checkUser!.role,
         },
         process.env.JWT_KEY!
       );
 
-      done(null, profile, { jwtToken });
+      return done(null, profile, { jwtToken });
     }
   )
 );
