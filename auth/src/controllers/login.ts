@@ -13,7 +13,7 @@ export const loginController = async (req: Request, res: Response) => {
   }
 
   const passwordsMatch = await Password.compare(
-    existingUser.password,
+    existingUser.password!,
     password
   );
   if (!passwordsMatch) {
