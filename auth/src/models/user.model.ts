@@ -5,7 +5,7 @@ type UserRole = "Admin" | "User" | "Seller";
 
 interface UserAttrs {
   email: string;
-  password: string;
+  password?: string;
   role: UserRole;
 }
 
@@ -15,7 +15,7 @@ interface UserModel extends mongoose.Model<UserDoc> {
 
 interface UserDoc extends mongoose.Document {
   email: string;
-  password: string;
+  password?: string;
   role: UserRole;
 }
 
