@@ -1,6 +1,7 @@
 import passport from "passport";
 import strategy from "passport-facebook";
 import jwt from "jsonwebtoken";
+import { logger } from "./utils/logger";
 
 import { User } from "./models/user.model";
 import { UserRole } from "./types/users.types";
@@ -25,13 +26,15 @@ passport.use(
     },
     async (_accessToken, _refreshToken, profile: strategy.Profile, done) => {
       const { email, id } = profile._json;
-      console.log("test profile", profile._json);
+      logger.info(`test profile ${profile._json}`);
       const userData: { email: string; role: UserRole } = {
         email: email || id,
         role: "User",
       };
+      logger.info(`userData ${userData}`);
 
       const checkUser = await User.findOne({ email: email || id });
+      logger.info(`checkUser ${checkUser}`);
       if (!checkUser) {
         const user = await User.build(userData).save();
 
