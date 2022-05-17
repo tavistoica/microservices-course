@@ -1,5 +1,6 @@
 import passport from "passport";
 import strategy from "passport-facebook";
+import jwt from "jsonwebtoken";
 
 import { User } from "./models/user.model";
 
@@ -21,13 +22,24 @@ passport.use(
       callbackURL: process.env.FACEBOOK_CALLBACK_URL!,
       profileFields: ["email", "name"],
     },
-    (_accessToken, _refreshToken, profile, done) => {
+    async (_accessToken, _refreshToken, profile: strategy.Profile, done) => {
       const { email } = profile._json;
       const userData = {
         email,
+        role: "User",
       };
-      new User(userData).save();
-      done(null, profile);
+      const user = await new User(userData).save();
+
+      const jwtToken = jwt.sign(
+        {
+          id: user.id,
+          email: user.email,
+          role: user.role,
+        },
+        process.env.JWT_KEY!
+      );
+
+      done(null, profile, { jwtToken });
     }
   )
 );
