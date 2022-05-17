@@ -3,6 +3,8 @@ import { body } from "express-validator";
 import passport from "passport";
 import { validateRequest } from "@ostoica/common";
 import { loginController } from "../controllers/login";
+import { resHandler } from "../utils/res-handler";
+import { logger } from "../utils/logger";
 
 const router = express.Router();
 
@@ -30,8 +32,9 @@ router.get(
   (req, res) => {
     // @ts-ignore
     const token = req.authInfo?.jwtToken;
+    logger.info(`token ${token}`);
     req.session = { jwt: token };
-    res.redirect("https://www.tavistoica.xyz/");
+    resHandler(res, null, null, "https://www.tavistoica.xyz/");
   }
 );
 

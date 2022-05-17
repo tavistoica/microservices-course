@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { BadRequestError, validateRequest } from "@ostoica/common";
+import { BadRequestError } from "@ostoica/common";
 import { User } from "../models/user.model";
 import { Password } from "../services/password";
 import jwt from "jsonwebtoken";
