@@ -24,20 +24,20 @@ spec:
                   name: jwt-secret
                   key: JWT_KEY
             - name: FACEBOOK_CLIENT_ID
-            valueFrom:
-              secretKeyRef:
-                name: facebook
-                key: FACEBOOK_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: facebook
+                  key: FACEBOOK_CLIENT_ID
             - name: FACEBOOK_CLIENT_SECRET
-            valueFrom:
-              secretKeyRef:
-                name: facebook-secret
-                key: FACEBOOK_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: facebook-secret
+                  key: FACEBOOK_CLIENT_SECRET
             - name: FACEBOOK_CALLBACK_URL
-            valueFrom:
-              secretKeyRef:
-                name: facebook-callback
-                key: FACEBOOK_CALLBACK_URL
+              valueFrom:
+                secretKeyRef:
+                  name: facebook-callback
+                  key: FACEBOOK_CALLBACK_URL
 ---
 apiVersion: v1
 kind: Service
