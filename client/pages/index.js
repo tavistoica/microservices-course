@@ -5,7 +5,7 @@ const LandingPage = ({ tickets, currentUser }) => {
     return (
       <Link href="/tickets/[ticketId]" as={`/tickets/${item.id}`} key={item.id}>
         <tr key={item.id}>
-          <th>{item.title}</th>
+          <th className="th-title">{item.title}</th>
           <th>{item.price}</th>
         </tr>
       </Link>
@@ -13,9 +13,9 @@ const LandingPage = ({ tickets, currentUser }) => {
   });
 
   return (
-    <div>
+    <div className="text-center">
+      {currentUser?.role === "Seller" && <h2>Published Meals</h2>}
       <table className="table">
-        {currentUser?.role === "Seller" && <h2>Published Meals</h2>}
         <thead>
           <tr>
             <th>Title</th>
@@ -29,7 +29,7 @@ const LandingPage = ({ tickets, currentUser }) => {
 };
 
 LandingPage.getInitialProps = async (_context, client, currentUser) => {
-  if (currentUser.role === "Seller") {
+  if (currentUser?.role === "Seller") {
     const { data } = await client.get(`/api/tickets/users/${currentUser.id}`);
     return { tickets: data };
   }

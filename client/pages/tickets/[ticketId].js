@@ -29,15 +29,20 @@ const TicketShow = ({ ticket }) => {
   return (
     <div className={styles["ticket-page"]}>
       <h1>{ticket.title}</h1>
-      <h4>{ticket.price}</h4>
-      <select
-        value={itemAmount}
-        onChange={(event) => setItemAmount(event.target.value)}
-      >
-        {buildDropdown(ticket.stock)}
-      </select>
+      <h4>{ticket.price}$</h4>
+      <div>
+        <select
+          value={itemAmount}
+          onChange={(event) => setItemAmount(event.target.value)}
+        >
+          {buildDropdown(ticket.stock)}
+        </select>
+      </div>
       {errors}
-      <button className="btn btn-primary" onClick={() => doRequest()}>
+      <button
+        className={`btn btn-primary ${styles["purchase-btn"]}`}
+        onClick={doRequest}
+      >
         Purchase
       </button>
     </div>
