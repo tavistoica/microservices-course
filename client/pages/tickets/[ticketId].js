@@ -1,7 +1,7 @@
 import { useState } from "react";
 import useRequest from "../../hooks/use-request";
 import Router from "next/router";
-import { QrReader } from "react-qr-reader";
+import dynamic from "next/dynamic";
 
 import styles from "./ticket.module.css";
 
@@ -30,18 +30,10 @@ const TicketShow = ({ ticket }) => {
 
   return (
     <div className={styles["ticket-page"]}>
-      <QrReader
-        onResult={(result, error) => {
-          if (!!result) {
-            setData(result?.text);
-          }
-
-          if (!!error) {
-            console.info(error);
-          }
-        }}
-        style={{ width: "100%" }}
-      />
+      <select onChange={(e) => setSelected(e.target.value)}>
+        <option value={"environment"}>Back Camera</option>
+        <option value={"user"}>Front Camera</option>
+      </select>
       <p>{data}</p>
       <h1>{ticket.title}</h1>
       <h4>{ticket.price}$</h4>
