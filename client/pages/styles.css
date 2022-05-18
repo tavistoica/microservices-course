@@ -2,6 +2,15 @@ a {
   text-decoration: none !important;
 }
 
+.text-center {
+  text-align: center;
+}
+
+.th-title {
+  display: flex;
+  justify-content: flex-start;
+}
+
 .bm-burger-button {
   position: fixed;
   width: 26px;
