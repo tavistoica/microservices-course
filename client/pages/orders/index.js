@@ -1,6 +1,7 @@
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import { OrderList } from "../../components/OrderList/OrderList";
-import { QrReader } from "react-qr-reader";
+const QrReader = dynamic(() => import("react-qr-reader"), { ssr: false });
 
 import styles from "./index.module.css";
 
