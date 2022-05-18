@@ -17,6 +17,7 @@ export const HEADER = {
   SELL: "Sell Food",
   ORDERS: "My Orders",
   LOGOUT: "Log Out",
+  PROFILE: "Profile",
 };
 
 export const LOGOUT_PAGE = {
