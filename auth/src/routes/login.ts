@@ -21,14 +21,9 @@ router.post(
   loginController
 );
 
-router.get("/api/users/facebook", passport.authenticate("facebook"));
-
 router.get(
-  "/api/users/callback",
-  passport.authenticate("facebook", {
-    successRedirect: "https://www.tavistoica.xyz/",
-    failureRedirect: "https://www.tavistoica.xyz/auth/login",
-  }),
+  "/api/users/facebook",
+  passport.authenticate("facebook"),
   (req, res) => {
     logger.info("goes in next middleware");
     // @ts-ignore
@@ -37,6 +32,15 @@ router.get(
     req.session = { jwt: token };
     resHandler(res, null, null, "https://www.tavistoica.xyz/");
   }
+);
+
+router.get(
+  "/api/users/callback",
+  passport.authenticate("facebook", {
+    session: false,
+    successRedirect: "https://www.tavistoica.xyz/",
+    failureRedirect: "https://www.tavistoica.xyz/auth/login",
+  })
 );
 
 export { router as loginRouter };
