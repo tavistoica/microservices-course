@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const LandingPage = ({ tickets }) => {
+const LandingPage = ({ tickets, currentUser }) => {
   const ticketList = tickets.map((item) => {
     return (
       <Link href="/tickets/[ticketId]" as={`/tickets/${item.id}`} key={item.id}>
@@ -15,6 +15,7 @@ const LandingPage = ({ tickets }) => {
   return (
     <div>
       <table className="table">
+        {currentUser?.role === "Seller" && <h2>Published Meals</h2>}
         <thead>
           <tr>
             <th>Title</th>
@@ -27,7 +28,11 @@ const LandingPage = ({ tickets }) => {
   );
 };
 
-LandingPage.getInitialProps = async (context, client, currentUser) => {
+LandingPage.getInitialProps = async (_context, client, currentUser) => {
+  if (currentUser.role === "Seller") {
+    const { data } = await client.get(`/api/meals/users/${currentUser.id}`);
+    return { tickets: data };
+  }
   const { data } = await client.get("/api/tickets");
 
   return { tickets: data };
