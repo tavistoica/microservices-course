@@ -13,36 +13,40 @@ export const Login = ({
   setPassword,
 }) => {
   return (
-    <div className={`${styles.margintop} d-flex justify-content-center`}>
-      <form className={styles.signform} onSubmit={onSubmit}>
-        <h1>{LOGIN_PAGE.LOGIN_MESSAGE}</h1>
-        {errors}
-        <div className={styles.margintop}>
-          <input
-            className="form-control"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-            placeholder={LOGIN_PAGE.EMAIL_PLACEHOLDER}
+    <>
+      <div className={`${styles.margintop} d-flex justify-content-center`}>
+        <form className={styles.signform} onSubmit={onSubmit}>
+          <h1>{LOGIN_PAGE.LOGIN_MESSAGE}</h1>
+          {errors}
+          <div className={styles.margintop}>
+            <input
+              className="form-control"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              placeholder={LOGIN_PAGE.EMAIL_PLACEHOLDER}
+            />
+          </div>
+          <div className={styles.margintop}>
+            <input
+              className="form-control"
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              placeholder={LOGIN_PAGE.PASSWORD_PLACEHOLDER}
+            />
+          </div>
+          <Button
+            stylesProp={styles.margintop}
+            message={LOGIN_PAGE.LOGIN_MESSAGE}
           />
-        </div>
-        <div className={styles.margintop}>
-          <input
-            className="form-control"
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-            placeholder={LOGIN_PAGE.PASSWORD_PLACEHOLDER}
-          />
-        </div>
+        </form>
+      </div>
+      <div className={`${styles.margintop} d-flex justify-content-center`}>
         <Button
-          stylesProp={styles.margintop}
-          message={LOGIN_PAGE.LOGIN_MESSAGE}
+          message="Facebook"
+          onClick={() => Router.push("/api/users/facebook")}
         />
-      </form>
-      <Button
-        message="Facebook"
-        onClick={() => Router.push("/auth/users/facebook")}
-      />
-    </div>
+      </div>
+    </>
   );
 };
