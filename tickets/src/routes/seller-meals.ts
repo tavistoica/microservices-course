@@ -12,4 +12,4 @@ router.get("/api/meals/users/:id", async (req: Request, res: Response) => {
   res.send(tickets);
 });
 
-export { router as indexTicketRouter };
+export { router as sellerMealsRouter };
