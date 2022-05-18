@@ -30,7 +30,7 @@ const LandingPage = ({ tickets, currentUser }) => {
 
 LandingPage.getInitialProps = async (_context, client, currentUser) => {
   if (currentUser.role === "Seller") {
-    const { data } = await client.get(`/api/meals/users/${currentUser.id}`);
+    const { data } = await client.get(`/api/tickets/users/${currentUser.id}`);
     return { tickets: data };
   }
   const { data } = await client.get("/api/tickets");
