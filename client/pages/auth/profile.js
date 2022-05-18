@@ -1,7 +1,10 @@
 const profile = (props) => {
-  console.log("props", JSON.stringify(props));
-
-  return <div>Profile</div>;
+  return (
+    <>
+      <div>{`Email: ${props.currentUser.email}`}</div>
+      <div>{`Role: ${props.currentUser.role}`}</div>
+    </>
+  );
 };
 
 export default profile;

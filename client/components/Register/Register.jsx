@@ -8,9 +8,11 @@ export const Register = ({
   onSubmit,
   email,
   password,
+  role,
   errors,
   setEmail,
   setPassword,
+  setRole,
 }) => {
   return (
     <div className={`${styles.margintop} d-flex justify-content-center`}>
@@ -33,6 +35,15 @@ export const Register = ({
             value={password}
             placeholder={REGISTER_PAGE.PASSWORD_PLACEHOLDER}
           />
+        </div>
+        <div className={styles.margintop}>
+          <select
+            value={role}
+            onChange={(event) => setRole(event.target.value)}
+          >
+            <option value="User">User</option>
+            <option value="Seller">Seller</option>
+          </select>
         </div>
         <Button
           stylesProp={styles.margintop}
