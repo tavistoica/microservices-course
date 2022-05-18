@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import "express-async-errors";
 import { json } from "body-parser";
 import cookieSession from "cookie-session";
@@ -14,6 +15,7 @@ const app = express();
 console.log("test secure response", process.env.NODE_ENV);
 app.set("trust proxy", true);
 app.use(json());
+app.use(cors());
 app.use(
   cookieSession({
     signed: false,
