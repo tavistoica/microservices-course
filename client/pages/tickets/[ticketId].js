@@ -28,10 +28,6 @@ const TicketShow = ({ ticket }) => {
 
   return (
     <div className={styles["ticket-page"]}>
-      <select onChange={(e) => setSelected(e.target.value)}>
-        <option value={"environment"}>Back Camera</option>
-        <option value={"user"}>Front Camera</option>
-      </select>
       <h1>{ticket.title}</h1>
       <h4>{ticket.price}$</h4>
       <div>
