@@ -4,7 +4,7 @@ import { User } from "../models/user.model";
 import jwt from "jsonwebtoken";
 
 export const registerController = async (req: Request, res: Response) => {
-  const { email, password } = req.body;
+  const { email, password, role } = req.body;
 
   const existingUser = await User.findOne({ email });
 
@@ -12,7 +12,7 @@ export const registerController = async (req: Request, res: Response) => {
     throw new BadRequestError("Email in use");
   }
 
-  const user = User.build({ email, password, role: "User" });
+  const user = User.build({ email, password, role });
   await user.save();
 
   //  Generate JWT
