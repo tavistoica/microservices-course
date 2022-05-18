@@ -6,6 +6,7 @@ import {
   NotFoundError,
   BadRequestError,
   natsWrapper,
+  requireSeller,
 } from "@ostoica/common";
 import { body } from "express-validator";
 import { Ticket } from "../models/ticket.model";
@@ -16,6 +17,7 @@ const router = express.Router();
 router.put(
   "/api/tickets/:id",
   requireAuth,
+  requireSeller,
   [
     body("title").not().isEmpty().withMessage("Title is required"),
     body("price").isFloat({ gt: 0 }).withMessage("Price must be grater than 0"),
