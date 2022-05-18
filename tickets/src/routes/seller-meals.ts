@@ -3,7 +3,7 @@ import { Ticket } from "../models/ticket.model";
 
 const router = express.Router();
 
-router.get("/api/meals/users/:id", async (req: Request, res: Response) => {
+router.get("/api/tickets/users/:id", async (req: Request, res: Response) => {
   try {
     const tickets = await Ticket.find({
       userId: req.params.id,
