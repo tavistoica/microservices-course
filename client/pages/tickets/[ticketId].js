@@ -1,7 +1,6 @@
 import { useState } from "react";
 import useRequest from "../../hooks/use-request";
 import Router from "next/router";
-import dynamic from "next/dynamic";
 
 import styles from "./ticket.module.css";
 
@@ -15,7 +14,6 @@ const buildDropdown = (stock) => {
 
 const TicketShow = ({ ticket }) => {
   const [itemAmount, setItemAmount] = useState(1);
-  const [data, setData] = useState("No result");
 
   const { doRequest, errors } = useRequest({
     url: "/api/orders",
@@ -34,7 +32,6 @@ const TicketShow = ({ ticket }) => {
         <option value={"environment"}>Back Camera</option>
         <option value={"user"}>Front Camera</option>
       </select>
-      <p>{data}</p>
       <h1>{ticket.title}</h1>
       <h4>{ticket.price}$</h4>
       <div>
