@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { QrReader } from "react-qr-reader";
 
 const LandingPage = ({ tickets, currentUser }) => {
   const ticketList = tickets.map((item) => {
