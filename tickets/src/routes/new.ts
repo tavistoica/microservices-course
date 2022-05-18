@@ -1,5 +1,10 @@
 import express, { Request, Response } from "express";
-import { requireAuth, validateRequest, natsWrapper } from "@ostoica/common";
+import {
+  requireAuth,
+  validateRequest,
+  natsWrapper,
+  requireSeller,
+} from "@ostoica/common";
 import { body } from "express-validator";
 import { Ticket } from "../models/ticket.model";
 import { TicketCreatedPublisher } from "../events/publishers/ticket-created-publisher";
@@ -9,6 +14,7 @@ const router = express.Router();
 router.post(
   "/api/tickets",
   requireAuth,
+  requireSeller,
   [
     body("title").not().isEmpty().withMessage("Title is required"),
     body("price").isFloat({ gt: 0 }).withMessage("Price must be grater than 0"),
