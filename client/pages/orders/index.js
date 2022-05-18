@@ -10,7 +10,7 @@ const OrderIndex = ({ orders }) => {
   return (
     <div className={styles["orders-list"]}>
       <QrReader
-        onResult={(result, error) => {
+        onScan={(result, error) => {
           if (!!result) {
             setData(result?.text);
           }
