@@ -6,11 +6,11 @@ import Router from "next/router";
 const OrderShow = ({ order, currentUser }) => {
   const [timeLeft, setTimeLeft] = useState(0);
   const { doRequest, errors } = useRequest({
-    url: "/api/payments",
-    method: "post",
-    body: {
-      orderId: order.id,
-    },
+    url: `/api/orders/${order.id}/${order.ticket.id}`,
+    method: "patch",
+    // body: {
+    //   orderId: order.id,
+    // },
     onSuccess: () => Router.push("/orders"),
   });
 
@@ -33,13 +33,19 @@ const OrderShow = ({ order, currentUser }) => {
 
   return (
     <div>
+      <button
+        className={`btn btn-primary ${styles["purchase-btn"]}`}
+        onClick={doRequest()}
+      >
+        Purchase
+      </button>
       Time left to pay: {timeLeft} seconds
-      <StripeCheckout
+      {/* <StripeCheckout
         token={({ id }) => doRequest({ token: id })}
         stripeKey="pk_test_51JGhaeAltPmlu6DoHAGEQpvnVASrUHXMRFpAem4B3IVL03sEe4qveWi8NHOI9XsSGFfuLmH4tqVqrJ9J1BLoimVe00WW87uYDR"
         amount={order.ticket.price * 100}
         email={currentUser.email}
-      />
+      /> */}
       {errors}
     </div>
   );
