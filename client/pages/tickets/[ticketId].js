@@ -16,9 +16,14 @@ const TicketShow = ({ ticket }) => {
   const [itemAmount, setItemAmount] = useState(1);
 
   const { doRequest, errors } = useRequest({
-    url: `/api/orders/${order.id}/${ticket.id}`,
-    method: "patch",
-    onSuccess: () => Router.push("/orders/"),
+    url: "/api/orders",
+    method: "post",
+    body: {
+      ticketId: ticket.id,
+      itemAmount,
+    },
+    onSuccess: (order) =>
+      Router.push("/orders/[orderId]", `/orders/${order.id}`),
   });
 
   return (
