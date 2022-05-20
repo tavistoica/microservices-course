@@ -41,7 +41,7 @@ const TicketShow = ({ ticket }) => {
       {errors}
       <button
         className={`btn btn-primary ${styles["purchase-btn"]}`}
-        onClick={doRequest()}
+        onClick={doRequest}
       >
         Purchase
       </button>
