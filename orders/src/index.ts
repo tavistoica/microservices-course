@@ -5,6 +5,7 @@ import { TicketCreatedListener } from "./events/listeners/ticket-created-listene
 import { TicketUpdatedListener } from "./events/listeners/ticket-updated-listener";
 import { ExpirationCompleteListener } from "./events/listeners/expiration-complete-listener";
 import { PaymentCreatedListener } from "./events/listeners/payment-created-listener";
+import { logger } from "./utils/logger";
 
 const start = async () => {
   if (!process.env.JWT_KEY) {
@@ -32,7 +33,7 @@ const start = async () => {
   );
 
   natsWrapper.client.on("close", () => {
-    console.log("NATS connection closed!");
+    logger.info("NATS connection closed!");
     process.exit();
   });
 
@@ -49,10 +50,10 @@ const start = async () => {
     useUnifiedTopology: true,
     useCreateIndex: true,
   });
-  console.log("connected to MongoDB");
+  logger.info("connected to MongoDB");
 
   app.listen(3000, () => {
-    console.log("listening on port 3000");
+    logger.info("listening on port 3000");
   });
 };
 

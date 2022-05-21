@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { app } from "./app";
+import { logger } from "./utils/logger";
 
 const start = async () => {
   if (!process.env.JWT_KEY) {
@@ -15,13 +16,13 @@ const start = async () => {
       useUnifiedTopology: true,
       useCreateIndex: true,
     });
-    console.log("connected to MongoDB");
+    logger.info("connected to MongoDB");
   } catch (err) {
-    console.error(err);
+    logger.info(err);
   }
 
   app.listen(3000, () => {
-    console.log("listening on port 3000");
+    logger.info("listening on port 3000");
   });
 };
 
