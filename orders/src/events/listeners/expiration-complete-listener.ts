@@ -8,6 +8,7 @@ import { queueGroupName } from "./queue-group-name";
 import { Message } from "node-nats-streaming";
 import { Order } from "../../model/order.model";
 import { OrderCancelledPublisher } from "../publishers/order-cancelled-publisher";
+import { logger } from "../../../utils/logger";
 
 export class ExpirationCompleteListener extends Listener<ExpirationCompleteEvent> {
   subject: Subjects.ExpirationComplete = Subjects.ExpirationComplete;
@@ -17,10 +18,12 @@ export class ExpirationCompleteListener extends Listener<ExpirationCompleteEvent
     const order = await Order.findById(data.orderId).populate("ticket");
 
     if (!order) {
+      logger.info(`ExpirationCompleteListener - order not found`);
       throw new Error("Order not found");
     }
 
     if (order.status === OrderStatus.Complete) {
+      logger.info(`ExpirationCompleteListener - order.status is complete`);
       return msg.ack();
     }
 
