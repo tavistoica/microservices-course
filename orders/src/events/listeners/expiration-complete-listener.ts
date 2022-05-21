@@ -8,7 +8,7 @@ import { queueGroupName } from "./queue-group-name";
 import { Message } from "node-nats-streaming";
 import { Order } from "../../model/order.model";
 import { OrderCancelledPublisher } from "../publishers/order-cancelled-publisher";
-import { logger } from "../../../utils/logger";
+import { logger } from "../../utils/logger";
 
 export class ExpirationCompleteListener extends Listener<ExpirationCompleteEvent> {
   subject: Subjects.ExpirationComplete = Subjects.ExpirationComplete;
