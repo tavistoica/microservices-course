@@ -21,7 +21,7 @@ spec:
                 secretKeyRef:
                   name: jwt-secret
                   key: JWT_KEY
-      restartPolicy: OnFailure
+      restartPolicy: Always
 ---
 apiVersion: v1
 kind: Service
