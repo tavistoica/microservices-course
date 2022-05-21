@@ -3,6 +3,7 @@ import { app } from "./app";
 import { natsWrapper } from "@ostoica/common";
 import { OrderCancelledListener } from "./events/listeners/order-cancelled-listener";
 import { OrderCreatedListener } from "./events/listeners/order-created-listener";
+import { logger } from "./utils/logger";
 
 const start = async () => {
   if (!process.env.JWT_KEY) {
@@ -30,7 +31,7 @@ const start = async () => {
   );
 
   natsWrapper.client.on("close", () => {
-    console.log("NATS connection closed!");
+    logger.info("NATS connection closed!");
     process.exit();
   });
 
@@ -45,10 +46,10 @@ const start = async () => {
     useUnifiedTopology: true,
     useCreateIndex: true,
   });
-  console.log("connected to MongoDB");
+  logger.info("connected to MongoDB");
 
   app.listen(3000, () => {
-    console.log("listening on port 3000");
+    logger.info("listening on port 3000");
   });
 };
 
