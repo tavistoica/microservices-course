@@ -2,6 +2,7 @@ import { Message } from "node-nats-streaming";
 import { Subjects, Listener, TicketCreatedEvent } from "@ostoica/common";
 import { Ticket } from "../../model/ticket.model";
 import { queueGroupName } from "./queue-group-name";
+import { logger } from "../../utils/logger";
 
 export class TicketCreatedListener extends Listener<TicketCreatedEvent> {
   subject: Subjects.TicketCreated = Subjects.TicketCreated;
@@ -16,7 +17,9 @@ export class TicketCreatedListener extends Listener<TicketCreatedEvent> {
       stock,
       userId,
     });
-    console.log("meal created", ticket);
+    logger.info(
+      `TicketCreatedListener - ticket created - ${JSON.stringify(ticket)}`
+    );
     await ticket.save();
 
     msg.ack();
