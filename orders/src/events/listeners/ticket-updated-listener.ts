@@ -10,7 +10,6 @@ export class TicketUpdatedListener extends Listener<TicketUpdatedEvent> {
 
   async onMessage(data: TicketUpdatedEvent["data"], msg: Message) {
     logger.info(`ticket updated data: ${JSON.stringify(data)}`);
-    msg.ack();
     const test = await Ticket.find();
     logger.info(`all tickets: ${JSON.stringify(test)}`);
     const ticket = await Ticket.findById(data.id);
