@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import StripeCheckout from "react-stripe-checkout";
+// import StripeCheckout from "react-stripe-checkout";
 import useRequest from "../../hooks/use-request";
 import Router from "next/router";
+import QRCode from "react-qr-code";
 
 const OrderShow = ({ order, currentUser }) => {
   const [timeLeft, setTimeLeft] = useState(0);
@@ -33,6 +34,7 @@ const OrderShow = ({ order, currentUser }) => {
 
   return (
     <div>
+      <QRCode value={order.id} />
       <button className={"btn btn-primary"} onClick={() => doRequest()}>
         Purchase
       </button>
