@@ -48,7 +48,6 @@ router.post(
       throw new BadRequestError("Ticket is no longer available");
     }
 
-    ticket.stock -= itemAmount;
     await ticket.save();
 
     //  Make sure the ticket is not already reserved
@@ -82,7 +81,7 @@ router.post(
       ticket: {
         id: ticket.id,
         price: ticket.price,
-        stock: ticket.stock,
+        stock: ticket.stock - itemAmount,
       },
       itemAmount,
     });

@@ -18,6 +18,7 @@ export const HEADER = {
   ORDERS: "My Orders",
   LOGOUT: "Log Out",
   PROFILE: "Profile",
+  SCAN: "Scan Order",
 };
 
 export const LOGOUT_PAGE = {
