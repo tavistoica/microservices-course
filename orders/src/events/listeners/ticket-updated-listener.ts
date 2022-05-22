@@ -16,6 +16,7 @@ export class TicketUpdatedListener extends Listener<TicketUpdatedEvent> {
 
     if (!ticket) {
       logger.info(`TicketUpdatedListener - ticket not found`);
+      msg.ack();
       throw new Error("Ticket not found");
     }
 
