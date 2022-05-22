@@ -81,7 +81,7 @@ router.post(
       ticket: {
         id: ticket.id,
         price: ticket.price,
-        stock: ticket.stock - itemAmount,
+        stock: ticket.stock,
       },
       itemAmount,
     });
