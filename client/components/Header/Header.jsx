@@ -15,7 +15,13 @@ const generateNavBar = (currentUser, setCloseSideBar = null) => {
         label: HEADER.SELL,
         href: "/tickets/new",
       },
-    currentUser && { label: HEADER.ORDERS, href: "/orders" },
+    currentUser &&
+      currentUser.role === "Seller" && {
+        label: HEADER.SCAN,
+        href: "/orders/scan",
+      },
+    currentUser &&
+      currentUser.role === "User" && { label: HEADER.ORDERS, href: "/orders" },
     currentUser && { label: HEADER.LOGOUT, href: "/auth/signout" },
   ]
     .filter((linkConfig) => linkConfig)
