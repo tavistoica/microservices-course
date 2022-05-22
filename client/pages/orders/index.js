@@ -13,11 +13,12 @@ const OrderIndex = ({ orders }) => {
         onScan={(result, error) => {
           if (!!result) {
             console.log("result of qr: ", JSON.stringify(result));
-            setData(result?.text);
+            setData(JSON.stringify(result));
           }
 
           if (!!error) {
             console.info(error);
+            setData(`error - ${JSON.stringify(error)}`);
           }
         }}
         style={{ width: "100%" }}
