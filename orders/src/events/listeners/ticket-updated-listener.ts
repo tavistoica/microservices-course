@@ -12,7 +12,7 @@ export class TicketUpdatedListener extends Listener<TicketUpdatedEvent> {
     logger.info(`ticket updated data: ${JSON.stringify(data)}`);
     const test = await Ticket.find();
     logger.info(`all tickets: ${JSON.stringify(test)}`);
-    const ticket = await Ticket.findByEvent(data);
+    const ticket = await Ticket.findById(data.id);
 
     if (!ticket) {
       logger.info(`TicketUpdatedListener - ticket not found`);
