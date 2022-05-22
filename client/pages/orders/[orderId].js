@@ -33,7 +33,7 @@ const OrderShow = ({ order, currentUser }) => {
 
   return (
     <div>
-      <button className={"btn btn-primary"} onClick={doRequest()}>
+      <button className={"btn btn-primary"} onClick={() => doRequest()}>
         Purchase
       </button>
       Time left to pay: {timeLeft} seconds
