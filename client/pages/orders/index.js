@@ -12,6 +12,7 @@ const OrderIndex = ({ orders }) => {
       <QrReader
         onScan={(result, error) => {
           if (!!result) {
+            console.log("result of qr: ", JSON.stringify(result));
             setData(result?.text);
           }
 
