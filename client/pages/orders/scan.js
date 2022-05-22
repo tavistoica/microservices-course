@@ -1,6 +1,5 @@
 import { useState } from "react";
 import dynamic from "next/dynamic";
-import { OrderList } from "../../components/OrderList/OrderList";
 const QrReader = dynamic(() => import("react-qr-reader"), { ssr: false });
 
 import styles from "./index.module.css";
@@ -22,7 +21,6 @@ const ScanOrder = () => {
         style={{ width: "100%" }}
       />
       <p>{data}</p>
-      <OrderList orders={orders} />
     </div>
   );
 };
