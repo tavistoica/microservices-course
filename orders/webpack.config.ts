@@ -7,7 +7,9 @@ const production = process.env.NODE_ENV === "production";
 const mode = production ? "production" : "development";
 
 const config: Configuration = {
-  entry: "./src/index.ts",
+  entry: {
+    server: path.resolve(process.cwd(), "src/index.ts"),
+  },
   target: "node",
   mode,
   module: {
