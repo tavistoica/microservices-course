@@ -32,6 +32,7 @@ const start = async () => {
       process.env.NATS_CLIENT_ID,
       process.env.NATS_URL
     );
+    logger.info("connected to Nats");
 
     natsWrapper.client.on("close", () => {
       logger.info("NATS connection closed!");
