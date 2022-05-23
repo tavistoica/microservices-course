@@ -12,6 +12,7 @@ it("marks an order as cancelled", async () => {
     title: "concert",
     price: 20,
     stock: 10,
+    userId: "1",
   });
   await ticket.save();
 
@@ -44,6 +45,7 @@ it("emits an order cancelled event", async () => {
     title: "concert",
     price: 20,
     stock: 10,
+    userId: "1",
   });
   await ticket.save();
 

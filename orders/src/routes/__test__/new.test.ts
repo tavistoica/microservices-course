@@ -20,6 +20,7 @@ it("returns an error if the ticket has stock 0", async () => {
     title: "concert",
     price: 20,
     stock: 0,
+    userId: "1",
   });
   await ticket.save();
 
@@ -36,6 +37,7 @@ it("reserves a ticket", async () => {
     title: "concert",
     price: 20,
     stock: 10,
+    userId: "1",
   });
   await ticket.save();
 
@@ -52,6 +54,7 @@ it("emits an order created event", async () => {
     title: "concert",
     price: 20,
     stock: 10,
+    userId: "1",
   });
   await ticket.save();
 
