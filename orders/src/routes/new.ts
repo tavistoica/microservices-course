@@ -51,7 +51,7 @@ router.post(
       throw new BadRequestError("Ticket is no longer available");
     }
 
-    await ticket.save();
+    // await ticket.save();
 
     //  Make sure the ticket is not already reserved
     // const isReserved = await ticket.isReserved();
