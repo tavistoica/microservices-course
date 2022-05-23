@@ -26,27 +26,28 @@ const start = async () => {
     throw new Error("Environment variable 'NATS_CLUSTER_ID' is not defined.");
   }
 
-  if (process.env.NODE_ENV !== "development") {
-    await natsWrapper.connect(
-      process.env.NATS_CLUSTER_ID,
-      process.env.NATS_CLIENT_ID,
-      process.env.NATS_URL
-    );
-    logger.info("connected to Nats");
+  logger.info(`process.env.NODE_ENV = ${process.env.NODE_ENV}`);
+  // if (process.env.NODE_ENV !== "development") {
+  await natsWrapper.connect(
+    process.env.NATS_CLUSTER_ID,
+    process.env.NATS_CLIENT_ID,
+    process.env.NATS_URL
+  );
+  logger.info("connected to Nats");
 
-    natsWrapper.client.on("close", () => {
-      logger.info("NATS connection closed!");
-      process.exit();
-    });
+  natsWrapper.client.on("close", () => {
+    logger.info("NATS connection closed!");
+    process.exit();
+  });
 
-    process.on("SIGINT", () => natsWrapper.client.close());
-    process.on("SIGTERM", () => natsWrapper.client.close());
+  process.on("SIGINT", () => natsWrapper.client.close());
+  process.on("SIGTERM", () => natsWrapper.client.close());
 
-    new TicketCreatedListener(natsWrapper.client).listen();
-    new TicketUpdatedListener(natsWrapper.client).listen();
-    new ExpirationCompleteListener(natsWrapper.client).listen();
-    new PaymentCreatedListener(natsWrapper.client).listen();
-  }
+  new TicketCreatedListener(natsWrapper.client).listen();
+  new TicketUpdatedListener(natsWrapper.client).listen();
+  new ExpirationCompleteListener(natsWrapper.client).listen();
+  new PaymentCreatedListener(natsWrapper.client).listen();
+  // }
 
   await mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
