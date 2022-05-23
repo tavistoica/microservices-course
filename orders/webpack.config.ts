@@ -1,6 +1,5 @@
 import path from "path";
 import { Configuration } from "webpack";
-import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 
 const production = process.env.NODE_ENV === "production";
 const mode = production ? "production" : "development";
@@ -40,7 +39,6 @@ const config: Configuration = {
   node: {
     __dirname: true,
   },
-  plugins: [new ForkTsCheckerWebpackPlugin()],
 };
 
 export default config;
