@@ -17,6 +17,10 @@ export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
       throw new Error("Ticket not found");
     }
 
+    if (ticket.stock - data.itemAmount < 0) {
+      throw new Error("Ticket stock is too low");
+    }
+
     //  Mark the ticket as being reserved by setting its orderId property
     const orderId = ticket.orderId ? ticket.orderId.push(data.id) : [data.id];
     ticket.set({ orderId, stock: ticket.stock - data.itemAmount });
@@ -28,7 +32,7 @@ export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
       version: ticket.version,
       title: ticket.title,
       price: ticket.price,
-      stock: ticket.stock - data.itemAmount,
+      stock: ticket.stock,
       userId: ticket.userId,
       orderId: ticket.orderId,
     });
