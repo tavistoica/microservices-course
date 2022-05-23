@@ -1,7 +1,6 @@
 import path from "path";
 import { Configuration } from "webpack";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
-// import NodePolyfillPlugin from "node-polyfill-webpack-plugin";
 
 const production = process.env.NODE_ENV === "production";
 const mode = production ? "production" : "development";
