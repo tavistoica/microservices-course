@@ -7,7 +7,7 @@ import { Register } from "../../components/Register/Register";
 const register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState("User");
   const { doRequest, errors } = useRequest({
     url: "/api/users/register",
     method: "post",

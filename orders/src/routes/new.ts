@@ -13,6 +13,7 @@ import mongoose from "mongoose";
 import { Ticket } from "../model/ticket.model";
 import { Order } from "../model/order.model";
 import { OrderCreatedPublisher } from "../events/publishers/order-created-publisher";
+import { logger } from "../utils/logger";
 
 const router = express.Router();
 
@@ -36,6 +37,8 @@ router.post(
     const { ticketId, itemAmount } = req.body;
     //  Find ticket the user is trying to order
     const ticket = await Ticket.findById(ticketId);
+    logger.info(`POST /api/orders - ticket - ${JSON.stringify(ticket)}`);
+
     if (!ticket) {
       throw new NotFoundError();
     }
