@@ -9,6 +9,7 @@ import { showTicketRouter } from "./routes/show";
 import { indexTicketRouter } from "./routes/index";
 import { updateTicketRouter } from "./routes/update";
 import { sellerMealsRouter } from "./routes/seller-meals";
+import { deleteRouter } from "./routes/delete-db";
 
 //mongoose //5.10.19
 const app = express();
@@ -30,6 +31,7 @@ app.use(showTicketRouter);
 app.use(indexTicketRouter);
 app.use(updateTicketRouter);
 app.use(sellerMealsRouter);
+app.use(deleteRouter);
 
 app.all("*", async () => {
   throw new NotFoundError();

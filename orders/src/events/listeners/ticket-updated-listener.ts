@@ -10,23 +10,18 @@ export class TicketUpdatedListener extends Listener<TicketUpdatedEvent> {
 
   async onMessage(data: TicketUpdatedEvent["data"], msg: Message) {
     logger.info(`ticket updated data: ${JSON.stringify(data)}`);
-    const ticket = await Ticket.findById(data.id);
+    const ticket = await Ticket.findByEvent(data);
     logger.info(`TicketUpdatedListener - ticket - ${JSON.stringify(ticket)}`);
 
     if (!ticket) {
-      logger.info(`TicketUpdatedListener - ticket not found`);
-      msg.ack();
+      logger.error(`TicketUpdatedListener - ticket not found`);
       throw new Error("Ticket not found");
     }
-
-    if (ticket.stock - data.stock < 0) {
-      return;
-    }
-    msg.ack();
 
     const { title, price, stock } = data;
     ticket.set({ title, price, stock });
     await ticket.save();
+    logger.info("TicketUpdatedListener - finished");
 
     msg.ack();
   }
