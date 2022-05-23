@@ -10,6 +10,7 @@ import { showOrderRouter } from "./routes/show";
 import { newOrderRouter } from "./routes/new";
 import { completeOrderRouter } from "./routes/complete";
 import { healthRouter } from "./routes/health";
+import { deleteRouter } from "./routes/delete-db";
 
 //mongoose //5.10.19
 const app = express();
@@ -32,6 +33,7 @@ app.use(indexOrderRouter);
 app.use(deleteOrderRouter);
 app.use(showOrderRouter);
 app.use(completeOrderRouter);
+app.use(deleteRouter);
 
 app.all("*", async () => {
   throw new NotFoundError();
