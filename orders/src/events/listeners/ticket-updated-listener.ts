@@ -1,7 +1,7 @@
 import { Message } from "node-nats-streaming";
 import { Subjects, Listener, TicketUpdatedEvent } from "@ostoica/common";
 import { queueGroupName } from "./queue-group-name";
-import { Ticket } from "../../model/ticket.model";
+import { Ticket, TicketDoc } from "../../model/ticket.model";
 import { logger } from "../../utils/logger";
 
 export class TicketUpdatedListener extends Listener<TicketUpdatedEvent> {
@@ -10,7 +10,7 @@ export class TicketUpdatedListener extends Listener<TicketUpdatedEvent> {
 
   async onMessage(data: TicketUpdatedEvent["data"], msg: Message) {
     logger.info(`ticket updated data: ${JSON.stringify(data)}`);
-    let ticket: Ticket | null = null;
+    let ticket: TicketDoc | null = null;
     try {
       ticket = await Ticket.findByEvent(data);
     } catch (err) {
@@ -20,6 +20,7 @@ export class TicketUpdatedListener extends Listener<TicketUpdatedEvent> {
 
     if (!ticket) {
       logger.error(`TicketUpdatedListener - ticket not found`);
+      msg.ack();
       throw new Error("Ticket not found");
     }
 
