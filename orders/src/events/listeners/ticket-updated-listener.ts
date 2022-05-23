@@ -20,9 +20,9 @@ export class TicketUpdatedListener extends Listener<TicketUpdatedEvent> {
     }
 
     if (ticket.stock - data.stock < 0) {
-      msg.ack();
       return;
     }
+    msg.ack();
 
     const { title, price, stock } = data;
     ticket.set({ title, price, stock });

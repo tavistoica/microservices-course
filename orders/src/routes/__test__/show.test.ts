@@ -10,6 +10,7 @@ it("fetches the order", async () => {
     title: "concert",
     price: 20,
     stock: 10,
+    userId: "1",
   });
   await ticket.save();
 
@@ -38,6 +39,7 @@ it("it returns an error if a user tries to fetch other user's order", async () =
     title: "concert",
     price: 20,
     stock: 10,
+    userId: "1",
   });
   await ticket.save();
 

@@ -9,6 +9,7 @@ import { indexOrderRouter } from "./routes/index";
 import { showOrderRouter } from "./routes/show";
 import { newOrderRouter } from "./routes/new";
 import { completeOrderRouter } from "./routes/complete";
+import { healthRouter } from "./routes/health";
 
 //mongoose //5.10.19
 const app = express();
@@ -23,6 +24,8 @@ app.use(
 );
 
 app.use(currentUser);
+
+app.use(healthRouter);
 
 app.use(newOrderRouter);
 app.use(indexOrderRouter);

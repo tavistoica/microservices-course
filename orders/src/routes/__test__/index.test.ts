@@ -9,6 +9,7 @@ const buildTicket = async () => {
     title: "concert",
     price: 20,
     stock: 10,
+    userId: "1",
   });
   await ticket.save();
 
