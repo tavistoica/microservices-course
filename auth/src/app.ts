@@ -23,7 +23,7 @@ app.use(cors());
 app.use(
   cookieSession({
     signed: false,
-    secure: process.env.NODE_ENV === "production",
+    secure: true, //process.env.NODE_ENV === "production",
   })
 );
 
