@@ -1,25 +1,39 @@
 import { useState } from "react";
 import dynamic from "next/dynamic";
+import useRequest from "../../hooks/use-request";
 const QrReader = dynamic(() => import("react-qr-reader"), { ssr: false });
 
 import styles from "./index.module.css";
 
-const ScanOrder = () => {
-  const [data, setData] = useState("No Result");
+const ScanOrder = ({ currentUser }) => {
+  const [data, setData] = useState("");
+  const { doRequest, errors } = useRequest({
+    url: `/api/orders/${data}/${currentUser?.id}`,
+    method: "patch",
+    onSuccess: () => Router.push("/orders"),
+  });
+
+  useEffect(() => {
+    doRequest();
+  }, data);
+
   return (
     <div className={styles["orders-list"]}>
-      <QrReader
-        onScan={(result, error) => {
-          if (!!result) {
-            setData(result);
-          }
+      {errors}
+      {data && (
+        <QrReader
+          onScan={(result, error) => {
+            if (!!result) {
+              setData(result);
+            }
 
-          if (!!error) {
-            console.info(error);
-          }
-        }}
-        style={{ width: "100%" }}
-      />
+            if (!!error) {
+              console.info(error);
+            }
+          }}
+          style={{ width: "100%" }}
+        />
+      )}
       <p>{data}</p>
     </div>
   );
