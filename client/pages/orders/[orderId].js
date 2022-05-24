@@ -34,6 +34,7 @@ const OrderShow = ({ order, currentUser }) => {
 
   return (
     <div>
+      {console.log("currentUser?.id ", currentUser?.id)}
       <QRCode value={order.id} />
       <button className={"btn btn-primary"} onClick={() => doRequest()}>
         Purchase
