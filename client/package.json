@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "npm run build && next start",
+    "start": "next start",
     "ssl-certs": "cd ./scripts && mkcert localhost && mkcert -install",
     "dev:https": "cross-env NODE_EXTRA_CA_CERTS=\"$(mkcert -CAROOT)/rootCA.pem\" ./scripts/dev"
   },
