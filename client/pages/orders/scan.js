@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import useRequest from "../../hooks/use-request";
 const QrReader = dynamic(() => import("react-qr-reader"), { ssr: false });
