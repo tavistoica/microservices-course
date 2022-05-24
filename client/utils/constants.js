@@ -31,7 +31,7 @@ export const HOST_URL = {
     BROWSER_URL: "https://www.tavistoica.xyz",
   },
   PROD: {
-    SERVER_URL: "http://www.tavistoica.xyz",
+    SERVER_URL: "https://www.tavistoica.xyz",
     BROWSER_URL: "/",
   },
 };
