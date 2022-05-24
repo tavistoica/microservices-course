@@ -14,7 +14,7 @@ const ScanOrder = ({ currentUser }) => {
   });
 
   useEffect(() => {
-    doRequest();
+    if (data) doRequest();
   }, data);
 
   return (
