@@ -6,6 +6,7 @@ import QRCode from "react-qr-code";
 
 const OrderShow = ({ order, currentUser }) => {
   const [timeLeft, setTimeLeft] = useState(0);
+  console.log("currentUser?.id ", currentUser?.id);
   const { doRequest, errors } = useRequest({
     url: `/api/orders/${order.id}/${currentUser?.id}`,
     method: "patch",
@@ -34,7 +35,7 @@ const OrderShow = ({ order, currentUser }) => {
 
   return (
     <div>
-      {console.log("currentUser?.id ", currentUser?.id)}
+      <div>WTF: {currentUser?.id}</div>
       <QRCode value={order.id} />
       <button className={"btn btn-primary"} onClick={() => doRequest()}>
         Purchase
