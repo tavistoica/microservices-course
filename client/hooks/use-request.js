@@ -1,13 +1,20 @@
 import axios from "axios";
 import { useState } from "react";
 
+import { HOST_URL } from "../utils/constants";
+
 const useRequest = ({ url, method, body, onSuccess }) => {
   const [errors, setErrors] = useState(null);
+  const config =
+    process?.env?.IS_PRODUCTION !== "false" ? HOST_URL.PROD : HOST_URL.DEV;
 
   const doRequest = async (props = {}) => {
     try {
       setErrors(null);
-      const response = await axios[method](url, { ...body, ...props });
+      const response = await axios[method](`${config.SERVER_URL}${url}`, {
+        ...body,
+        ...props,
+      });
       if (onSuccess) {
         onSuccess(response.data);
       }
