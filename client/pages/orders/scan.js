@@ -20,7 +20,7 @@ const ScanOrder = ({ currentUser }) => {
   return (
     <div className={styles["orders-list"]}>
       {errors}
-      {data && (
+      {!data && (
         <QrReader
           onScan={(result, error) => {
             if (!!result) {
