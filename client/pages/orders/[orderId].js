@@ -7,7 +7,7 @@ import QRCode from "react-qr-code";
 const OrderShow = ({ order, currentUser }) => {
   const [timeLeft, setTimeLeft] = useState(0);
   const { doRequest, errors } = useRequest({
-    url: `/api/orders/${order.id}/${req.currentUser?.id}`,
+    url: `/api/orders/${order.id}/${currentUser?.id}`,
     method: "patch",
     // body: {
     //   orderId: order.id,
