@@ -24,7 +24,12 @@ const ScanOrder = ({ currentUser }) => {
       {errors}
       {!data && (
         <QrReader
-          onScan={(_result, error) => {
+          onScan={(result, error) => {
+            if (!!result) {
+              console.log("result", result);
+              setData(result);
+            }
+
             if (!!error) {
               console.info(error);
             }
