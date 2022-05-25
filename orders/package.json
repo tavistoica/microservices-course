@@ -28,7 +28,6 @@
     "express-async-errors": "^3.1.1",
     "express-validator": "^6.10.1",
     "jsonwebtoken": "^8.5.1",
-    "mongodb-client-encryption": "^2.1.0",
     "mongoose": "^5.12.7",
     "mongoose-update-if-current": "^1.4.0",
     "node-nats-streaming": "^0.3.2",
