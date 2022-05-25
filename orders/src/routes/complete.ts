@@ -27,11 +27,6 @@ router.patch(endpointPath, requireAuth, async (req: Request, res: Response) => {
     throw new NotFoundError();
   }
 
-  if (order.userId !== req.currentUser!.id) {
-    logger.info(`${endpointPath} - order.userId !== currentUser id`);
-    throw new NotAuthorizedError();
-  }
-
   if (sellerId !== ticket?.userId) {
     logger.info(
       `${endpointPath} - sellerId !== ticket.userId - ${ticket?.userId}`
