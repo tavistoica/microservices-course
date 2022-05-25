@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import useRequest from "../../hooks/use-request";
-const QrReader = dynamic(() => import("react-qr-reader"), { ssr: false });
+import { QrReader } from "react-qr-reader";
+// const QrReader = dynamic(() => import("react-qr-reader"), { ssr: false });
 
 import styles from "./index.module.css";
 
 const ScanOrder = ({ currentUser }) => {
   const [data, setData] = useState("");
+  console.log("currentUser", JSON.stringify(currentUser));
   const { doRequest, errors } = useRequest({
     url: `/api/orders/${data}/${currentUser?.id}`,
     method: "patch",
@@ -14,8 +16,8 @@ const ScanOrder = ({ currentUser }) => {
   });
 
   useEffect(() => {
-    if (data) doRequest();
-  }, data);
+    if (data && currentUser?.id) doRequest();
+  }, [data]);
 
   return (
     <div className={styles["orders-list"]}>
@@ -24,11 +26,18 @@ const ScanOrder = ({ currentUser }) => {
         <QrReader
           onScan={(result, error) => {
             if (!!result) {
+              console.log("result", result);
               setData(result);
             }
 
             if (!!error) {
               console.info(error);
+            }
+          }}
+          onResult={(result) => {
+            console.log("resss, ", JSON.stringify(result));
+            if (result?.text) {
+              setData(result.text);
             }
           }}
           style={{ width: "100%" }}
