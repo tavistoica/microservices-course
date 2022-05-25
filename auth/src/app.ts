@@ -19,11 +19,11 @@ app.use(passport.initialize());
 
 app.set("trust proxy", true);
 app.use(json());
-app.use(cors());
+app.use(cors({ exposedHeaders: ["set-cookie"] }));
 app.use(
   cookieSession({
     signed: false,
-    secure: false, // process.env.NODE_ENV === "production",
+    secure: true, // process.env.NODE_ENV === "production",
   })
 );
 
