@@ -10,9 +10,6 @@ const OrderShow = ({ order, currentUser }) => {
   const { doRequest, errors } = useRequest({
     url: `/api/orders/${order.id}/${currentUser?.id}`,
     method: "patch",
-    // body: {
-    //   orderId: order.id,
-    // },
     onSuccess: () => Router.push("/orders"),
   });
 
