@@ -1,15 +1,19 @@
 import path from "path";
 import { Configuration } from "webpack";
 
+const production = process.env.NODE_ENV === "production";
+const mode = production ? "production" : "development";
+
 const config: Configuration = {
   entry: {
     server: path.resolve(process.cwd(), "src/index.ts"),
   },
   target: "node",
+  mode,
   module: {
     rules: [
       {
-        test: /\.(ts|js)?$/,
+        test: /\.js?$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
@@ -17,6 +21,11 @@ const config: Configuration = {
             presets: ["@babel/preset-env", "@babel/preset-typescript"],
           },
         },
+      },
+      {
+        test: /\.tsx?$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
       },
       {
         test: /\.ya?ml$/,

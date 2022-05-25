@@ -12,7 +12,6 @@ import { completeOrderRouter } from "./routes/complete";
 import { healthRouter } from "./routes/health";
 import { deleteRouter } from "./routes/delete-db";
 
-//mongoose //5.10.19
 const app = express();
 app.set("trust proxy", true);
 app.use(json());
