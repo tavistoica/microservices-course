@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "npm run build && npx cross-env ENV_CONFIG_PATH=config/.env JWT_KEY=test MONGO_URI=mongodb://localhost:27017 NATS_CLIENT_ID=test NATS_URL=http//localhost:3000 NATS_CLUSTER_ID=test node build/server.js",
     "start": "npx cross-env NODE_ENV=production node build/server.js",
-    "build": "webpack",
+    "build": "webpack -d",
     "test": "jest --watchAll --no-cache",
     "test:ci": "jest"
   },
