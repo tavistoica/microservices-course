@@ -1,15 +1,11 @@
 import path from "path";
 import { Configuration } from "webpack";
 
-const production = process.env.NODE_ENV === "production";
-const mode = production ? "production" : "development";
-
 const config: Configuration = {
   entry: {
     server: path.resolve(process.cwd(), "src/index.ts"),
   },
   target: "node",
-  mode,
   module: {
     rules: [
       {
