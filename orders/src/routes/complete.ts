@@ -49,7 +49,7 @@ router.patch(endpointPath, requireAuth, async (req: Request, res: Response) => {
     itemAmount: order.ticket.stock,
   });
 
-  res.status(204).send(order);
+  res.send(order);
 });
 
 export { router as completeOrderRouter };
