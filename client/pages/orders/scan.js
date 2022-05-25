@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
-import dynamic from "next/dynamic";
 import useRequest from "../../hooks/use-request";
 import { QrReader } from "react-qr-reader";
-// const QrReader = dynamic(() => import("react-qr-reader"), { ssr: false });
 
 import styles from "./index.module.css";
 
@@ -21,6 +19,7 @@ const ScanOrder = ({ currentUser }) => {
 
   return (
     <div className={styles["orders-list"]}>
+      {console.log("errors", JSON.stringify(errors))}
       {errors}
       {!data && (
         <QrReader
