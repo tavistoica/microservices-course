@@ -19,7 +19,7 @@ app.use(passport.initialize());
 
 app.set("trust proxy", true);
 app.use(json());
-app.use(cors({ exposedHeaders: ["set-cookie"] }));
+app.use(cors({ exposedHeaders: ["set-cookie"], credentials: true }));
 app.use(
   cookieSession({
     signed: false,
