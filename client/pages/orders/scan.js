@@ -14,6 +14,7 @@ const ScanOrder = ({ currentUser }) => {
   });
 
   useEffect(() => {
+    console.log("new data ", data);
     if (data && currentUser?.id) doRequest();
   }, [data]);
 
@@ -23,26 +24,19 @@ const ScanOrder = ({ currentUser }) => {
       {errors}
       {!data && (
         <QrReader
-          onScan={(result, error) => {
+          onResult={(result, error) => {
             if (!!result) {
-              console.log("result", result);
-              setData(result);
+              setData(result?.text);
             }
 
             if (!!error) {
               console.info(error);
             }
           }}
-          onResult={(result) => {
-            console.log("resss, ", JSON.stringify(result));
-            if (result?.text) {
-              setData(result.text);
-            }
-          }}
+          constraints={{ facingMode: "environment" }}
           style={{ width: "100%" }}
         />
       )}
-      <p>{data}</p>
     </div>
   );
 };
