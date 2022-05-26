@@ -6,9 +6,12 @@ import styles from "./index.module.css";
 
 const ScanOrder = ({ currentUser }) => {
   const [data, setData] = useState("");
+  const [resData, setResData] = useState({});
+
   const { doRequest, errors } = useRequest({
     url: `/api/orders/${data}/${currentUser?.id}`,
     method: "patch",
+    onSuccess: (res) => setResData(res),
   });
 
   useEffect(() => {
@@ -41,10 +44,10 @@ const ScanOrder = ({ currentUser }) => {
       )}
       {data && (
         <>
-          <h1>{data.ticket?.title}</h1>
-          <h4>Status: {data.status}</h4>
-          <h4>{data.ticket?.price}$</h4>
-          <h4>Amount: {data.itemAmount}</h4>
+          <h1>{resData.ticket?.title}</h1>
+          <h4>Status: {resData.status}</h4>
+          <h4>{resData.ticket?.price}$</h4>
+          <h4>Amount: {resData.itemAmount}</h4>
         </>
       )}
     </div>
