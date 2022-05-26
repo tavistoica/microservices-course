@@ -11,10 +11,16 @@ const useRequest = ({ url, method, body, onSuccess }) => {
   const doRequest = async (props = {}) => {
     try {
       setErrors(null);
-      const response = await axios[method](`${config.SERVER_URL}${url}`, {
-        ...body,
-        ...props,
-      });
+      const response = await axios[method](
+        `${config.SERVER_URL}${url}`,
+        {
+          ...body,
+          ...props,
+        },
+        {
+          withCredentials: true, // Now this is was the missing piece in the client side
+        }
+      );
       if (onSuccess) {
         onSuccess(response.data);
       }
