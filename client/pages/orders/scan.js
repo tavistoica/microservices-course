@@ -6,11 +6,9 @@ import styles from "./index.module.css";
 
 const ScanOrder = ({ currentUser }) => {
   const [data, setData] = useState("");
-  console.log("currentUser", JSON.stringify(currentUser));
   const { doRequest, errors } = useRequest({
     url: `/api/orders/${data}/${currentUser?.id}`,
     method: "patch",
-    onSuccess: () => Router.push("/orders"),
   });
 
   useEffect(() => {
@@ -34,7 +32,7 @@ const ScanOrder = ({ currentUser }) => {
             }
 
             if (!!error) {
-              console.info(error);
+              console.info("err: ", error);
             }
           }}
           constraints={{ facingMode: "environment" }}
