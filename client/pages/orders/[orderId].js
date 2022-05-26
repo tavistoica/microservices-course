@@ -25,7 +25,7 @@ const OrderShow = ({ order, currentUser }) => {
   return (
     <div>
       <QRCode value={order.id} />
-      Time left to pay: {timeLeft} seconds
+      <div>Time left to pay: {timeLeft} seconds</div>
       {/* <StripeCheckout
         token={({ id }) => doRequest({ token: id })}
         stripeKey="pk_test_51JGhaeAltPmlu6DoHAGEQpvnVASrUHXMRFpAem4B3IVL03sEe4qveWi8NHOI9XsSGFfuLmH4tqVqrJ9J1BLoimVe00WW87uYDR"
