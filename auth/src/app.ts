@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import "express-async-errors";
 import { json } from "body-parser";
 import cors from "cors";
@@ -17,9 +17,21 @@ const app = express();
 
 app.use(passport.initialize());
 
-app.use(function (req, res, next) {
+app.set("trust proxy", true);
+app.use(json());
+app.use(cors({ exposedHeaders: ["set-cookie"], credentials: true }));
+app.use(
+  cookieSession({
+    signed: false,
+    secure: true, // process.env.NODE_ENV === "production",
+    sameSite: "none",
+  })
+);
+
+app.use((req: Request, res: Response, next) => {
   // Website you wish to allow to connect
-  res.setHeader("Access-Control-Allow-Origin", req.headers.origin);
+  if (req.headers.origin)
+    res.setHeader("Access-Control-Allow-Origin", req.headers.origin);
 
   // Request methods you wish to allow
   res.setHeader(
@@ -37,17 +49,6 @@ app.use(function (req, res, next) {
   // Pass to next layer of middleware
   next();
 });
-
-app.set("trust proxy", true);
-app.use(json());
-app.use(cors({ exposedHeaders: ["set-cookie"], credentials: true }));
-app.use(
-  cookieSession({
-    signed: false,
-    secure: true, // process.env.NODE_ENV === "production",
-    sameSite: "none",
-  })
-);
 
 app.use(currentUserRouter);
 app.use(loginRouter);
