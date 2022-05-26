@@ -24,7 +24,8 @@ app.use(
   cookieSession({
     signed: false,
     secure: true, // process.env.NODE_ENV === "production",
-    sameSite: "none",
+    //  @ts-ignore
+    sameSite: "None",
   })
 );
 
