@@ -18,6 +18,10 @@ const ScanOrder = ({ currentUser }) => {
     if (data && currentUser?.id) doRequest();
   }, [data]);
 
+  useEffect(() => {
+    setData("");
+  }, [errors]);
+
   return (
     <div className={styles["orders-list"]}>
       {console.log("errors", JSON.stringify(errors))}
@@ -36,6 +40,14 @@ const ScanOrder = ({ currentUser }) => {
           constraints={{ facingMode: "environment" }}
           style={{ width: "100%" }}
         />
+      )}
+      {data && (
+        <>
+          <h1>{data.ticket?.title}</h1>
+          <h4>Status: {data.status}</h4>
+          <h4>{data.ticket?.price}$</h4>
+          <h4>Amount: {data.itemAmount}</h4>
+        </>
       )}
     </div>
   );

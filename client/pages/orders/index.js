@@ -1,4 +1,3 @@
-import { useState } from "react";
 import dynamic from "next/dynamic";
 import { OrderList } from "../../components/OrderList/OrderList";
 const QrReader = dynamic(() => import("react-qr-reader"), { ssr: false });
@@ -6,7 +5,6 @@ const QrReader = dynamic(() => import("react-qr-reader"), { ssr: false });
 import styles from "./index.module.css";
 
 const OrderIndex = ({ orders }) => {
-  const [data, setData] = useState("No Result");
   return (
     <div className={styles["orders-list"]}>
       <OrderList orders={orders} />
