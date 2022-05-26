@@ -24,7 +24,6 @@ const OrderShow = ({ order, currentUser }) => {
 
   return (
     <div>
-      {errors}
       <QRCode value={order.id} />
       Time left to pay: {timeLeft} seconds
       {/* <StripeCheckout
