@@ -33,10 +33,8 @@ app.use((req, res, next) => {
 
 // enable the "secure" flag on the sessionCookies object
 app.use((req, _res, next) => {
-  if (req.get("origin")?.slice(0, 17).includes("localhost")) {
-    // @ts-ignore
-    req["sessionCookies"].secure = true;
-  }
+  // @ts-ignore
+  req["sessionCookies"].secure = true;
   next();
 });
 
