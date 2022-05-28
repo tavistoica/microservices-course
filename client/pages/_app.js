@@ -18,11 +18,12 @@ const AppComponent = ({ Component, pageProps, currentUser }) => {
 
 AppComponent.getInitialProps = async (appContext) => {
   const client = buildClient(appContext.ctx);
-  const {
-    data,
-  } = await axios.get(`https://www.tavistoica.xyz/api/users/currentuser`, {
-    withCredentials: true,
-  });
+  const { data } = await axios.get(
+    `https://www.tavistoica.xyz/api/users/currentuser`,
+    {
+      withCredentials: true,
+    }
+  );
   let pageProps;
   if (appContext.Component.getInitialProps) {
     pageProps = await appContext.Component.getInitialProps(
