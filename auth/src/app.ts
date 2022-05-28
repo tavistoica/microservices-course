@@ -22,9 +22,9 @@ app.use(json());
 app.use(cors({ exposedHeaders: ["set-cookie"], credentials: true }));
 app.use(
   cookieSession({
-    signed: false,
     secure: true, // process.env.NODE_ENV === "production",
     maxAge: 10000,
+    domain: "localhost:3000",
   })
 );
 
