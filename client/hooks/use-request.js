@@ -12,6 +12,7 @@ const useRequest = ({ url, method, body, onSuccess }) => {
     try {
       setErrors(null);
       const response = await axios[method](`${config.SERVER_URL}${url}`, {
+        withCredentials: true,
         ...body,
         ...props,
       });
