@@ -26,10 +26,9 @@ app.use((req, res, next) => {
   return cookieSession({
     signed: false,
     domain: req.get("origin")?.slice(0, 17).includes("localhost")
-      ? "localhost"
+      ? "localhost:3000"
       : "tavistoica.xyz",
     secure: !req.get("origin")?.slice(0, 17).includes("localhost"), // process.env.NODE_ENV === "production",
-    httpOnly: true,
     maxAge: 10000,
   })(req, res, next);
 });
