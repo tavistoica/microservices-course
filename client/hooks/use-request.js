@@ -11,6 +11,16 @@ const useRequest = ({ url, method, body, onSuccess }) => {
   const doRequest = async (props = {}) => {
     try {
       setErrors(null);
+      if (method === "get") {
+        const response = await axios[method](`${config.SERVER_URL}${url}`, {
+          withCredentials: true,
+          ...props,
+        });
+        if (onSuccess) {
+          onSuccess(response.data);
+        }
+        return response.data;
+      }
       const response = await axios[method](
         `${config.SERVER_URL}${url}`,
         {
