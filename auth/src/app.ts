@@ -11,6 +11,7 @@ import { loginRouter } from "./routes/login";
 import { logoutRouter } from "./routes/logout";
 import { registerRouter } from "./routes/register";
 import { errorHandler, NotFoundError } from "@ostoica/common";
+import { logger } from "./utils/logger";
 
 //mongoose //5.10.19
 const app = express();
@@ -20,17 +21,18 @@ app.use(passport.initialize());
 app.set("trust proxy", 1);
 app.use(json());
 app.use(cors({ exposedHeaders: ["set-cookie"] }));
-app.use((req, res, next) =>
-  cookieSession({
+app.use((req, res, next) => {
+  logger.info(`req.get(origin): ${req.get("origin")}`);
+  return cookieSession({
     signed: false,
-    domain: req.get("host")?.slice(0, 17).includes("localhost")
+    domain: req.get("origin")?.slice(0, 17).includes("localhost")
       ? "localhost"
       : "tavistoica.xyz",
-    secure: !req.get("host")?.slice(0, 17).includes("localhost"), // process.env.NODE_ENV === "production",
+    secure: !req.get("origin")?.slice(0, 17).includes("localhost"), // process.env.NODE_ENV === "production",
     httpOnly: true,
     maxAge: 10000,
-  })(req, res, next)
-);
+  })(req, res, next);
+});
 
 app.use(currentUserRouter);
 app.use(loginRouter);
