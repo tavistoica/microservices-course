@@ -15,7 +15,7 @@ import { deleteRouter } from "./routes/delete-db";
 const app = express();
 app.set("trust proxy", true);
 app.use(json());
-app.use(cors());
+app.use(cors({ exposedHeaders: ["set-cookie"], credentials: true }));
 app.use(
   cookieSession({
     signed: false,
