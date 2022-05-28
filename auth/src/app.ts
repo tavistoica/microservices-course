@@ -22,9 +22,9 @@ app.use(cors({ exposedHeaders: ["set-cookie"], credentials: true }));
 app.use((req, res, next) => {
   return cookieSession({
     signed: false,
-    domain: req.get("origin")?.slice(0, 17).includes("localhost")
-      ? "https://localhost:3000"
-      : "tavistoica.xyz",
+    // domain: req.get("origin")?.slice(0, 17).includes("localhost")
+    //   ? "https://localhost:3000"
+    //   : "tavistoica.xyz",
     secure: true, // process.env.NODE_ENV === "production",
     sameSite: "none",
     maxAge: 24 * 60 * 60 * 1000,
