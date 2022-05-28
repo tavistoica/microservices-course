@@ -15,7 +15,6 @@ const ScanOrder = ({ currentUser }) => {
   });
 
   useEffect(() => {
-    console.log("new data ", data);
     if (data && currentUser?.id) doRequest();
   }, [data]);
 
@@ -25,7 +24,6 @@ const ScanOrder = ({ currentUser }) => {
 
   return (
     <div className={styles["orders-list"]}>
-      {console.log("errors", JSON.stringify(errors))}
       {errors}
       {!data && (
         <QrReader

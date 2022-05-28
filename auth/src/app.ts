@@ -17,7 +17,7 @@ const app = express();
 
 app.use(passport.initialize());
 
-app.set("trust proxy", true);
+app.set("trust proxy", 1);
 app.use(json());
 app.use(cors({ exposedHeaders: ["set-cookie"], credentials: true }));
 app.use(
@@ -27,28 +27,6 @@ app.use(
     sameSite: "none",
   })
 );
-
-app.use((req: Request, res: Response, next) => {
-  // Website you wish to allow to connect
-  if (req.headers.origin)
-    res.setHeader("Access-Control-Allow-Origin", req.headers.origin);
-
-  // Request methods you wish to allow
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, PATCH, DELETE"
-  );
-  // Request headers you wish to allow
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,content-type, Authorization"
-  );
-  // Set to true if you need the website to include cookies in the requests sent
-  // to the API (e.g. in case you use sessions)
-  res.setHeader("Access-Control-Allow-Credentials", "true");
-  // Pass to next layer of middleware
-  next();
-});
 
 app.use(currentUserRouter);
 app.use(loginRouter);
