@@ -48,7 +48,7 @@ const newTicket = () => {
       process?.env?.IS_PRODUCTION !== "false" ? HOST_URL.PROD : HOST_URL.DEV;
 
     axios
-      .post(config.SERVER_URL, createFormData(), {
+      .post(`${config.SERVER_URL}/api/tickets`, createFormData(), {
         headers: {
           "Content-type": "multipart/form-data",
         },
