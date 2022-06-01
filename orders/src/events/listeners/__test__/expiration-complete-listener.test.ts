@@ -2,14 +2,14 @@ import { natsWrapper } from "@ostoica/common";
 import { Message } from "node-nats-streaming";
 import { ExpirationCompleteListener } from "../expiration-complete-listener";
 import { Order } from "../../../model/order.model";
-import { Ticket } from "../../../model/ticket.model";
+import { Meal } from "../../../model/meal.model";
 import mongoose from "mongoose";
 import { OrderStatus, ExpirationCompleteEvent } from "@ostoica/common";
 
 const setup = async () => {
   const listener = new ExpirationCompleteListener(natsWrapper.client);
 
-  const ticket = Ticket.build({
+  const meal = Meal.build({
     id: mongoose.Types.ObjectId().toHexString(),
     title: "music",
     price: 20,
@@ -17,12 +17,12 @@ const setup = async () => {
     userId: new mongoose.Types.ObjectId().toHexString(),
     imagePath: "test",
   });
-  await ticket.save();
+  await meal.save();
   const order = Order.build({
     status: OrderStatus.Created,
     userId: "random",
     expiresAt: new Date(),
-    ticket,
+    meal,
     itemAmount: 3,
   });
   await order.save();
@@ -36,7 +36,7 @@ const setup = async () => {
     ack: jest.fn(),
   };
 
-  return { listener, order, ticket, data, msg };
+  return { listener, order, meal, data, msg };
 };
 
 it("updates the orderstatus to cancelled", async () => {

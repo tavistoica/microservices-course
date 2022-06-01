@@ -15,7 +15,7 @@ export class ExpirationCompleteListener extends Listener<ExpirationCompleteEvent
   queueGroupName = queueGroupName;
 
   async onMessage(data: ExpirationCompleteEvent["data"], msg: Message) {
-    const order = await Order.findById(data.orderId).populate("ticket");
+    const order = await Order.findById(data.orderId).populate("meal");
 
     if (!order) {
       logger.info(`ExpirationCompleteListener - order not found`);
@@ -34,10 +34,10 @@ export class ExpirationCompleteListener extends Listener<ExpirationCompleteEvent
     await new OrderCancelledPublisher(this.client).publish({
       id: order.id,
       version: order.version,
-      ticket: {
-        id: order.ticket.id,
-        stock: order.ticket.stock,
-        imagePath: order.ticket.imagePath,
+      meal: {
+        id: order.meal.id,
+        stock: order.meal.stock,
+        imagePath: order.meal.imagePath,
       },
       itemAmount: order.itemAmount,
     });

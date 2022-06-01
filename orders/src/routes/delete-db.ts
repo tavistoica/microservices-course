@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import { requireAuth } from "@ostoica/common";
 import { Order } from "../model/order.model";
-import { Ticket } from "../model/ticket.model";
+import { Meal } from "../model/meal.model";
 
 const router = express.Router();
 
@@ -10,9 +10,9 @@ router.delete(
   requireAuth,
   async (_req: Request, res: Response) => {
     await Order.remove();
-    await Ticket.remove();
+    await Meal.remove();
 
-    res.status(200).send("Removed order and ticket collections");
+    res.status(200).send("Removed order and meal collections");
   }
 );
 

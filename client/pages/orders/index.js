@@ -3,7 +3,7 @@ import { ItemList } from "../../components/ItemList/ItemList";
 import styles from "./index.module.css";
 
 const OrderIndex = ({ orders }) => {
-  const fields = ["ticket.title", "status", "itemAmount", "ticket.price"];
+  const fields = ["meal.title", "status", "itemAmount", "meal.price"];
   const headers = ["Title", "Status", "Amount", "Price"];
 
   return (

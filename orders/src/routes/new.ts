@@ -10,7 +10,7 @@ import {
 } from "@ostoica/common";
 import { body } from "express-validator";
 import mongoose from "mongoose";
-import { Ticket } from "../model/ticket.model";
+import { Meal } from "../model/meal.model";
 import { Order } from "../model/order.model";
 import { OrderCreatedPublisher } from "../events/publishers/order-created-publisher";
 import { logger } from "../utils/logger";
@@ -23,40 +23,40 @@ router.post(
   "/api/orders",
   requireAuth,
   [
-    body("ticketId")
+    body("mealId")
       .not()
       .isEmpty()
       .custom((input: string) => mongoose.Types.ObjectId.isValid(input))
-      .withMessage("TicketId must be provided"),
+      .withMessage("mealId must be provided"),
     body("itemAmount")
       .isInt({ gt: 0 })
       .withMessage("Stock must be grater than 0"),
   ],
   validateRequest,
   async (req: Request, res: Response) => {
-    const { ticketId, itemAmount } = req.body;
-    //  Find ticket the user is trying to order
-    const ticket = await Ticket.findById(ticketId);
-    logger.info(`POST /api/orders - ticket - ${JSON.stringify(ticket)}`);
+    const { mealId, itemAmount } = req.body;
+    //  Find meal the user is trying to order
+    const meal = await Meal.findById(mealId);
+    logger.info(`POST /api/orders - meal - ${JSON.stringify(meal)}`);
 
-    if (!ticket) {
+    if (!meal) {
       throw new NotFoundError();
     }
 
-    if (ticket.stock < itemAmount) {
+    if (meal.stock < itemAmount) {
       throw new NotEnoughStock();
     }
 
-    if (ticket.stock === 0 || itemAmount === 0) {
-      throw new BadRequestError("Ticket is no longer available");
+    if (meal.stock === 0 || itemAmount === 0) {
+      throw new BadRequestError("meal is no longer available");
     }
 
-    // await ticket.save();
+    // await meal.save();
 
-    //  Make sure the ticket is not already reserved
-    // const isReserved = await ticket.isReserved();
+    //  Make sure the meal is not already reserved
+    // const isReserved = await meal.isReserved();
     // if (isReserved) {
-    //   throw new BadRequestError("Ticket is already reserved");
+    //   throw new BadRequestError("meal is already reserved");
     // }
 
     //  Calculate an expiration date for this order
@@ -68,7 +68,7 @@ router.post(
       userId: req.currentUser!.id,
       status: OrderStatus.Created,
       expiresAt: expiration,
-      ticket,
+      meal,
       itemAmount,
     });
 
@@ -81,11 +81,11 @@ router.post(
       status: order.status,
       userId: order.userId,
       expiresAt: order.expiresAt.toISOString(),
-      ticket: {
-        id: ticket.id,
-        price: ticket.price,
-        stock: ticket.stock,
-        imagePath: ticket.imagePath,
+      meal: {
+        id: meal.id,
+        price: meal.price,
+        stock: meal.stock,
+        imagePath: meal.imagePath,
       },
       itemAmount,
     });

@@ -1,21 +1,21 @@
 import request from "supertest";
 import { app } from "../../app";
 import mongoose from "mongoose";
-import { Ticket } from "../../model/ticket.model";
+import { Meal } from "../../model/meal.model";
 import { natsWrapper } from "@ostoica/common";
 
-it("returns an error if the ticket does not exist", async () => {
-  const ticketId = mongoose.Types.ObjectId();
+it("returns an error if the meal does not exist", async () => {
+  const mealId = mongoose.Types.ObjectId();
 
   await request(app)
     .post("/api/orders")
     .set("Cookie", global.signin())
-    .send({ ticketId, itemAmount: 10 })
+    .send({ mealId, itemAmount: 10 })
     .expect(404);
 });
 
-it("returns an error if the ticket has stock 0", async () => {
-  const ticket = Ticket.build({
+it("returns an error if the meal has stock 0", async () => {
+  const meal = Meal.build({
     id: new mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
@@ -23,17 +23,17 @@ it("returns an error if the ticket has stock 0", async () => {
     userId: "1",
     imagePath: "test",
   });
-  await ticket.save();
+  await meal.save();
 
   await request(app)
     .post("/api/orders")
     .set("Cookie", global.signin())
-    .send({ ticketId: ticket.id, itemAmount: 10 })
+    .send({ mealId: meal.id, itemAmount: 10 })
     .expect(400);
 });
 
-it("reserves a ticket", async () => {
-  const ticket = Ticket.build({
+it("reserves a meal", async () => {
+  const meal = Meal.build({
     id: new mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
@@ -41,17 +41,17 @@ it("reserves a ticket", async () => {
     userId: "1",
     imagePath: "test",
   });
-  await ticket.save();
+  await meal.save();
 
   await request(app)
     .post("/api/orders")
     .set("Cookie", global.signin())
-    .send({ ticketId: ticket.id, itemAmount: 10 })
+    .send({ mealId: meal.id, itemAmount: 10 })
     .expect(201);
 });
 
 it("emits an order created event", async () => {
-  const ticket = Ticket.build({
+  const meal = Meal.build({
     id: new mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
@@ -59,12 +59,12 @@ it("emits an order created event", async () => {
     userId: "1",
     imagePath: "test",
   });
-  await ticket.save();
+  await meal.save();
 
   await request(app)
     .post("/api/orders")
     .set("Cookie", global.signin())
-    .send({ ticketId: ticket.id, itemAmount: 10 })
+    .send({ mealId: meal.id, itemAmount: 10 })
     .expect(201);
 
   expect(natsWrapper.client.publish).toHaveBeenCalled();

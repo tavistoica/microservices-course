@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { updateIfCurrentPlugin } from "mongoose-update-if-current";
 import { OrderStatus } from "@ostoica/common";
-import { TicketDoc } from "./ticket.model";
+import { MealDoc } from "./meal.model";
 
 export { OrderStatus };
 
@@ -9,7 +9,7 @@ interface OrderAttrs {
   userId: string;
   status: OrderStatus;
   expiresAt: Date;
-  ticket: TicketDoc;
+  meal: MealDoc;
   itemAmount: number;
 }
 
@@ -21,7 +21,7 @@ interface OrderDoc extends mongoose.Document {
   userId: string;
   status: OrderStatus;
   expiresAt: Date;
-  ticket: TicketDoc;
+  meal: MealDoc;
   itemAmount: number;
   version: number;
 }
@@ -42,9 +42,9 @@ const orderSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.Date,
       require: true,
     },
-    ticket: {
+    meal: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Ticket",
+      ref: "Meal",
       require: true,
     },
     itemAmount: {

@@ -1,8 +1,8 @@
 import { connect } from "mongoose";
 import { app } from "./app";
 import { natsWrapper } from "@ostoica/common";
-import { TicketCreatedListener } from "./events/listeners/ticket-created-listener";
-import { TicketUpdatedListener } from "./events/listeners/ticket-updated-listener";
+import { MealCreatedListener } from "./events/listeners/meal-created-listener";
+import { MealUpdatedListener } from "./events/listeners/meal-updated-listener";
 import { ExpirationCompleteListener } from "./events/listeners/expiration-complete-listener";
 import { PaymentCreatedListener } from "./events/listeners/payment-created-listener";
 import { logger } from "./utils/logger";
@@ -31,8 +31,8 @@ const start = async () => {
   process.on("SIGINT", () => natsClient.close());
   process.on("SIGTERM", () => natsClient.close());
 
-  new TicketCreatedListener(natsClient).listen();
-  new TicketUpdatedListener(natsClient).listen();
+  new MealCreatedListener(natsClient).listen();
+  new MealUpdatedListener(natsClient).listen();
   new ExpirationCompleteListener(natsClient).listen();
   new PaymentCreatedListener(natsClient).listen();
 

@@ -1,10 +1,10 @@
 import nats from "node-nats-streaming";
 import { randomBytes } from "crypto";
-import { TicketCreatedListener } from "./events/ticket-created-listener";
+import { MealCreatedListener } from "./events/meal-created-listener";
 
 console.clear();
 
-const stan = nats.connect("ticketing", randomBytes(4).toString("hex"), {
+const stan = nats.connect("meals", randomBytes(4).toString("hex"), {
   url: "http://localhost:4222",
 });
 
@@ -16,7 +16,7 @@ stan.on("connect", () => {
     process.exit();
   });
 
-  new TicketCreatedListener(stan).listen();
+  new MealCreatedListener(stan).listen();
 });
 
 process.on("SIGINT", () => stan.close());

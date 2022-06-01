@@ -1,10 +1,10 @@
 import request from "supertest";
 import { app } from "../../app";
-import { Ticket } from "../../model/ticket.model";
+import { Meal } from "../../model/meal.model";
 import mongoose from "mongoose";
 
-const buildTicket = async () => {
-  const ticket = Ticket.build({
+const buildMeal = async () => {
+  const meal = Meal.build({
     id: new mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
@@ -12,16 +12,16 @@ const buildTicket = async () => {
     userId: "1",
     imagePath: "test",
   });
-  await ticket.save();
+  await meal.save();
 
-  return ticket;
+  return meal;
 };
 
 it("fetches orders for a particular user", async () => {
-  //  Create three tickets
-  const ticketOne = await buildTicket();
-  const ticketTwo = await buildTicket();
-  const ticketTree = await buildTicket();
+  //  Create three meals
+  const mealOne = await buildMeal();
+  const mealTwo = await buildMeal();
+  const mealTree = await buildMeal();
 
   const userOne = global.signin();
   const userTwo = global.signin();
@@ -30,19 +30,19 @@ it("fetches orders for a particular user", async () => {
   await request(app)
     .post("/api/orders")
     .set("Cookie", userOne)
-    .send({ ticketId: ticketOne.id, itemAmount: 10 })
+    .send({ mealId: mealOne.id, itemAmount: 10 })
     .expect(201);
 
   //  Create two orders as User #2
   const { body: orderOne } = await request(app)
     .post("/api/orders")
     .set("Cookie", userTwo)
-    .send({ ticketId: ticketTwo.id, itemAmount: 10 })
+    .send({ mealId: mealTwo.id, itemAmount: 10 })
     .expect(201);
   const { body: orderTwo } = await request(app)
     .post("/api/orders")
     .set("Cookie", userTwo)
-    .send({ ticketId: ticketTree.id, itemAmount: 10 })
+    .send({ mealId: mealTree.id, itemAmount: 10 })
     .expect(201);
 
   //  Make request to get orders for User #2
