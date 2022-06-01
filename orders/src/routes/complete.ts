@@ -45,6 +45,7 @@ router.patch(endpointPath, requireAuth, async (req: Request, res: Response) => {
     ticket: {
       id: order.ticket.id,
       stock: order.ticket.stock,
+      imagePath: order.ticket.imagePath,
     },
     itemAmount: order.ticket.stock,
   });

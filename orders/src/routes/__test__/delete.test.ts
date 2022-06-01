@@ -13,6 +13,7 @@ it("marks an order as cancelled", async () => {
     price: 20,
     stock: 10,
     userId: "1",
+    imagePath: "test",
   });
   await ticket.save();
 
@@ -46,6 +47,7 @@ it("emits an order cancelled event", async () => {
     price: 20,
     stock: 10,
     userId: "1",
+    imagePath: "test",
   });
   await ticket.save();
 

@@ -10,6 +10,7 @@ import { indexTicketRouter } from "./routes/index";
 import { updateTicketRouter } from "./routes/update";
 import { sellerMealsRouter } from "./routes/seller-meals";
 import { deleteRouter } from "./routes/delete-db";
+import { uploadImage } from "./middleware/uploadImage";
 
 //mongoose //5.10.19
 const app = express();

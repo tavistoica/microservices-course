@@ -36,6 +36,7 @@ router.patch(
       ticket: {
         id: order.ticket.id,
         stock: order.ticket.stock,
+        imagePath: order.ticket.imagePath,
       },
       itemAmount: order.ticket.stock,
     });

@@ -15,6 +15,7 @@ const setup = async () => {
     price: 20,
     stock: 5,
     userId: new mongoose.Types.ObjectId().toHexString(),
+    imagePath: "test",
   });
   await ticket.save();
   const order = Order.build({

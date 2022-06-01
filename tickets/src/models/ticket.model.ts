@@ -6,6 +6,7 @@ interface TicketAttrs {
   price: number;
   userId: string;
   stock: number;
+  imagePath: string;
 }
 
 interface TicketModel extends mongoose.Model<TicketDoc> {
@@ -16,6 +17,7 @@ interface TicketDoc extends mongoose.Document {
   title: string;
   price: number;
   userId: string;
+  imagePath: string;
   version: number;
   orderId?: string[];
   stock: number;
@@ -24,6 +26,10 @@ interface TicketDoc extends mongoose.Document {
 const ticketSchema = new mongoose.Schema(
   {
     title: {
+      type: String,
+      required: true,
+    },
+    imagePath: {
       type: String,
       required: true,
     },

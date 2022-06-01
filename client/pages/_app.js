@@ -1,5 +1,5 @@
-import "bootstrap/dist/css/bootstrap.css";
 import axios from "axios";
+import "bootstrap/dist/css/bootstrap.css";
 import buildClient from "../api/build-client";
 import { Header } from "../components/Header/Header";
 
@@ -17,13 +17,16 @@ const AppComponent = ({ Component, pageProps, currentUser }) => {
 };
 
 AppComponent.getInitialProps = async (appContext) => {
+  if (appContext?.ctx?.req?.headers?.cookie) {
+    // it runs on server side
+    axios.defaults.headers.get.Cookie = appContext.ctx.req.headers.cookie;
+  }
   const client = buildClient(appContext.ctx);
-  const { data } = await axios.get(
-    `https://www.tavistoica.xyz/api/users/currentuser`,
-    {
-      withCredentials: true,
-    }
-  );
+  const { data } = await client.get("/api/users/currentuser", {
+    withCredentials: true,
+  });
+  console.log("poate chiar intra; ", data);
+
   let pageProps;
   if (appContext.Component.getInitialProps) {
     pageProps = await appContext.Component.getInitialProps(
