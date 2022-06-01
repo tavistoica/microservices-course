@@ -3,7 +3,7 @@ import Link from "next/link";
 import styles from "./ItemList.module.css";
 
 export const ItemList = ({ orders, headers, baseURL, fields }) => {
-  const ticketList = orders.map((item) => {
+  const mealList = orders.map((item) => {
     return (
       <Link
         href={`${baseURL}/[itemId]`}
@@ -38,14 +38,14 @@ export const ItemList = ({ orders, headers, baseURL, fields }) => {
             ))}
           </tr>
         </thead>
-        <tbody>{ticketList}</tbody>
+        <tbody>{mealList}</tbody>
       </table>
       // <Link href="/orders/[orderId]" as={`/orders/${item.id}`} key={item.id}>
       //   <a className={styles["list-row"]}>
-      //     <div>{item.ticket.title}</div>
+      //     <div>{item.meal.title}</div>
       //     <div>{item.status}</div>
       //     <div>{item.itemAmount}</div>
-      //     <div>{item.ticket.price}</div>
+      //     <div>{item.meal.price}</div>
       //   </a>
       // </Link>
       // );

@@ -24,11 +24,11 @@ spec:
                 name: auth-srv
                 port:
                   number: 3000
-          - path: /api/tickets/?(.*)
+          - path: /api/meals/?(.*)
             pathType: Prefix
             backend:
               service:
-                name: tickets-srv
+                name: meals-srv
                 port:
                   number: 3000
           - path: /api/orders/?(.*)

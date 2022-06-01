@@ -1,11 +1,11 @@
 import request from "supertest";
 import { app } from "../../app";
-import { Ticket } from "../../model/ticket.model";
+import { Meal } from "../../model/meal.model";
 import mongoose from "mongoose";
 
 it("fetches the order", async () => {
-  //  Create ticket
-  const ticket = Ticket.build({
+  //  Create meal
+  const meal = Meal.build({
     id: new mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
@@ -13,14 +13,14 @@ it("fetches the order", async () => {
     userId: "1",
     imagePath: "test",
   });
-  await ticket.save();
+  await meal.save();
 
   const user = global.signin();
-  //  make a request to build order with the ticket
+  //  make a request to build order with the meal
   const { body: order } = await request(app)
     .post("/api/orders")
     .set("Cookie", user)
-    .send({ ticketId: ticket.id, itemAmount: 10 })
+    .send({ mealId: meal.id, itemAmount: 10 })
     .expect(201);
 
   //  make request to fetch the order
@@ -34,8 +34,8 @@ it("fetches the order", async () => {
 });
 
 it("it returns an error if a user tries to fetch other user's order", async () => {
-  //  Create ticket
-  const ticket = Ticket.build({
+  //  Create meal
+  const meal = Meal.build({
     id: new mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
@@ -43,14 +43,14 @@ it("it returns an error if a user tries to fetch other user's order", async () =
     userId: "1",
     imagePath: "test",
   });
-  await ticket.save();
+  await meal.save();
 
   const user = global.signin();
-  //  make a request to build order with the ticket
+  //  make a request to build order with the meal
   const { body: order } = await request(app)
     .post("/api/orders")
     .set("Cookie", user)
-    .send({ ticketId: ticket.id, itemAmount: 10 })
+    .send({ mealId: meal.id, itemAmount: 10 })
     .expect(201);
 
   //  make request to fetch the order

@@ -13,7 +13,7 @@ const generateNavBar = (currentUser, setCloseSideBar = null) => {
     currentUser &&
       currentUser.role === "Seller" && {
         label: HEADER.SELL,
-        href: "/tickets/new",
+        href: "/meals/new",
       },
     currentUser &&
       currentUser.role === "Seller" && {

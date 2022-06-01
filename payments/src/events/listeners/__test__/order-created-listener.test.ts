@@ -13,10 +13,11 @@ const setup = async () => {
     expiresAt: "random",
     userId: "string",
     status: OrderStatus.Created,
-    ticket: {
+    meal: {
       id: "random",
       price: 20,
       stock: 10,
+      imagePath: "test",
     },
     itemAmount: 10,
   };
@@ -35,7 +36,7 @@ it("replicates the order info", async () => {
   await listener.onMessage(data, msg);
   const order = await Order.findById(data.id);
 
-  expect(order!.price).toEqual(data.ticket.price);
+  expect(order!.price).toEqual(data.meal.price);
 });
 
 it("acks the message", async () => {

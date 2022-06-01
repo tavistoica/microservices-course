@@ -1,13 +1,13 @@
 import request from "supertest";
 import { app } from "../../app";
 import { Order, OrderStatus } from "../../model/order.model";
-import { Ticket } from "../../model/ticket.model";
+import { Meal } from "../../model/meal.model";
 import { natsWrapper } from "@ostoica/common";
 import mongoose from "mongoose";
 
 it("marks an order as cancelled", async () => {
-  //  create ticket with ticket model
-  const ticket = Ticket.build({
+  //  create meal with meal model
+  const meal = Meal.build({
     id: new mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
@@ -15,7 +15,7 @@ it("marks an order as cancelled", async () => {
     userId: "1",
     imagePath: "test",
   });
-  await ticket.save();
+  await meal.save();
 
   const user = global.signin();
 
@@ -23,7 +23,7 @@ it("marks an order as cancelled", async () => {
   const { body: order } = await request(app)
     .post("/api/orders")
     .set("Cookie", user)
-    .send({ ticketId: ticket.id, itemAmount: 10 })
+    .send({ mealId: meal.id, itemAmount: 10 })
     .expect(201);
 
   //  make a request to cancel the order
@@ -40,8 +40,8 @@ it("marks an order as cancelled", async () => {
 });
 
 it("emits an order cancelled event", async () => {
-  //  create ticket with ticket model
-  const ticket = Ticket.build({
+  //  create meal with meal model
+  const meal = Meal.build({
     id: new mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
@@ -49,7 +49,7 @@ it("emits an order cancelled event", async () => {
     userId: "1",
     imagePath: "test",
   });
-  await ticket.save();
+  await meal.save();
 
   const user = global.signin();
 
@@ -57,7 +57,7 @@ it("emits an order cancelled event", async () => {
   const { body: order } = await request(app)
     .post("/api/orders")
     .set("Cookie", user)
-    .send({ ticketId: ticket.id, itemAmount: 10 })
+    .send({ mealId: meal.id, itemAmount: 10 })
     .expect(201);
 
   //  make a request to cancel the order

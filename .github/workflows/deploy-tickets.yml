@@ -1,25 +1,25 @@
-name: deploy-tickets
+name: deploy-meals
 
 on:
   push:
     branches:
       - main
     paths:
-      - "tickets/**"
+      - "meals/**"
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: cd tickets && docker build -t tavistoica/tickets .
+      - run: cd meals && docker build -t tavistoica/meals .
       - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      - run: docker push tavistoica/tickets
+      - run: docker push tavistoica/meals
       - uses: digitalocean/action-doctl@v2
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
       - run: doctl kubernetes cluster kubeconfig save k8s-smart-food
-      - run: kubectl rollout restart deployment tickets-depl
+      - run: kubectl rollout restart deployment meals-depl

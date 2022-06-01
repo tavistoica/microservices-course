@@ -42,9 +42,9 @@ const ScanOrder = ({ currentUser }) => {
       )}
       {data && (
         <>
-          <h1>{resData.ticket?.title}</h1>
+          <h1>{resData.meal?.title}</h1>
           <h4>Status: {resData.status}</h4>
-          <h4>{resData.ticket?.price}$</h4>
+          <h4>{resData.meal?.price}$</h4>
           <h4>Amount: {resData.itemAmount}</h4>
         </>
       )}

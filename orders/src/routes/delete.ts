@@ -16,7 +16,7 @@ router.patch(
   async (req: Request, res: Response) => {
     const { orderId } = req.params;
 
-    const order = await Order.findById(orderId).populate("ticket");
+    const order = await Order.findById(orderId).populate("meal");
 
     if (!order) {
       throw new NotFoundError();
@@ -33,12 +33,12 @@ router.patch(
     new OrderCancelledPublisher(natsWrapper.client).publish({
       id: order.id,
       version: order.version,
-      ticket: {
-        id: order.ticket.id,
-        stock: order.ticket.stock,
-        imagePath: order.ticket.imagePath,
+      meal: {
+        id: order.meal.id,
+        stock: order.meal.stock,
+        imagePath: order.meal.imagePath,
       },
-      itemAmount: order.ticket.stock,
+      itemAmount: order.meal.stock,
     });
 
     res.status(204).send(order);

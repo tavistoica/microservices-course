@@ -9,7 +9,7 @@ build:
   # local:
   #   push: false
   # googleCloudBuild:
-  #   projectId: tickets-dev-312815
+  #   projectId: meals-dev-312815
   artifacts:
     - image: tavistoica/auth
       context: auth
@@ -27,8 +27,8 @@ build:
         manual:
           - src: "**/*.js"
             dest: .
-    - image: tavistoica/tickets
-      context: tickets
+    - image: tavistoica/meals
+      context: meals
       docker:
         dockerfile: Dockerfile
       sync:
