@@ -45,6 +45,7 @@ export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
       stock: ticket.stock,
       userId: ticket.userId,
       orderId: ticket.orderId,
+      imagePath: ticket.imagePath,
     });
 
     //  ack the message
