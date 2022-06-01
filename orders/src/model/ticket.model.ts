@@ -80,6 +80,7 @@ ticketSchema.statics.build = (attrs: TicketAttrs) => {
     price: attrs.price,
     stock: attrs.stock,
     userId: attrs.userId,
+    imagePath: attrs.imagePath,
   });
 };
 
