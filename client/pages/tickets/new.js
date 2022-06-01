@@ -4,6 +4,7 @@ import { FileUploader } from "../../components/FileUploader/FileUploader";
 import useRequest from "../../hooks/use-request";
 import FormData from "form-data";
 import axios from "axios";
+import { HOST_URL } from "../utils/constants";
 
 const newTicket = () => {
   const [title, setTitle] = useState("");
@@ -43,8 +44,11 @@ const newTicket = () => {
   const onSubmit = (event) => {
     event.preventDefault();
 
+    const config =
+      process?.env?.IS_PRODUCTION !== "false" ? HOST_URL.PROD : HOST_URL.DEV;
+
     axios
-      .post("https://tavistoica.xyz/api/tickets", createFormData(), {
+      .post(config.SERVER_URL, createFormData(), {
         headers: {
           "Content-type": "multipart/form-data",
         },
