@@ -4,7 +4,7 @@ import { FileUploader } from "../../components/FileUploader/FileUploader";
 import useRequest from "../../hooks/use-request";
 import FormData from "form-data";
 import axios from "axios";
-import { HOST_URL } from "../utils/constants";
+import { HOST_URL } from "../../utils/constants";
 
 const newTicket = () => {
   const [title, setTitle] = useState("");
