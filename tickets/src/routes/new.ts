@@ -12,16 +12,16 @@ import { TicketCreatedPublisher } from "../events/publishers/ticket-created-publ
 import { uploadImage } from "../middleware/uploadImage";
 import { IncomingForm } from "formidable";
 import { v2 as cloudinary } from "cloudinary";
+import { logger } from "../utils/logger";
 
 const router = express.Router();
 
 const setImage = async (imagePath: string) => {
   const result = await cloudinary.uploader.upload(imagePath);
+  logger.info("cloudinary responded with: ", JSON.stringify(result));
   if (result?.public_id) {
-    // req.body.imagePath = result.url;
     return result.url;
   }
-  // req.body.imagePath = null;
   return "";
 };
 
@@ -37,17 +37,24 @@ router.post(
   validateRequest,
   async (req: Request, res: Response) => {
     const form = new IncomingForm();
-
     form.parse(req, async (_err, fields, files) => {
-      if (!fields.title || !fields.price || !fields.stock) {
+      if (
+        !fields.title ||
+        !fields.price ||
+        !fields.stock ||
+        //  @ts-ignore
+        !files.image.path
+      ) {
         throw new BadRequestError("Data sent is incomplete");
       }
+      logger.info("has all the fields necessary");
 
       //  @ts-ignore
       const imagePath = await setImage(files.image.path);
       if (!imagePath) {
         throw new Error("Something went wrong with uploading the image");
       }
+      logger.info("image was set in cloudinary");
 
       const { title, price, stock } = fields;
       const ticket = Ticket.build({
@@ -61,6 +68,7 @@ router.post(
         stock: parseInt(stock),
         imagePath,
       });
+      logger.info("ticket was build");
 
       new TicketCreatedPublisher(natsWrapper.client).publish({
         id: ticket.id,
@@ -71,8 +79,10 @@ router.post(
         stock: ticket.stock,
         imagePath: ticket.imagePath,
       });
+      logger.info("TicketCreatedPublisher event was published");
 
       await ticket.save();
+      logger.info("ticket was saved in db");
 
       res.status(201).json(ticket);
     });
