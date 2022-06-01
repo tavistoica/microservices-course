@@ -15,6 +15,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "bootstrap": "^5.0.0-beta3",
+    "form-data": "^4.0.0",
     "isomorphic-fetch": "^3.0.0",
     "next": "^12.1.6",
     "react": "^17.0.2",
