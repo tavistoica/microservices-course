@@ -85,6 +85,7 @@ router.post(
         id: ticket.id,
         price: ticket.price,
         stock: ticket.stock,
+        imagePath: ticket.imagePath,
       },
       itemAmount,
     });

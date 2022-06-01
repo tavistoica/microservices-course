@@ -11,6 +11,7 @@ it("fetches the order", async () => {
     price: 20,
     stock: 10,
     userId: "1",
+    imagePath: "test",
   });
   await ticket.save();
 
@@ -40,6 +41,7 @@ it("it returns an error if a user tries to fetch other user's order", async () =
     price: 20,
     stock: 10,
     userId: "1",
+    imagePath: "test",
   });
   await ticket.save();
 

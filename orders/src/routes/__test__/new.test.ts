@@ -21,6 +21,7 @@ it("returns an error if the ticket has stock 0", async () => {
     price: 20,
     stock: 0,
     userId: "1",
+    imagePath: "test",
   });
   await ticket.save();
 
@@ -38,6 +39,7 @@ it("reserves a ticket", async () => {
     price: 20,
     stock: 10,
     userId: "1",
+    imagePath: "test",
   });
   await ticket.save();
 
@@ -55,6 +57,7 @@ it("emits an order created event", async () => {
     price: 20,
     stock: 10,
     userId: "1",
+    imagePath: "test",
   });
   await ticket.save();
 

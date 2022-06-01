@@ -9,13 +9,14 @@ export class TicketCreatedListener extends Listener<TicketCreatedEvent> {
   queueGroupName = queueGroupName;
 
   async onMessage(data: TicketCreatedEvent["data"], msg: Message) {
-    const { id, title, price, stock, userId } = data;
+    const { id, title, price, stock, userId, imagePath } = data;
     const ticket = Ticket.build({
       id,
       title,
       price,
       stock,
       userId,
+      imagePath,
     });
     logger.info(
       `TicketCreatedListener - ticket created - ${JSON.stringify(ticket)}`

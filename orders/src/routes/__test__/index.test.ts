@@ -10,6 +10,7 @@ const buildTicket = async () => {
     price: 20,
     stock: 10,
     userId: "1",
+    imagePath: "test",
   });
   await ticket.save();
 

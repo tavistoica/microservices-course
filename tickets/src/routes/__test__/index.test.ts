@@ -6,6 +6,7 @@ const createTicket = () => {
     title: "sdgege",
     price: 10,
     stock: 10,
+    imagePath: "test",
   });
 };
 

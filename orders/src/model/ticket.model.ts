@@ -8,12 +8,14 @@ interface TicketAttrs {
   price: number;
   stock: number;
   userId: string;
+  imagePath: string;
 }
 
 export interface TicketDoc extends mongoose.Document {
   title: string;
   price: number;
   stock: number;
+  imagePath: string;
   userId: string;
   version: number;
   isReserved(): Promise<boolean>;
@@ -42,6 +44,10 @@ const ticketSchema = new mongoose.Schema(
       type: Number,
       required: true,
       min: 0,
+    },
+    imagePath: {
+      type: String,
+      required: true,
     },
     userId: {
       type: String,

@@ -50,6 +50,7 @@ router.put(
       price: ticket.price,
       userId: ticket.userId,
       stock: ticket.stock,
+      imagePath: ticket.imagePath,
     });
 
     res.json(ticket);

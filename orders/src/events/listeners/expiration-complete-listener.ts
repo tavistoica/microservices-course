@@ -37,6 +37,7 @@ export class ExpirationCompleteListener extends Listener<ExpirationCompleteEvent
       ticket: {
         id: order.ticket.id,
         stock: order.ticket.stock,
+        imagePath: order.ticket.imagePath,
       },
       itemAmount: order.itemAmount,
     });

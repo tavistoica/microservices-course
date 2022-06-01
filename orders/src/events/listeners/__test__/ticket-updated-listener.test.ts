@@ -16,6 +16,7 @@ const setup = async () => {
     price: 10,
     stock: 10,
     userId,
+    imagePath: "test",
   });
 
   await ticket.save();
@@ -27,6 +28,7 @@ const setup = async () => {
     price: 1000,
     userId,
     stock: 10,
+    imagePath: "test",
   };
   //  create a fake message object
   //  @ts-ignore
