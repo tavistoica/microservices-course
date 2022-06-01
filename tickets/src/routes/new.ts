@@ -6,10 +6,8 @@ import {
   requireSeller,
   BadRequestError,
 } from "@ostoica/common";
-import { body } from "express-validator";
 import { Ticket } from "../models/ticket.model";
 import { TicketCreatedPublisher } from "../events/publishers/ticket-created-publisher";
-import { uploadImage } from "../middleware/uploadImage";
 import { IncomingForm } from "formidable";
 import { v2 as cloudinary } from "cloudinary";
 import { logger } from "../utils/logger";
