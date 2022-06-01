@@ -12,7 +12,7 @@ export class TicketCreatedListener extends Listener<TicketCreatedEvent> {
     logger.info(
       `TicketCreatedListener - TicketCreatedEvent - data - ${JSON.stringify(
         data
-      )}`
+      )} ${data.imagePath}`
     );
     const { id, title, price, stock, userId, imagePath } = data;
     const ticket = Ticket.build({
