@@ -6,15 +6,14 @@ const newTicket = () => {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
+  const [image, setImage] = useState();
+  const formData = new FormData();
 
   const { doRequest, errors } = useRequest({
     url: "/api/tickets",
     method: "post",
-    body: {
-      title,
-      price,
-      stock,
-    },
+    headers: { "Content-type": "multipart/form-data" },
+    formData: formData,
     onSuccess: () => Router.push("/"),
   });
 
@@ -31,6 +30,11 @@ const newTicket = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
+    formData.append("title", title);
+    formData.append("price", price);
+    formData.append("stock", stock);
+    formData.append("image", image);
+    console.log("formData", JSON.stringify(formData));
 
     doRequest();
   };
@@ -63,6 +67,16 @@ const newTicket = () => {
             value={stock}
             onBlur={onBlur}
             onChange={(e) => setStock(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label>Image</label>
+          <input
+            type="file"
+            className="form-control"
+            value={image}
+            onBlur={onBlur}
+            onChange={(e) => setImage(e.target.files[0])}
           />
         </div>
         {errors}
