@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npx cross-env npx cross-env ENV_CONFIG_PATH=config/.env JWT_KEY=test MONGO_URI=mongodb://localhost:27017 NATS_CLIENT_ID=test NATS_URL=http://localhost:3000 NATS_CLUSTER_ID=test CLOUDINARY_URL=cloudinary://664738797854216:ArWjVSSADBwuro8ckmvuu_mJMeM@dtzqfsexw ts-node-dev --poll src/index.ts",
+    "start": "ts-node-dev --poll src/index.ts",
+    "dev": "npx cross-env npx cross-env ENV_CONFIG_PATH=config/.env JWT_KEY=test MONGO_URI=mongodb://localhost:27017 NATS_CLIENT_ID=test NATS_URL=http://localhost:3000 NATS_CLUSTER_ID=test CLOUDINARY_URL=test ts-node-dev --poll src/index.ts",
     "test": "jest --watchAll --no-cache",
     "test:ci": "jest"
   },
