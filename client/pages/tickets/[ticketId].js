@@ -31,6 +31,9 @@ const TicketShow = ({ ticket }) => {
       <h1>{ticket.title}</h1>
       <h4>{ticket.price}$</h4>
       <div>
+        <img src={ticket.imagePath} />
+      </div>
+      <div>
         <select
           value={itemAmount}
           onChange={(event) => setItemAmount(event.target.value)}

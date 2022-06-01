@@ -1,21 +1,33 @@
 import Router from "next/router";
 import { useState } from "react";
+import { FileUploader } from "../../components/FileUploader/FileUploader";
 import useRequest from "../../hooks/use-request";
+import FormData from "form-data";
+import axios from "axios";
 
 const newTicket = () => {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
-  const [image, setImage] = useState();
-  const formData = new FormData();
+  const [image, setImage] = useState(null);
 
-  const { doRequest, errors } = useRequest({
-    url: "/api/tickets",
-    method: "post",
-    headers: { "Content-type": "multipart/form-data" },
-    formData: formData,
-    onSuccess: () => Router.push("/"),
-  });
+  const createFormData = () => {
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("price", price);
+    formData.append("stock", stock);
+    formData.append("image", image || "");
+    console.log("formData", formData);
+    return formData;
+  };
+
+  // const { doRequest, errors } = useRequest({
+  //   url: "/api/tickets",
+  //   method: "post",
+  //   headers: { "Content-type": "multipart/form-data" },
+  //   body: createFormData(),
+  //   onSuccess: () => Router.push("/"),
+  // });
 
   const onBlur = () => {
     const value = parseFloat(price);
@@ -30,13 +42,18 @@ const newTicket = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    formData.append("title", title);
-    formData.append("price", price);
-    formData.append("stock", stock);
-    formData.append("image", image);
-    console.log("formData", JSON.stringify(formData));
 
-    doRequest();
+    axios
+      .post("https://tavistoica.xyz/api/tickets", createFormData(), {
+        headers: {
+          "Content-type": "multipart/form-data",
+        },
+      })
+      .then(() => {
+        Router.push("/");
+      });
+
+    // doRequest();
   };
 
   return (
@@ -71,15 +88,9 @@ const newTicket = () => {
         </div>
         <div className="form-group">
           <label>Image</label>
-          <input
-            type="file"
-            className="form-control"
-            value={image}
-            onBlur={onBlur}
-            onChange={(e) => setImage(e.target.files[0])}
-          />
+          <FileUploader onFileSelect={(file) => setImage(file)} />
         </div>
-        {errors}
+        {/* {errors} */}
         <button className="btn btn-primary">Submit</button>
       </form>
     </div>
