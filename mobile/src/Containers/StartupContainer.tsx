@@ -1,37 +1,29 @@
-import React, { useEffect } from 'react'
-import { ActivityIndicator, View, Text } from 'react-native'
-import { useTranslation } from 'react-i18next'
-import { useTheme } from '@/Hooks'
-import { Brand } from '@/Components'
-import { setDefaultTheme } from '@/Store/Theme'
-import { navigateAndSimpleReset } from '@/Navigators/utils'
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 
-const StartupContainer = () => {
-  const { Layout, Gutters, Fonts } = useTheme()
+import { Button } from '@ui-kitten/components'
 
-  const { t } = useTranslation()
-
-  const init = async () => {
-    await new Promise(resolve =>
-      setTimeout(() => {
-        resolve(true)
-      }, 2000),
-    )
-    await setDefaultTheme({ theme: 'default', darkMode: null })
-    navigateAndSimpleReset('Main')
-  }
-
-  useEffect(() => {
-    init()
-  })
-
+const StartupContainer = ({ navigation }) => {
   return (
-    <View style={[Layout.fill, Layout.colCenter]}>
-      <Brand />
-      <ActivityIndicator size={'large'} style={[Gutters.largeVMargin]} />
-      <Text style={Fonts.textCenter}>{t('welcome')}</Text>
+    <View style={styles.container}>
+      <Text style={styles.text}>Starting Point</Text>
+      <Button onPress={() => navigation.navigate('Second')}>
+        Press to navigate
+      </Button>
     </View>
   )
 }
 
 export default StartupContainer
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 10,
+  },
+  text: {
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+})

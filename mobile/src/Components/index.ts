@@ -1,1 +1,1 @@
-export { default as Brand } from './Brand'
+let thisFile = 'index.js'
