@@ -1,1 +1,1 @@
-let thisFile = 'index.js'
+export { default as MainNavigator } from './MainNavigator'

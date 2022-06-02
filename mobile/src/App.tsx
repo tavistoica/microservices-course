@@ -1,8 +1,18 @@
-import 'react-native-gesture-handler'
 import React from 'react'
-import { StartupContainer } from './Containers'
+import 'react-native-gesture-handler'
 import '../ReactotronConfig'
+import * as eva from '@eva-design/eva'
+import { ApplicationProvider } from '@ui-kitten/components'
 
-const App = () => <StartupContainer />
+import { NavigationContainer } from '@react-navigation/native'
+import { MainNavigator } from './Navigators'
+
+const App = () => (
+  <ApplicationProvider {...eva} theme={eva.light}>
+    <NavigationContainer>
+      <MainNavigator />
+    </NavigationContainer>
+  </ApplicationProvider>
+)
 
 export default App
