@@ -1,6 +1,6 @@
 {
-  "name": "boilerplate",
-  "version": "3.3.0",
+  "name": "mobile",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -16,20 +16,14 @@
     "@react-navigation/bottom-tabs": "^6.3.1",
     "@react-navigation/native": "^6.0.10",
     "@react-navigation/stack": "^6.2.1",
-    "@reduxjs/toolkit": "^1.8.1",
-    "i18next": "^21.6.16",
     "prop-types": "^15.8.1",
     "react": "17.0.2",
-    "react-i18next": "^11.16.7",
     "react-native": "0.67.4",
     "react-native-flipper": "^0.143.0",
     "react-native-gesture-handler": "^2.4.1",
     "react-native-reanimated": "^2.8.0",
     "react-native-safe-area-context": "^4.2.4",
-    "react-native-screens": "^3.13.1",
-    "react-redux": "^8.0.1",
-    "redux-flipper": "^2.0.1",
-    "redux-persist": "^6.0.0"
+    "react-native-screens": "^3.13.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
@@ -39,7 +33,6 @@
     "@types/jest": "^27.5.1",
     "@types/react": "^18.0.8",
     "@types/react-native": "^0.67.7",
-    "@types/react-redux": "^7.1.24",
     "@types/react-test-renderer": "^18.0.0",
     "babel-jest": "^26.6.3",
     "babel-plugin-module-resolver": "^4.0.0",
