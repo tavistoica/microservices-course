@@ -1,0 +1,49 @@
+.meal-card {
+  display: flex;
+  flex-direction: row;
+  border-radius: 10px;
+  border: 1px solid white;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: white;
+}
+
+.meal-card:hover {
+  border: 1px solid black;
+}
+
+.meal-card_image {
+  flex: 1;
+}
+
+.meal-card_image img {
+  width: 150px;
+  object-fit: cover;
+  min-height: 100%;
+}
+
+.meal-card_content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  flex-grow: 2;
+  width: 100%;
+  margin: 1rem;
+  margin-top: 0.5rem;
+}
+
+.meal-card_content_title {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 22px;
+  margin-top: 5px;
+  flex: 1;
+}
+
+.meal-card_content_price {
+  font-size: 22px;
+  font-weight: 700;
+  color: red;
+  flex: 1;
+}

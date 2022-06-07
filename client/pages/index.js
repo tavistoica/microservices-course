@@ -1,29 +1,11 @@
 import Link from "next/link";
+import { MealList } from "../components/MealList/MealList";
 
 const LandingPage = ({ meals, currentUser }) => {
-  const mealList = meals.map((item) => {
-    return (
-      <Link href="/meals/[mealId]" as={`/meals/${item.id}`} key={item.id}>
-        <tr key={item.id}>
-          <th className="th-title">{item.title}</th>
-          <th>{item.price}</th>
-        </tr>
-      </Link>
-    );
-  });
-
   return (
-    <div className="text-center">
+    <div>
       {currentUser?.role === "Seller" && <h2>Published Meals</h2>}
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>{mealList}</tbody>
-      </table>
+      <MealList items={meals} />
     </div>
   );
 };
