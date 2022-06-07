@@ -1,0 +1,17 @@
+.meal-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-gap: 24px;
+}
+/* 
+@media screen and (max-width: 768px) {
+  .meal-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .meal-list {
+    grid-template-columns: 1fr;
+  }
+} */

@@ -25,7 +25,6 @@ AppComponent.getInitialProps = async (appContext) => {
   const { data } = await client.get("/api/users/currentuser", {
     withCredentials: true,
   });
-  console.log("poate chiar intra; ", data);
 
   let pageProps;
   if (appContext.Component.getInitialProps) {
