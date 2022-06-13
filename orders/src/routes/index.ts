@@ -11,10 +11,11 @@ router.get("/api/orders", requireAuth, async (req: Request, res: Response) => {
     userId: req.currentUser!.id,
   });
 
+  logger.info(`orders: ${JSON.stringify(orders)}`);
+
   const mappedOrders = await Promise.all(
     orders.map(async (item) => {
-      logger.info(`meal: ${JSON.stringify(item.meal)}`);
-      const meal = await Meal.findById(item.meal._id);
+      const meal = await Meal.findById(item.meal);
       if (meal) item.meal = meal;
       return item;
     })
