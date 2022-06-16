@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import {
   NotFoundError,
   NotEnoughStock,
-  requireAuth,
+  requireUser,
   validateRequest,
   OrderStatus,
   BadRequestError,
@@ -17,11 +17,11 @@ import { logger } from "../utils/logger";
 
 const router = express.Router();
 
-const EXPIRATION_WINDOW_SECONDS = 5 * 60;
+const EXPIRATION_WINDOW_SECONDS = 60 * 60 * 24;
 
 router.post(
   "/api/orders",
-  requireAuth,
+  requireUser,
   [
     body("mealId")
       .not()
@@ -50,14 +50,6 @@ router.post(
     if (meal.stock === 0 || itemAmount === 0) {
       throw new BadRequestError("meal is no longer available");
     }
-
-    // await meal.save();
-
-    //  Make sure the meal is not already reserved
-    // const isReserved = await meal.isReserved();
-    // if (isReserved) {
-    //   throw new BadRequestError("meal is already reserved");
-    // }
 
     //  Calculate an expiration date for this order
     const expiration = new Date();

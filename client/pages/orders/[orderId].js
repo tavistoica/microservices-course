@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 // import StripeCheckout from "react-stripe-checkout";
 import QRCode from "react-qr-code";
+import { calculateTime } from "../../utils/utils";
 
 const OrderShow = ({ order }) => {
   const [timeLeft, setTimeLeft] = useState(0);
@@ -8,6 +9,7 @@ const OrderShow = ({ order }) => {
   useEffect(() => {
     const findTimeLeft = () => {
       const msLeft = new Date(order.expiresAt) - new Date();
+      console.log("timeLeft: ", calculateTime(msLeft));
       setTimeLeft(Math.round(msLeft / 1000));
     };
     findTimeLeft();
