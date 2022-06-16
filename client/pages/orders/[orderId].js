@@ -9,8 +9,7 @@ const OrderShow = ({ order }) => {
   useEffect(() => {
     const findTimeLeft = () => {
       const msLeft = new Date(order.expiresAt) - new Date();
-      console.log("timeLeft: ", calculateTime(msLeft));
-      setTimeLeft(Math.round(msLeft / 1000));
+      setTimeLeft(calculateTime(msLeft));
     };
     findTimeLeft();
     const timerId = setInterval(findTimeLeft, 1000);
@@ -23,7 +22,7 @@ const OrderShow = ({ order }) => {
   return (
     <div>
       {order.status !== "completed" && <QRCode value={order.id} />}
-      {timeLeft && <div>Time left to pay: {timeLeft} seconds</div>}
+      {timeLeft && <div>Time left to pay: {timeLeft}</div>}
       {!timeLeft && order.status !== "completed" && <div>Order Expired</div>}
       {/* <StripeCheckout
         token={({ id }) => doRequest({ token: id })}

@@ -5,10 +5,16 @@ export const baseURL =
     ? HOST_URL.DEV.BROWSER_URL
     : HOST_URL.PROD.BROWSER_URL;
 
-export const calculateTime = (time) => {
-  const hours = time / 60 / 60;
-  const minutes = (time - hours) / 60;
-  const seconds = time - hours - minutes;
+export const calculateTime = (date) => {
+  const seconds = date.getSeconds();
+  const minutes = date.getMinutes();
+  const hours = date.getHours();
 
-  return { hours, minutes, seconds };
+  if (minutes === 0 && hours === 0) {
+    return `${seconds} secounds`;
+  }
+
+  return `${hours} hour${
+    hours < 2 && "s"
+  } ${minutes} minutes ${seconds} seconds`;
 };
