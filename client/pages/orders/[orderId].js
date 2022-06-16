@@ -8,7 +8,7 @@ const OrderShow = ({ order }) => {
 
   useEffect(() => {
     const findTimeLeft = () => {
-      const msLeft = new Date(order.expiresAt) - new Date();
+      const msLeft = new Date(new Date(order.expiresAt) - new Date());
       setTimeLeft(calculateTime(msLeft));
     };
     findTimeLeft();
