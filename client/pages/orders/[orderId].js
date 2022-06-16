@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Router } from "next/router";
 // import StripeCheckout from "react-stripe-checkout";
 import QRCode from "react-qr-code";
+import useRequest from "../../hooks/use-request";
+
 import { calculateTime } from "../../utils/utils";
 import { Button } from "../../components/Button/Button";
 
