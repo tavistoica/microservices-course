@@ -1,10 +1,18 @@
 import { useEffect, useState } from "react";
+import { Router } from "next/router";
 // import StripeCheckout from "react-stripe-checkout";
 import QRCode from "react-qr-code";
 import { calculateTime } from "../../utils/utils";
+import { Button } from "../../components/Button/Button";
 
 const OrderShow = ({ order }) => {
   const [timeLeft, setTimeLeft] = useState(0);
+
+  const { doRequest, errors } = useRequest({
+    url: `/api/orders/${order.id}`,
+    method: "patch",
+    onSuccess: () => Router.push("/"),
+  });
 
   useEffect(() => {
     const findTimeLeft = () => {
@@ -21,7 +29,17 @@ const OrderShow = ({ order }) => {
 
   return (
     <div>
-      {order.status !== "completed" && <QRCode value={order.id} />}
+      {order.status !== "completed" && (
+        <>
+          <QRCode value={order.id} />
+          {errors}
+          <Button
+            message="Cancel Order"
+            type="error"
+            onClick={() => doRequest()}
+          />
+        </>
+      )}
       {timeLeft && <div>Time left to pay: {timeLeft}</div>}
       {!timeLeft && order.status !== "completed" && <div>Order Expired</div>}
       {/* <StripeCheckout
