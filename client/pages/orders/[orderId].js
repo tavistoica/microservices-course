@@ -32,7 +32,7 @@ const OrderShow = ({ order }) => {
 
   return (
     <div>
-      {order.status !== "completed" && (
+      {order.status === "created" && (
         <>
           <QRCode value={order.id} />
           {errors}
@@ -43,8 +43,12 @@ const OrderShow = ({ order }) => {
           />
         </>
       )}
-      {timeLeft && <div>Time left to pay: {timeLeft}</div>}
-      {!timeLeft && order.status !== "completed" && <div>Order Expired</div>}
+      {(!timeLeft || order.status === "cancelled") && (
+        <div>Order has been canceled</div>
+      )}
+      {timeLeft && order.status === "created" && (
+        <div>Time left to pay: {timeLeft}</div>
+      )}
       {/* <StripeCheckout
         token={({ id }) => doRequest({ token: id })}
         stripeKey="pk_test_51JGhaeAltPmlu6DoHAGEQpvnVASrUHXMRFpAem4B3IVL03sEe4qveWi8NHOI9XsSGFfuLmH4tqVqrJ9J1BLoimVe00WW87uYDR"
