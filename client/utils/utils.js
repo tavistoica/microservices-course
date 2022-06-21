@@ -15,6 +15,6 @@ export const calculateTime = (date) => {
   }
 
   return `${hours} hour${
-    hours < 2 && "s"
+    hours < 2 ? "s" : ""
   } ${minutes} minutes ${seconds} seconds`;
 };

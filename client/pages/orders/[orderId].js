@@ -8,6 +8,7 @@ import { calculateTime } from "../../utils/utils";
 import { Button } from "../../components/Button/Button";
 
 const OrderShow = ({ order }) => {
+  console.log("order", JSON.stringify(order));
   const [timeLeft, setTimeLeft] = useState(0);
 
   const { doRequest, errors } = useRequest({
@@ -19,7 +20,7 @@ const OrderShow = ({ order }) => {
   useEffect(() => {
     const findTimeLeft = () => {
       const msLeft = new Date(new Date(order.expiresAt) - new Date());
-      setTimeLeft(calculateTime(msLeft));
+      setTimeLeft(msLeft > 0 ? calculateTime(msLeft) : 0);
     };
     findTimeLeft();
     const timerId = setInterval(findTimeLeft, 1000);
