@@ -37,7 +37,7 @@ router.get(
 router.get(
   "/api/users/callback",
   passport.authenticate("facebook", {
-    session: false,
+    session: true,
     successRedirect: "https://www.tavistoica.xyz/",
     failureRedirect: "https://www.tavistoica.xyz/auth/login",
   })
