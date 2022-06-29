@@ -10,8 +10,9 @@ jobs:
     name: Run tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-        run: cd auth && npm install && npm run test:ci
+      - name: Go to auth and run tests
+        uses: actions/checkout@v2
+      - run: cd auth && npm install && npm run test:ci
         env:
           BRANCH_PREFIX: "skip-*"
           PULL_REQUEST_BRANCH: "main"
