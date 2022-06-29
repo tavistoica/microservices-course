@@ -19,6 +19,9 @@ export const ItemList = ({ orders, headers, baseURL, fields }) => {
                 searchedField = searchedField[`${nestedObjects[i]}`];
               }
 
+              if (baseURL === "/orders" && field === "meal.price") {
+                return <th>{searchedField * item["itemAmount"]}</th>;
+              }
               return <th>{searchedField}</th>;
             }
             return <th>{item[`${field}`]}</th>;

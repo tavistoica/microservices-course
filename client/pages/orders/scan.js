@@ -44,8 +44,8 @@ const ScanOrder = ({ currentUser }) => {
         <>
           <h1>{resData.meal?.title}</h1>
           <h4>Status: {resData.status}</h4>
-          <h4>{resData.meal?.price}$</h4>
           <h4>Amount: {resData.itemAmount}</h4>
+          <h4>{resData.meal?.price * resData.itemAmount}$</h4>
         </>
       )}
     </div>
