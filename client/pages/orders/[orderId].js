@@ -56,9 +56,9 @@ const OrderShow = ({ order }) => {
         </div>
       )}
       {timeLeft && order.status === ORDER_TYPES.CREATED && (
-        <div className={`${mainClass}__time`}>
-          <h3>{ORDER_PAGE.LEFT_TO_PAY_MESSAGE}</h3>
-          <h4>{timeLeft}</h4>
+        <div className={styles[`${mainClass}__time`]}>
+          <h5>{ORDER_PAGE.LEFT_TO_PAY_MESSAGE}</h5>
+          <h6>{timeLeft}</h6>
         </div>
       )}
       {/* <StripeCheckout
