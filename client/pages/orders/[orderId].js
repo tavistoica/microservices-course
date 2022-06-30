@@ -5,10 +5,13 @@ import QRCode from "react-qr-code";
 import useRequest from "../../hooks/use-request";
 
 import { calculateTime } from "../../utils/utils";
+import { ORDER_PAGE, ORDER_TYPES } from "../../utils/constants";
+import styles from "./[orderId].module.css";
 import { Button } from "../../components/atoms/Button/Button";
 
+const mainClass = "oct-order";
+
 const OrderShow = ({ order }) => {
-  console.log("order", JSON.stringify(order));
   const [timeLeft, setTimeLeft] = useState(0);
 
   const { doRequest, errors } = useRequest({
@@ -31,23 +34,27 @@ const OrderShow = ({ order }) => {
   }, [order]);
 
   return (
-    <div>
-      {order.status === "created" && (
-        <>
+    <div className={styles[mainClass]}>
+      {order.status === ORDER_TYPES.CREATED && (
+        <div className={styles[`${mainClass}__created`]}>
           <QRCode value={order.id} />
           {errors}
           <Button
-            message="Cancel Order"
+            message={ORDER_PAGE.CANCEL_BUTTON_TEXT}
             type="danger"
             onClick={() => doRequest()}
           />
-        </>
+        </div>
       )}
-      {(!timeLeft || order.status === "cancelled") && (
-        <div>Order has been canceled</div>
+      {(!timeLeft || order.status === ORDER_TYPES.CANCELLED) && (
+        <div className={styles[`${mainClass}__cancelled`]}>
+          {ORDER_PAGE.CANCELLED_MESSAGE}
+        </div>
       )}
-      {timeLeft && order.status === "created" && (
-        <div>Time left to pay: {timeLeft}</div>
+      {timeLeft && order.status === ORDER_TYPES.CREATED && (
+        <div
+          className={`${mainClass}__time`}
+        >{`${ORDER_PAGE.LEFT_TO_PAY_MESSAGE}${timeLeft}`}</div>
       )}
       {/* <StripeCheckout
         token={({ id }) => doRequest({ token: id })}

@@ -1,0 +1,15 @@
+.oct-order {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.oct-order__created {
+}
+
+.oct-order__cancelled {
+}
+
+.oct-order__time {
+  text-align: center;
+}
