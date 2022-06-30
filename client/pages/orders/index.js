@@ -1,4 +1,4 @@
-import { ItemList } from "../../components/ItemList/ItemList";
+import { ItemList } from "../../components/molecules/ItemList/ItemList";
 
 import styles from "./index.module.css";
 

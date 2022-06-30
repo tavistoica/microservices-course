@@ -1,9 +1,9 @@
 import styles from "./Login.module.css";
-import { LOGIN_PAGE } from "../../utils/constants";
+import { LOGIN_PAGE } from "../../../utils/constants";
 import Router from "next/router";
 
-import { Button } from "../Button/Button";
-import { Input } from "../Input/Input";
+import { Button } from "../../atoms/Button/Button";
+import { Input } from "../molecules/Input/Input";
 
 export const Login = ({
   onSubmit,

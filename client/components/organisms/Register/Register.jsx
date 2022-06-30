@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { REGISTER_PAGE } from "../../utils/constants";
+import { REGISTER_PAGE } from "../../../utils/constants";
 
-import { Button } from "../Button/Button";
-import { Input } from "../Input/Input";
+import { Button } from "../../atoms/Button/Button";
+import { Input } from "../molecules/Input/Input";
 
 import styles from "./Register.module.css";
 

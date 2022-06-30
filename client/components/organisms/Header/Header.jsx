@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Link from "next/link";
-import { HEADER } from "../../utils/constants";
+import { HEADER } from "../../../utils/constants";
 import { slide as Menu } from "react-burger-menu";
 
 import styles from "./Header.module.css";
