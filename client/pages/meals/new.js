@@ -5,6 +5,7 @@ import useRequest from "../../hooks/use-request";
 import FormData from "form-data";
 import axios from "axios";
 import { HOST_URL } from "../../utils/constants";
+import { Input } from "../../components/Input/Input";
 
 const newMeal = () => {
   const [title, setTitle] = useState("");
@@ -66,7 +67,7 @@ const newMeal = () => {
       <form onSubmit={onSubmit}>
         <div className="form-group">
           <label>Title</label>
-          <input
+          <Input
             className="form-control"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -74,7 +75,7 @@ const newMeal = () => {
         </div>
         <div className="form-group">
           <label>Price</label>
-          <input
+          <Input
             className="form-control"
             value={price}
             onBlur={onBlur}
@@ -83,7 +84,7 @@ const newMeal = () => {
         </div>
         <div className="form-group">
           <label>Stock</label>
-          <input
+          <Input
             className="form-control"
             value={stock}
             onBlur={onBlur}

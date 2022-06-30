@@ -5,11 +5,13 @@ export const Button = ({
   type = "primary",
   stylesProp = "",
   onClick = null,
+  disable = false,
 }) => {
   return (
     <button
       className={`${stylesProp} ${styles.button} btn btn-${type}`}
       onClick={onClick}
+      disabled={disable}
     >
       {message}
     </button>
