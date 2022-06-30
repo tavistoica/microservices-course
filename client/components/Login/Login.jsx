@@ -3,6 +3,7 @@ import { LOGIN_PAGE } from "../../utils/constants";
 import Router from "next/router";
 
 import { Button } from "../Button/Button";
+import { Input } from "../Input/Input";
 
 export const Login = ({
   onSubmit,
@@ -19,16 +20,14 @@ export const Login = ({
           <h1>{LOGIN_PAGE.LOGIN_MESSAGE}</h1>
           {errors}
           <div className={styles.margintop}>
-            <input
-              className="form-control"
+            <Input
               onChange={(e) => setEmail(e.target.value)}
               value={email}
               placeholder={LOGIN_PAGE.EMAIL_PLACEHOLDER}
             />
           </div>
           <div className={styles.margintop}>
-            <input
-              className="form-control"
+            <Input
               type="password"
               onChange={(e) => setPassword(e.target.value)}
               value={password}

@@ -8,6 +8,8 @@ export const REGISTER_PAGE = {
   REGISTER_MESSAGE: "Register",
   EMAIL_PLACEHOLDER: "Email",
   PASSWORD_PLACEHOLDER: "Password",
+  CONFIRM_PASSWORD_PLACEHOLDER: "Confirm Password",
+  CONFIRM_PASSWORD_ERROR: "The passwords do not match!",
 };
 
 export const HEADER = {

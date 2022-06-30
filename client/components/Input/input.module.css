@@ -1,0 +1,33 @@
+.oct-input {
+  width: 100%;
+  font-size: 16px;
+  height: 50px;
+  padding-left: 10px;
+  padding-right: 40px;
+  border-radius: 5px;
+  border: 1px solid blue;
+  background: transparent;
+}
+
+.oct-input-message-error {
+  text-align: start !important;
+}
+
+.oct-input:focus {
+  border: 2px solid blue;
+  outline: none;
+}
+
+.oct-input::placeholder {
+  color: grey;
+  opacity: 1;
+}
+
+.oct-input-error {
+  color: red;
+  border-color: red !important;
+}
+
+.oct-input-error:focus {
+  border-color: red !important;
+}
