@@ -5,7 +5,7 @@ import QRCode from "react-qr-code";
 import useRequest from "../../hooks/use-request";
 
 import { calculateTime } from "../../utils/utils";
-import { Button } from "../../components/Button/Button";
+import { Button } from "../../components/atoms/Button/Button";
 
 const OrderShow = ({ order }) => {
   console.log("order", JSON.stringify(order));

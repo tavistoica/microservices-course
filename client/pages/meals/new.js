@@ -1,11 +1,11 @@
 import Router from "next/router";
 import { useState } from "react";
-import { FileUploader } from "../../components/FileUploader/FileUploader";
+import { FileUploader } from "../../components/molecules/FileUploader/FileUploader";
 // import useRequest from "../../hooks/use-request";
 import FormData from "form-data";
 import axios from "axios";
 import { HOST_URL } from "../../utils/constants";
-import { Input } from "../../components/Input/Input";
+import { Input } from "../../components/molecules/Input/Input";
 
 const newMeal = () => {
   const [title, setTitle] = useState("");
