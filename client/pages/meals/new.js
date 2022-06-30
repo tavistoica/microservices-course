@@ -4,7 +4,7 @@ import { FileUploader } from "../../components/molecules/FileUploader/FileUpload
 import FormData from "form-data";
 import axios from "axios";
 import { HOST_URL } from "../../utils/constants";
-import { Input } from "../../components/molecules/Input/Input";
+import { Input } from "../../components/atoms/Input/Input";
 
 const newMeal = () => {
   const [title, setTitle] = useState("");

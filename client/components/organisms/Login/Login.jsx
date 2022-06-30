@@ -3,7 +3,7 @@ import { LOGIN_PAGE } from "../../../utils/constants";
 import Router from "next/router";
 
 import { Button } from "../../atoms/Button/Button";
-import { Input } from "../atoms/Input/Input";
+import { Input } from "../../atoms/Input/Input";
 
 export const Login = ({
   onSubmit,
