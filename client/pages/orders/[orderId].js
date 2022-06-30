@@ -35,15 +35,19 @@ const OrderShow = ({ order }) => {
 
   return (
     <div className={styles[mainClass]}>
+      <div className={styles[`${mainClass}__errors`]}>{errors}</div>
       {order.status === ORDER_TYPES.CREATED && (
         <div className={styles[`${mainClass}__created`]}>
-          <QRCode value={order.id} />
-          {errors}
-          <Button
-            message={ORDER_PAGE.CANCEL_BUTTON_TEXT}
-            type="danger"
-            onClick={() => doRequest()}
-          />
+          <div className={styles[`${mainClass}__qr-code`]}>
+            <QRCode value={order.id} />
+          </div>
+          <div className={styles[`${mainClass}_cancel-button`]}>
+            <Button
+              message={ORDER_PAGE.CANCEL_BUTTON_TEXT}
+              type="danger"
+              onClick={() => doRequest()}
+            />
+          </div>
         </div>
       )}
       {(!timeLeft || order.status === ORDER_TYPES.CANCELLED) && (

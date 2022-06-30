@@ -1,13 +1,24 @@
 .oct-order {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  text-align: center;
 }
 
 .oct-order__created {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
 }
 
 .oct-order__cancelled {
+}
+
+.oct-order__qr-code {
+  margin-bottom: 25px;
+}
+
+.oct-order__cancel-button {
+  margin-bottom: 25px;
 }
 
 .oct-order__time {
