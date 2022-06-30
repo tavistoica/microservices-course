@@ -41,7 +41,7 @@ const OrderShow = ({ order }) => {
           <div className={styles[`${mainClass}__qr-code`]}>
             <QRCode value={order.id} />
           </div>
-          <div className={styles[`${mainClass}_cancel-button`]}>
+          <div className={styles[`${mainClass}__cancel-button`]}>
             <Button
               message={ORDER_PAGE.CANCEL_BUTTON_TEXT}
               type="danger"
@@ -56,9 +56,10 @@ const OrderShow = ({ order }) => {
         </div>
       )}
       {timeLeft && order.status === ORDER_TYPES.CREATED && (
-        <div
-          className={`${mainClass}__time`}
-        >{`${ORDER_PAGE.LEFT_TO_PAY_MESSAGE}${timeLeft}`}</div>
+        <div className={`${mainClass}__time`}>
+          <h3>{ORDER_PAGE.LEFT_TO_PAY_MESSAGE}</h3>
+          <h4>{timeLeft}</h4>
+        </div>
       )}
       {/* <StripeCheckout
         token={({ id }) => doRequest({ token: id })}
