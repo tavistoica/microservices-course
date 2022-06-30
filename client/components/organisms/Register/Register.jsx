@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { REGISTER_PAGE } from "../../../utils/constants";
 
 import { Button } from "../../atoms/Button/Button";
-import { Input } from "../molecules/Input/Input";
+import { Input } from "../../atoms/Input/Input";
 
 import styles from "./Register.module.css";
 
