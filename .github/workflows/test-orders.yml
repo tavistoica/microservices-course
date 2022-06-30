@@ -1,15 +1,15 @@
-name: tests-payments
+name: test-orders
 
 on:
   pull_request:
     types:
       - opened
     paths:
-      - "payments/**"
+      - "orders/**"
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: cd payments && npm install && npm run test:ci
+      - run: cd orders && npm install && npm run test:ci

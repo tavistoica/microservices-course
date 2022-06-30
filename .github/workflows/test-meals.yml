@@ -1,4 +1,4 @@
-name: tests-meals
+name: test-meals
 
 on:
   pull_request:

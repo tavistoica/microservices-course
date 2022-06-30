@@ -38,7 +38,7 @@ router.patch(
         stock: order.meal.stock,
         imagePath: order.meal.imagePath,
       },
-      itemAmount: order.meal.stock,
+      itemAmount: order.itemAmount,
     });
 
     res.status(204).send(order);
