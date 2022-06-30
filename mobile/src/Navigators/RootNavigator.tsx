@@ -6,13 +6,25 @@
  */
 import React from 'react'
 import { MainNavigator } from './MainNavigator'
-import { createNativeStackNavigator } from 'react-native-screens/native-stack'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+
+import { Login, SignUp, ForgetPassword } from '../Containers'
 
 const Stack = createNativeStackNavigator()
 
 export const RootNavigator = () => {
   return (
     <Stack.Navigator>
+      <Stack.Group
+        screenOptions={{
+          headerShown: true,
+          headerTitle: '',
+        }}
+      >
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
+        <Stack.Screen name="SignUp" component={SignUp} />
+      </Stack.Group>
       <Stack.Screen
         name="mainStack"
         component={MainNavigator}
