@@ -1,7 +1,7 @@
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css";
 import buildClient from "../api/build-client";
-import { Header } from "../components/Header/Header";
+import { Header } from "..//components/organisms/Header/Header";
 
 import "./styles.css";
 

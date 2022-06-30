@@ -2,7 +2,7 @@ import { useState } from "react";
 import Router from "next/router";
 import useRequest from "../../hooks/use-request";
 
-import { Register } from "../../components/Register/Register";
+import { Register } from "../../components/organisms/Register/Register";
 
 const register = () => {
   const [email, setEmail] = useState("");

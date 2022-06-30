@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { MealList } from "../components/MealList/MealList";
+import { MealList } from "../components/molecules/MealList/MealList";
 
 const LandingPage = ({ meals, currentUser }) => {
   return (

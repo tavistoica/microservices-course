@@ -1,7 +1,6 @@
 import Router from "next/router";
 import { useState } from "react";
 import { FileUploader } from "../../components/molecules/FileUploader/FileUploader";
-// import useRequest from "../../hooks/use-request";
 import FormData from "form-data";
 import axios from "axios";
 import { HOST_URL } from "../../utils/constants";
