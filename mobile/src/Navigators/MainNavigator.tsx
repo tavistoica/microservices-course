@@ -1,14 +1,23 @@
 import React from 'react'
-import { createStackNavigator } from '@react-navigation/stack'
-import { StartupContainer, ExampleContainer } from '../Containers'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-const Stack = createStackNavigator<any>()
+import { StartupContainer } from '../Containers'
+import { TabNavigator } from './TabNavigator'
 
-export default function App() {
+const Stack = createNativeStackNavigator()
+
+export function MainNavigator() {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        name="TabNavigator"
+        component={TabNavigator}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen name="Home" component={StartupContainer} />
-      <Stack.Screen name="Second" component={ExampleContainer} />
     </Stack.Navigator>
   )
 }
+
+const exitRoutes = ['TabNavigator']
+export const canExit = (routeName: string) => exitRoutes.includes(routeName)

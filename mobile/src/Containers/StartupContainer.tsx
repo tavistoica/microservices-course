@@ -1,29 +1,16 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
-import { Button } from '@ui-kitten/components'
+import { Box, Text, Button } from 'native-base'
 
-const StartupContainer = ({ navigation }) => {
+const StartupContainer = () => {
+  const navigation = useNavigation()
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Starting Point</Text>
-      <Button onPress={() => navigation.navigate('Second')}>
-        Press to navigate
-      </Button>
-    </View>
+    <Box flex={1} alignItems="center" justifyContent="center">
+      <Text>Text here</Text>
+      <Button onPress={() => navigation.navigate('Login')}>Login</Button>
+    </Box>
   )
 }
 
 export default StartupContainer
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 10,
-  },
-  text: {
-    textAlign: 'center',
-    marginBottom: 10,
-  },
-})

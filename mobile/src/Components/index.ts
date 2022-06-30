@@ -1,1 +1,1 @@
-let thisFile = 'index.js'
+export * from './'
