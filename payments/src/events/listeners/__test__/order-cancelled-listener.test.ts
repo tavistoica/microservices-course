@@ -10,7 +10,7 @@ const setup = async () => {
 
   const order = Order.build({
     id: mongoose.Types.ObjectId().toHexString(),
-    status: OrderStatus.Created,
+    status: OrderStatus.Pending,
     price: 10,
     userId: "random",
     version: 0,

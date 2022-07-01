@@ -12,7 +12,7 @@ const setup = async () => {
     version: 0,
     expiresAt: "random",
     userId: "string",
-    status: OrderStatus.Created,
+    status: OrderStatus.Pending,
     meal: {
       id: "random",
       price: 20,
