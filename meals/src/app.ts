@@ -8,7 +8,7 @@ import { createMealRouter } from "./routes/new";
 import { showMealRouter } from "./routes/show";
 import { indexMealRouter } from "./routes/index";
 import { updateMealRouter } from "./routes/update";
-import { sellerMealsRouter } from "./routes/seller-meals";
+import { restaurantMealsRouter } from "./routes/restaurant-meals";
 import { deleteRouter } from "./routes/delete-db";
 
 //mongoose //5.10.19
@@ -30,7 +30,7 @@ app.use(createMealRouter);
 app.use(showMealRouter);
 app.use(indexMealRouter);
 app.use(updateMealRouter);
-app.use(sellerMealsRouter);
+app.use(restaurantMealsRouter);
 app.use(deleteRouter);
 
 app.all("*", async () => {

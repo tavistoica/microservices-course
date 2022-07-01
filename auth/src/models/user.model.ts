@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { Password } from "../services/password";
 
-type UserRole = "Admin" | "User" | "Seller";
+type UserRole = "Admin" | "User" | "Restaurant";
 
 interface UserAttrs {
   email: string;

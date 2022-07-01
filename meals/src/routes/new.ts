@@ -3,7 +3,7 @@ import {
   requireAuth,
   validateRequest,
   natsWrapper,
-  requireSeller,
+  requireRestaurant,
   BadRequestError,
 } from "@ostoica/common";
 import { Meal } from "../models/meal.model";
@@ -26,7 +26,7 @@ const setImage = async (imagePath: string) => {
 router.post(
   "/api/meals",
   requireAuth,
-  requireSeller,
+  requireRestaurant,
   // [
   //   body("title").not().isEmpty().withMessage("Title is required"),
   //   body("price").isFloat({ gt: 0 }).withMessage("Price must be grater than 0"),

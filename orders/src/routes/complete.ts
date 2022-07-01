@@ -11,11 +11,13 @@ import { natsWrapper } from "@ostoica/common";
 import { logger } from "../utils/logger";
 
 const router = express.Router();
-const endpointPath = "/api/orders/:orderId/:sellerId";
+const endpointPath = "/api/orders/:orderId/:restaurantId";
 
 router.patch(endpointPath, requireAuth, async (req: Request, res: Response) => {
-  const { orderId, sellerId } = req.params;
-  logger.info(`${endpointPath} - orderId = ${orderId}, sellerId = ${sellerId}`);
+  const { orderId, restaurantId } = req.params;
+  logger.info(
+    `${endpointPath} - orderId = ${orderId}, restaurantId = ${restaurantId}`
+  );
 
   const order = await Order.findById(orderId).populate("meal");
   logger.info(`${endpointPath} - order obj - ${JSON.stringify(order)}`);
@@ -27,8 +29,10 @@ router.patch(endpointPath, requireAuth, async (req: Request, res: Response) => {
     throw new NotFoundError();
   }
 
-  if (sellerId !== meal?.userId) {
-    logger.info(`${endpointPath} - sellerId !== meal.userId - ${meal?.userId}`);
+  if (restaurantId !== meal?.userId) {
+    logger.info(
+      `${endpointPath} - restaurantId !== meal.userId - ${meal?.userId}`
+    );
     throw new NotAuthorizedError();
   }
 

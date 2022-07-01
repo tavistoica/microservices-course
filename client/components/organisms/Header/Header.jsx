@@ -11,12 +11,12 @@ const generateNavBar = (currentUser, setCloseSideBar = null) => {
     !currentUser && { label: HEADER.LOGIN, href: "/auth/login" },
     currentUser && { label: HEADER.PROFILE, href: "/auth/profile" },
     currentUser &&
-      currentUser.role === "Seller" && {
+      currentUser.role === "Resturant" && {
         label: HEADER.SELL,
         href: "/meals/new",
       },
     currentUser &&
-      currentUser.role === "Seller" && {
+      currentUser.role === "Resturant" && {
         label: HEADER.SCAN,
         href: "/orders/scan",
       },
