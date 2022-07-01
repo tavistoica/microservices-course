@@ -76,7 +76,7 @@ export const Register = ({
         <Button
           stylesProp={styles.margintop}
           message={REGISTER_PAGE.REGISTER_MESSAGE}
-          disable={!isSubmittable}
+          disable={isSubmittable}
         />
       </form>
     </div>
