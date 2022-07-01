@@ -5,7 +5,7 @@ export const LOGIN_PAGE = {
 };
 
 export const ORDER_TYPES = {
-  CREATED: "created",
+  CREATED: "pending",
   CANCELLED: "cancelled",
   COMPLETED: "completed",
 };
