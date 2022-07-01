@@ -15,4 +15,4 @@ router.get("/api/meals/users/:id", async (req: Request, res: Response) => {
   }
 });
 
-export { router as sellerMealsRouter };
+export { router as restaurantMealsRouter };

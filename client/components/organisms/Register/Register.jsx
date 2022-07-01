@@ -70,7 +70,7 @@ export const Register = ({
             onChange={(event) => setRole(event.target.value)}
           >
             <option value="User">User</option>
-            <option value="Seller">Seller</option>
+            <option value="Resturant">Resturant</option>
           </select>
         </div>
         <Button
