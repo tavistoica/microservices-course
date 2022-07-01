@@ -20,7 +20,7 @@ const setup = async () => {
   const data: OrderCreatedEvent["data"] = {
     id: mongoose.Types.ObjectId().toHexString(),
     version: 0,
-    status: OrderStatus.Created,
+    status: OrderStatus.Pending,
     userId: "random",
     expiresAt: "random2",
     meal: {

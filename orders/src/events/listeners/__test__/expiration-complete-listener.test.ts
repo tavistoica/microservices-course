@@ -19,7 +19,7 @@ const setup = async () => {
   });
   await meal.save();
   const order = Order.build({
-    status: OrderStatus.Created,
+    status: OrderStatus.Pending,
     userId: "random",
     expiresAt: new Date(),
     meal,

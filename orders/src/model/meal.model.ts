@@ -86,7 +86,7 @@ mealSchema.methods.isReserved = async function () {
     meal: this as any,
     status: {
       $in: [
-        OrderStatus.Created,
+        OrderStatus.Pending,
         OrderStatus.AwaitingPayment,
         OrderStatus.Complete,
       ],

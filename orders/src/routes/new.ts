@@ -58,7 +58,7 @@ router.post(
     //  Build the order and save it to the database
     const order = Order.build({
       userId: req.currentUser!.id,
-      status: OrderStatus.Created,
+      status: OrderStatus.Pending,
       expiresAt: expiration,
       meal,
       itemAmount,

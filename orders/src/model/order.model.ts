@@ -36,7 +36,7 @@ const orderSchema = new mongoose.Schema(
       type: String,
       require: true,
       enum: Object.values(OrderStatus),
-      default: OrderStatus.Created,
+      default: OrderStatus.Pending,
     },
     expiresAt: {
       type: mongoose.Schema.Types.Date,
