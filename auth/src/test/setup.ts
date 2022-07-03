@@ -14,7 +14,7 @@ declare global {
 const mockedUser = {
   email: "test@test.com",
   password: "password",
-  role: "User",
+  role: "Customer",
 };
 
 let mongo: any;

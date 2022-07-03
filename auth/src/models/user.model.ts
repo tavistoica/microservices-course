@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 import { Password } from "../services/password";
 
-type UserRole = "Admin" | "User" | "Restaurant";
+import { UserType } from "@ostoica/common";
 
 interface UserAttrs {
   email: string;
   password?: string;
-  role: UserRole;
+  role: UserType;
 }
 
 interface UserModel extends mongoose.Model<UserDoc> {
@@ -16,7 +16,7 @@ interface UserModel extends mongoose.Model<UserDoc> {
 interface UserDoc extends mongoose.Document {
   email: string;
   password?: string;
-  role: UserRole;
+  role: UserType;
 }
 
 const userSchema = new mongoose.Schema(
