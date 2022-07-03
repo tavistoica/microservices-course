@@ -7,7 +7,7 @@ import { Register } from "../../components/organisms/Register/Register";
 const register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("User");
+  const [role, setRole] = useState("Customer");
   const { doRequest, errors } = useRequest({
     url: "/api/users/register",
     method: "post",

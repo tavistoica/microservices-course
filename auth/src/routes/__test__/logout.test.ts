@@ -4,7 +4,7 @@ import { app } from "../../app";
 const mockedUser = {
   email: "test@test.com",
   password: "password",
-  role: "User",
+  role: "Customer",
 };
 
 it("clears the cookie after signing out", async () => {

@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import { logger } from "./utils/logger";
 
 import { User } from "./models/user.model";
-import { UserRole } from "./types/users.types";
+import { UserType, UserEnum } from "@ostoica/common";
 
 const FacebookStrategy = strategy.Strategy;
 
@@ -27,9 +27,9 @@ passport.use(
     async (_accessToken, _refreshToken, profile: strategy.Profile, done) => {
       const { email, id } = profile._json;
       logger.info(`test profile ${JSON.stringify(profile._json)}`);
-      const userData: { email: string; role: UserRole } = {
+      const userData: { email: string; role: UserType } = {
         email: email || id,
-        role: "User",
+        role: UserEnum.Customer,
       };
       logger.info(`userData ${JSON.stringify(userData)}`);
 
