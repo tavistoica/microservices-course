@@ -56,9 +56,6 @@ export const mealTitleValidation = (title) => {
 };
 
 export const mealPriceValidation = (price) => {
-  if (typeof price !== "number") {
-    return "Price needs to be a number";
-  }
   if (price < 0) {
     return "Price needs to be greater or equal than 0";
   }
@@ -66,9 +63,6 @@ export const mealPriceValidation = (price) => {
 };
 
 export const mealStockValidation = (stock) => {
-  if (typeof stock !== "number") {
-    return "Stock needs to be a number";
-  }
   if (stock < 0) {
     return "Stock needs to be greater or equal than 0";
   }
