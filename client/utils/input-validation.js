@@ -49,3 +49,28 @@ export const confirmPasswordValidation = (confirmPassword, password) => {
   if (testPassword) return testPassword;
   return "";
 };
+
+export const mealTitleValidation = (title) => {
+  if (!title) return "Title field cannot be empty";
+  return "";
+};
+
+export const mealPriceValidation = (price) => {
+  if (typeof price !== "number") {
+    return "Price needs to be a number";
+  }
+  if (price < 0) {
+    return "Price needs to be greater or equal than 0";
+  }
+  return "";
+};
+
+export const mealStockValidation = (stock) => {
+  if (typeof stock !== "number") {
+    return "Stock needs to be a number";
+  }
+  if (stock < 0) {
+    return "Stock needs to be greater or equal than 0";
+  }
+  return "";
+};

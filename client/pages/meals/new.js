@@ -1,10 +1,16 @@
 import Router from "next/router";
 import { useState } from "react";
-import { FileUploader } from "../../components/molecules/FileUploader/FileUploader";
 import FormData from "form-data";
 import axios from "axios";
+
+import { FileUploader } from "../../components/molecules/FileUploader/FileUploader";
+import { FormField } from "../../components/molecules/FormField/FormField";
+import {
+  mealTitleValidation,
+  mealPriceValidation,
+  mealStockValidation,
+} from "../../utils/input-validation";
 import { HOST_URL } from "../../utils/constants";
-import { Input } from "../../components/atoms/Input/Input";
 
 const newMeal = () => {
   const [title, setTitle] = useState("");
@@ -62,34 +68,44 @@ const newMeal = () => {
 
   return (
     <div>
-      <h1>Create a Meal</h1>
+      <h1>Publich a Meal</h1>
       <form onSubmit={onSubmit}>
-        <div className="form-group">
-          <label>Title</label>
-          <Input
-            className="form-control"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </div>
-        <div className="form-group">
-          <label>Price</label>
-          <Input
-            className="form-control"
-            value={price}
-            onBlur={onBlur}
-            onChange={(e) => setPrice(e.target.value)}
-          />
-        </div>
-        <div className="form-group">
-          <label>Stock</label>
-          <Input
-            className="form-control"
-            value={stock}
-            onBlur={onBlur}
-            onChange={(e) => setStock(e.target.value)}
-          />
-        </div>
+        <FormField
+          placeholder="Enter Meal Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          label="Title"
+          getError={mealTitleValidation}
+          required
+        />
+        <FormField
+          placeholder="99.99"
+          value={price}
+          onBlur={onBlur}
+          onChange={(e) => setPrice(e.target.value)}
+          label="Price"
+          getError={mealPriceValidation}
+          required
+        />
+        <FormField
+          type={"number"}
+          placeholder="Stock amount"
+          value={stock}
+          onBlur={onBlur}
+          onChange={(e) => setStock(e.target.value)}
+          label="Stock"
+          getError={mealStockValidation}
+          required
+        />
+
+        {/* type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            placeholder={REGISTER_PAGE.PASSWORD_PLACEHOLDER}
+            required
+            label={"Password"}
+            getError={passwordValidation} */}
+
         <div className="form-group">
           <label>Image</label>
           <FileUploader onFileSelect={(file) => setImage(file)} />
