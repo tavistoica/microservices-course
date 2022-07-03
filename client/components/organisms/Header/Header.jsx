@@ -2,7 +2,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { HEADER } from "../../../utils/constants";
 import { slide as Menu } from "react-burger-menu";
-import { USER_TYPES } from "@ostoica/common";
+import { USER_TYPES } from "@ostoica/common/build/types/user.types";
 
 import styles from "./Header.module.css";
 
