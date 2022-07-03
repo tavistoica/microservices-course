@@ -2,7 +2,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { HEADER } from "../../../utils/constants";
 import { slide as Menu } from "react-burger-menu";
-import { USER_TYPES } from "@ostoica/common/build/types/user.types";
+import { UserEnum } from "@ostoica/common/build/types/user.types";
 
 import styles from "./Header.module.css";
 
@@ -12,17 +12,17 @@ const generateNavBar = (currentUser, setCloseSideBar = null) => {
     !currentUser && { label: HEADER.LOGIN, href: "/auth/login" },
     currentUser && { label: HEADER.PROFILE, href: "/auth/profile" },
     currentUser &&
-      currentUser.role === "Resturant" && {
+      currentUser.role === UserEnum.Restaurant && {
         label: HEADER.SELL,
         href: "/meals/new",
       },
     currentUser &&
-      currentUser.role === "Resturant" && {
+      currentUser.role === UserEnum.Restaurant && {
         label: HEADER.SCAN,
         href: "/orders/scan",
       },
     currentUser &&
-      currentUser.role === USER_TYPES.CUSTOMER && {
+      currentUser.role === UserEnum.Customer && {
         label: HEADER.ORDERS,
         href: "/orders",
       },
