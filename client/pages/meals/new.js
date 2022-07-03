@@ -70,42 +70,40 @@ const newMeal = () => {
     <div>
       <h1>Publich a Meal</h1>
       <form onSubmit={onSubmit}>
-        <FormField
-          placeholder="Enter Meal Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          label="Title"
-          getError={mealTitleValidation}
-          required
-        />
-        <FormField
-          placeholder="99.99"
-          value={price}
-          onBlur={onBlur}
-          onChange={(e) => setPrice(e.target.value)}
-          label="Price"
-          getError={mealPriceValidation}
-          required
-        />
-        <FormField
-          type={"number"}
-          placeholder="Stock amount"
-          value={stock}
-          onBlur={onBlur}
-          onChange={(e) => setStock(e.target.value)}
-          label="Stock"
-          getError={mealStockValidation}
-          required
-        />
-
-        {/* type="password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-            placeholder={REGISTER_PAGE.PASSWORD_PLACEHOLDER}
+        <div className="form-group">
+          <FormField
+            placeholder="Enter Meal Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            label="Title"
+            getError={mealTitleValidation}
             required
-            label={"Password"}
-            getError={passwordValidation} */}
-
+          />
+        </div>
+        <div className="form-group">
+          <FormField
+            type="number"
+            placeholder="99.99"
+            value={price}
+            onBlur={onBlur}
+            onChange={(e) => setPrice(e.target.value)}
+            label="Price"
+            getError={mealPriceValidation}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <FormField
+            type="number"
+            placeholder="Stock amount"
+            value={stock}
+            onBlur={onBlur}
+            onChange={(e) => setStock(e.target.value)}
+            label="Stock"
+            getError={mealStockValidation}
+            required
+          />
+        </div>
         <div className="form-group">
           <label>Image</label>
           <FileUploader onFileSelect={(file) => setImage(file)} />
