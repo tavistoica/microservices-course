@@ -3,6 +3,8 @@ import { useState } from "react";
 import FormData from "form-data";
 import axios from "axios";
 
+import styles from "./meal.module.css";
+
 import { FileUploader } from "../../components/molecules/FileUploader/FileUploader";
 import { FormField } from "../../components/molecules/FormField/FormField";
 import {
@@ -70,7 +72,7 @@ const newMeal = () => {
     <div>
       <h1>Publich a Meal</h1>
       <form onSubmit={onSubmit}>
-        <div className="form-group">
+        <div className={styles.margintop}>
           <FormField
             placeholder="Enter Meal Title"
             value={title}
@@ -80,7 +82,7 @@ const newMeal = () => {
             required
           />
         </div>
-        <div className="form-group">
+        <div className={styles.margintop}>
           <FormField
             type="number"
             placeholder="99.99"
@@ -92,7 +94,7 @@ const newMeal = () => {
             required
           />
         </div>
-        <div className="form-group">
+        <div className={styles.margintop}>
           <FormField
             type="number"
             placeholder="Stock amount"
@@ -104,7 +106,7 @@ const newMeal = () => {
             required
           />
         </div>
-        <div className="form-group">
+        <div className={styles.margintop}>
           <label>Image</label>
           <FileUploader onFileSelect={(file) => setImage(file)} />
         </div>
