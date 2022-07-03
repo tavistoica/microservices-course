@@ -48,6 +48,11 @@ export const Header = ({ currentUser }) => {
   const handleIsOpen = () => setIsOpen(!isOpen);
   const setCloseSideBar = () => setIsOpen(false);
 
+  const bmStyles = {
+    ["bmMenu"]: styles["bm-menu"],
+    ["bmBurgerBarsHover"]: styles["bm-burger-bars-hover"],
+  };
+
   return (
     <nav className="navbar-light bg-light">
       <div className={styles["nav-hamburger"]}>
@@ -58,6 +63,9 @@ export const Header = ({ currentUser }) => {
           isOpen={isOpen}
           onClose={handleIsOpen}
           onOpen={handleIsOpen}
+          menuClassName={styles["bm-menu"]}
+          itemListClassName={styles["bm-menu"]}
+          crossClassName={styles["cross-button"]}
         >
           {generateNavBar(currentUser, setCloseSideBar)}
         </Menu>

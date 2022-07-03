@@ -20,3 +20,17 @@
     display: none !important;
   }
 }
+
+.bm-menu {
+  background: #fff !important;
+  color: black !important;
+}
+
+.cross-button {
+  color: black !important;
+  background-color: black !important;
+}
+
+.bm-burger-bars-hover {
+  background: red;
+}

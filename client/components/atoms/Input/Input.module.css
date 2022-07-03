@@ -1,16 +1,12 @@
 .oct-input {
   width: 100%;
   font-size: 16px;
-  height: 50px;
-  padding-left: 10px;
-  padding-right: 40px;
+  height: 40px;
+  padding-left: 5px;
+  padding-right: 5px;
   border-radius: 5px;
   border: 1px solid blue;
   background: transparent;
-}
-
-.oct-input-message-error {
-  text-align: start !important;
 }
 
 .oct-input:focus {

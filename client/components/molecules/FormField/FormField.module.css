@@ -1,0 +1,35 @@
+.oct-form-field-message-error {
+  text-align: start !important;
+}
+
+.oct-form-field-error {
+  color: red;
+  border-color: red !important;
+}
+
+.oct-form-field-error:focus {
+  border-color: red !important;
+}
+
+.oct-form-field__label {
+  height: 20px;
+  padding: 0 0 3px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* line-height: 30px; */
+}
+
+.oct-form-field__label-text {
+  font-weight: bold;
+}
+
+.oct-form-field__label-required {
+  height: 20px;
+  padding: 0 0 3px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* line-height: 30px; */
+  color: grey;
+}
