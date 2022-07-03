@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
 import { REGISTER_PAGE } from "../../../utils/constants";
+import {
+  emailValidation,
+  passwordValidation,
+  confirmPasswordValidation,
+} from "../../../utils/input-validation";
 
 import { Button } from "../../atoms/Button/Button";
-import { Input } from "../../atoms/Input/Input";
+import { FormField } from "../../molecules/FormField/FormField";
 
 import styles from "./Register.module.css";
 
@@ -23,17 +28,22 @@ export const Register = ({
   useEffect(() => {
     if (password !== confirmPassword) {
       setIsConfirmEqual(false);
-      setIsSubmittable(false);
     } else setIsConfirmEqual(true);
   }, [confirmPassword]);
 
   useEffect(() => {
-    if (!password || !confirmPassword || !email || !isConfirmEqual) {
+    if (
+      !password ||
+      !confirmPassword ||
+      !email ||
+      !isConfirmEqual ||
+      password !== confirmPassword
+    ) {
       setIsSubmittable(false);
     } else {
       setIsSubmittable(true);
     }
-  }, [password, confirmPassword, email]);
+  }, [password, confirmPassword, email, isConfirmEqual]);
 
   return (
     <div className={`${styles.margintop} d-flex justify-content-center`}>
@@ -41,27 +51,37 @@ export const Register = ({
         <h1>{REGISTER_PAGE.REGISTER_MESSAGE}</h1>
         {errors}
         <div className={styles.margintop}>
-          <Input
+          <FormField
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             placeholder={REGISTER_PAGE.EMAIL_PLACEHOLDER}
+            getError={emailValidation}
+            required
+            label={"Email"}
           />
         </div>
         <div className={styles.margintop}>
-          <Input
+          <FormField
             type="password"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             placeholder={REGISTER_PAGE.PASSWORD_PLACEHOLDER}
+            required
+            label={"Password"}
+            getError={passwordValidation}
           />
         </div>
         <div className={styles.margintop}>
-          <Input
+          <FormField
             type="password"
             onChange={(e) => setConfirmPassword(e.target.value)}
             value={confirmPassword}
             placeholder={REGISTER_PAGE.CONFIRM_PASSWORD_PLACEHOLDER}
-            error={!isConfirmEqual ? REGISTER_PAGE.CONFIRM_PASSWORD_ERROR : ""}
+            getError={(confirmPassword) =>
+              confirmPasswordValidation(confirmPassword, password)
+            }
+            required
+            label={"Confirm Password"}
           />
         </div>
         <div className={styles.margintop}>
@@ -76,7 +96,7 @@ export const Register = ({
         <Button
           stylesProp={styles.margintop}
           message={REGISTER_PAGE.REGISTER_MESSAGE}
-          disable={isSubmittable}
+          disable={!isSubmittable}
         />
       </form>
     </div>

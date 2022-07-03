@@ -4,6 +4,7 @@ const LandingPage = ({ meals, currentUser }) => {
   return (
     <div>
       {currentUser?.role === "Resturant" && <h2>Published Meals</h2>}
+      <div className={"divider"} />
       <MealList items={meals} />
     </div>
   );

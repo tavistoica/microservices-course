@@ -4,6 +4,19 @@ export const LOGIN_PAGE = {
   PASSWORD_PLACEHOLDER: "Password",
 };
 
+export const TEXT_SIZES = {
+  XXS: "xxs",
+  XS: "xs",
+  S: "s",
+  M: "m",
+  L: "l",
+};
+
+export const EMAIL_VALIDATION = {
+  EMPTY_FIELD: "Input field cannot be empty",
+  REGEX_ERROR: "Email entered is not valid",
+};
+
 export const ORDER_TYPES = {
   CREATED: "pending",
   CANCELLED: "cancelled",

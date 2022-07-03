@@ -4,7 +4,6 @@ import { MealCard } from "../MealCard/MealCard";
 export const mainClass = "meal-list";
 
 export const MealList = ({ items }) => {
-  console.log("meals", items);
   const meals = items.map((item) => {
     return (
       <MealCard
