@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+
+import { UserEnum } from "@ostoica/common/build/types/user.types";
 import { REGISTER_PAGE } from "../../../utils/constants";
 import {
   emailValidation,
@@ -89,9 +91,9 @@ export const Register = ({
             value={role}
             onChange={(event) => setRole(event.target.value)}
           >
-            <option value="Customer">Customer</option>
-            <option value="Resturant">Resturant</option>
-            <option value="Admin">Admin</option>
+            <option value={UserEnum.Customer}>{UserEnum.Customer}</option>
+            <option value={UserEnum.Restaurant}>{UserEnum.Restaurant}</option>
+            <option value={UserEnum.Admin}>{UserEnum.Admin}</option>
           </select>
         </div>
         <Button
