@@ -5,8 +5,20 @@ import { UserType } from "@ostoica/common";
 
 interface UserAttrs {
   email: string;
-  password?: string;
   role: UserType;
+  password?: string;
+  lon?: number;
+  lat?: number;
+  profileImagePath?: string;
+}
+
+interface RestaurantAttrs {
+  email: string;
+  role: UserType;
+  password?: string;
+  lon: number;
+  lat: number;
+  profileImagePath: string;
 }
 
 interface UserModel extends mongoose.Model<UserDoc> {
@@ -15,8 +27,20 @@ interface UserModel extends mongoose.Model<UserDoc> {
 
 interface UserDoc extends mongoose.Document {
   email: string;
-  password?: string;
   role: UserType;
+  password?: string;
+  lon?: number;
+  lat?: number;
+  profileImagePath?: string;
+}
+
+interface RestaurantDoc extends mongoose.Document {
+  email: string;
+  role: UserType;
+  password: string;
+  lon: number;
+  lat: number;
+  profileImagePath?: string;
 }
 
 const userSchema = new mongoose.Schema(
@@ -25,13 +49,25 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    role: {
+      type: String,
+      require: true,
+    },
     password: {
       type: String,
       require: false,
     },
-    role: {
+    lon: {
+      type: Number,
+      require: false,
+    },
+    lat: {
+      type: Number,
+      require: false,
+    },
+    profileImagePath: {
       type: String,
-      require: true,
+      require: false,
     },
   },
   {
@@ -55,10 +91,13 @@ userSchema.pre("save", async function (done) {
   done();
 });
 
-userSchema.statics.build = (attrs: UserAttrs) => {
+userSchema.statics.build = (attrs: UserAttrs | RestaurantAttrs) => {
   return new User(attrs);
 };
 
-const User = mongoose.model<UserDoc, UserModel>("User", userSchema);
+const User = mongoose.model<UserDoc | RestaurantDoc, UserModel>(
+  "User",
+  userSchema
+);
 
 export { User };

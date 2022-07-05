@@ -1,13 +1,15 @@
 import { Request, Response } from "express";
-import { BadRequestError } from "@ostoica/common";
+import { BadRequestError, UserEnum } from "@ostoica/common";
 import { User } from "../models/user.model";
 import jwt from "jsonwebtoken";
 import { logger } from "../utils/logger";
 
 export const registerController = async (req: Request, res: Response) => {
-  const { email, password, role } = req.body;
+  logger.info(
+    `registerController - existingUser - body: ${JSON.stringify(req.body)}`
+  );
 
-  const existingUser = await User.findOne({ email });
+  const existingUser = await User.findOne({ email: req.body.email });
   logger.info(`registerController - existingUser ${existingUser}`);
 
   if (existingUser) {
@@ -15,7 +17,7 @@ export const registerController = async (req: Request, res: Response) => {
     throw new BadRequestError("Email in use");
   }
 
-  const user = User.build({ email, password, role });
+  const user = User.build(req.body);
   await user.save();
 
   //  Generate JWT
