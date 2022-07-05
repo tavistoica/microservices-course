@@ -9,6 +9,8 @@ export const registerController = async (req: Request, res: Response) => {
     `registerController - existingUser - body: ${JSON.stringify(req.body)}`
   );
 
+  req.body.email = req.body.email.toLowerCase();
+
   const existingUser = await User.findOne({ email: req.body.email });
   logger.info(`registerController - existingUser ${existingUser}`);
 
