@@ -6,8 +6,9 @@ import jwt from "jsonwebtoken";
 
 export const loginController = async (req: Request, res: Response) => {
   const { email, password } = req.body;
+  const lowerCaseEmail = email.toLowerCase();
 
-  const existingUser = await User.findOne({ email });
+  const existingUser = await User.findOne({ email: lowerCaseEmail });
   if (!existingUser) {
     throw new BadRequestError("Invalid credentials");
   }
