@@ -1,5 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { useNavigation } from '@react-navigation/native'
+import { AuthContext } from '../../Context/authContext'
+import { AuthContextType } from '../../@types/auth'
 
 import {
   Box,
@@ -16,6 +18,7 @@ import {
 
 const Login = () => {
   const navigation = useNavigation()
+  const { login } = useContext(AuthContext) as AuthContextType
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -29,8 +32,8 @@ const Login = () => {
   }, [navigation])
 
   const onSignIn = React.useCallback(() => {
-    navigation.navigate('home')
-  }, [navigation])
+    login({ email: email, token: password })
+  }, [email, login, password])
 
   return (
     <Center w="100%">

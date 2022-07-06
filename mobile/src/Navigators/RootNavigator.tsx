@@ -4,35 +4,41 @@
  * and a "main" flow (which is contained in your MainNavigator) which the user
  * will use once logged in.
  */
-import React from 'react'
+import React, { useContext } from 'react'
+
+import { AuthContext } from '../Context/authContext'
+import { AuthContextType } from '../@types/auth'
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import { Login, SignUp, ForgetPassword, Homepage } from '../Containers'
+import { MainNavigator } from './MainNavigator'
+import { AuthNavigator } from './AuthNavigator'
 
 const Stack = createNativeStackNavigator()
 
 export const RootNavigator = () => {
+  const { userData } = useContext(AuthContext) as AuthContextType
   return (
     <Stack.Navigator>
-      <Stack.Group
-        screenOptions={{
-          headerShown: true,
-          headerTitle: '',
-        }}
-      >
-        <Stack.Screen name="signIn" component={Login} />
-        <Stack.Screen name="forgetPassword" component={ForgetPassword} />
-        <Stack.Screen name="signUp" component={SignUp} />
-      </Stack.Group>
-      <Stack.Group
-        screenOptions={{
-          headerShown: true,
-          headerTitle: 'Smart Food',
-        }}
-      >
-        <Stack.Screen name="home" component={Homepage} />
-      </Stack.Group>
+      {userData === undefined ? (
+        <Stack.Group
+          screenOptions={{
+            headerShown: true,
+            headerTitle: '',
+          }}
+        >
+          <Stack.Screen name="auth" component={AuthNavigator} />
+        </Stack.Group>
+      ) : (
+        <Stack.Group
+          screenOptions={{
+            headerShown: true,
+            headerTitle: 'Smart Food',
+          }}
+        >
+          <Stack.Screen name="main" component={MainNavigator} />
+        </Stack.Group>
+      )}
     </Stack.Navigator>
   )
 }
