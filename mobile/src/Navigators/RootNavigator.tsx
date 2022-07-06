@@ -5,10 +5,10 @@
  * will use once logged in.
  */
 import React from 'react'
-import { MainNavigator } from './MainNavigator'
+
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import { Login, SignUp, ForgetPassword } from '../Containers'
+import { Login, SignUp, ForgetPassword, Homepage } from '../Containers'
 
 const Stack = createNativeStackNavigator()
 
@@ -21,17 +21,18 @@ export const RootNavigator = () => {
           headerTitle: '',
         }}
       >
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
-        <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen name="signIn" component={Login} />
+        <Stack.Screen name="forgetPassword" component={ForgetPassword} />
+        <Stack.Screen name="signUp" component={SignUp} />
       </Stack.Group>
-      <Stack.Screen
-        name="mainStack"
-        component={MainNavigator}
-        options={{
-          headerShown: false,
+      <Stack.Group
+        screenOptions={{
+          headerShown: true,
+          headerTitle: 'Smart Food',
         }}
-      />
+      >
+        <Stack.Screen name="home" component={Homepage} />
+      </Stack.Group>
     </Stack.Navigator>
   )
 }

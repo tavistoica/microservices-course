@@ -4,14 +4,16 @@ import '../ReactotronConfig'
 
 import { NativeBaseProvider } from 'native-base'
 import { NavigationContainer } from '@react-navigation/native'
-import { RootNavigator } from './Navigators'
+import { RootNavigator, MainNavigator } from './Navigators'
 
-const App = () => (
-  <NativeBaseProvider>
-    <NavigationContainer>
-      <RootNavigator />
-    </NavigationContainer>
-  </NativeBaseProvider>
-)
+const App = () => {
+  return (
+    <NativeBaseProvider>
+      <NavigationContainer>
+        {false ? <MainNavigator /> : <RootNavigator />}
+      </NavigationContainer>
+    </NativeBaseProvider>
+  )
+}
 
 export default App

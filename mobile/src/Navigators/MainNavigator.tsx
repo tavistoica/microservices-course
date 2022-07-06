@@ -1,7 +1,7 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import { StartupContainer } from '../Containers'
+import { Homepage } from '../Containers'
 import { TabNavigator } from './TabNavigator'
 
 const Stack = createNativeStackNavigator()
@@ -10,11 +10,11 @@ export function MainNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="TabNavigator"
+        name="tabNavigator"
         component={TabNavigator}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="Home" component={StartupContainer} />
+      <Stack.Screen name="home" component={Homepage} />
     </Stack.Navigator>
   )
 }

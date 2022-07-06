@@ -1,16 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useNavigation } from '@react-navigation/native'
 
 import { Box, Text, Button } from 'native-base'
 
-const StartupContainer = () => {
+const Homepage = () => {
   const navigation = useNavigation()
+
   return (
     <Box flex={1} alignItems="center" justifyContent="center">
-      <Text>Text here</Text>
-      <Button onPress={() => navigation.navigate('Login')}>Login</Button>
+      <Text>Welcome </Text>
     </Box>
   )
 }
 
-export default StartupContainer
+export default Homepage

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigation } from '@react-navigation/native'
 
 import {
@@ -17,12 +17,19 @@ import {
 const Login = () => {
   const navigation = useNavigation()
 
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
   const onForgetPassword = React.useCallback(() => {
-    navigation.navigate('ForgetPassword')
+    navigation.navigate('forgetPassword')
   }, [navigation])
 
   const onSignUp = React.useCallback(() => {
-    navigation.navigate('SignUp')
+    navigation.navigate('signUp')
+  }, [navigation])
+
+  const onSignIn = React.useCallback(() => {
+    navigation.navigate('home')
   }, [navigation])
 
   return (
@@ -52,10 +59,15 @@ const Login = () => {
 
         <VStack space={3} mt="5">
           <FormControl>
-            <Input placeholder="Email" />
+            <Input placeholder="Email" value={email} onChangeText={setEmail} />
           </FormControl>
           <FormControl>
-            <Input type="password" placeholder="Password" />
+            <Input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChangeText={setPassword}
+            />
             <Link
               _text={{
                 fontSize: 'xs',
@@ -69,7 +81,7 @@ const Login = () => {
               Forget Password?
             </Link>
           </FormControl>
-          <Button mt="2" colorScheme="blue">
+          <Button mt="2" colorScheme="blue" onPress={onSignIn}>
             Sign in
           </Button>
           <Button mt="2" colorScheme="blue">

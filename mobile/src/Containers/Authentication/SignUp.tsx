@@ -62,8 +62,8 @@ const SignUp = () => {
               }}
               mt="1"
             >
-              <Select.Item label="User" value="user" />
-              <Select.Item label="Seller" value="seller" />
+              <Select.Item label="Client" value="client" />
+              <Select.Item label="Restaurant" value="restaurant" />
             </Select>
             <FormControl.ErrorMessage
               leftIcon={<WarningOutlineIcon size="xs" />}
