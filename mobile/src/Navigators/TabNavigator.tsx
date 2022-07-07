@@ -1,6 +1,6 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { StartupContainer } from '../Containers'
+import { Homepage } from '../Containers'
 
 const Tab = createBottomTabNavigator<any>()
 
@@ -9,10 +9,24 @@ export const TabNavigator = function TabNavigator() {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="home"
-        component={StartupContainer}
+        name="homeTab"
+        component={Homepage}
         options={{
-          tabBarLabel: 'HomeScreen',
+          tabBarLabel: 'Home',
+        }}
+      />
+      <Tab.Screen
+        name="ordersTab"
+        component={Homepage}
+        options={{
+          tabBarLabel: 'Orders',
+        }}
+      />
+      <Tab.Screen
+        name="profileTab"
+        component={Homepage}
+        options={{
+          tabBarLabel: 'Profile',
         }}
       />
     </Tab.Navigator>
