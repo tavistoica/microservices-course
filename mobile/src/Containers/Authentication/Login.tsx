@@ -28,7 +28,7 @@ const Login = () => {
   }, [navigation])
 
   const onSignUp = React.useCallback(() => {
-    navigation.navigate('signUp')
+    navigation.replace('signUp')
   }, [navigation])
 
   const onSignIn = React.useCallback(() => {

@@ -17,8 +17,7 @@ export const AuthNavigator = () => {
     <Stack.Navigator>
       <Stack.Group
         screenOptions={{
-          headerShown: true,
-          headerTitle: '',
+          headerShown: false,
         }}
       >
         <Stack.Screen name="signIn" component={Login} />

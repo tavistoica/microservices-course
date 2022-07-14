@@ -5,5 +5,5 @@ export interface IUser {
 export type AuthContextType = {
   userData: IUSer
   login: (user: IUSer) => void
-  logout: (user: IUSer) => void
+  logout: () => void
 }

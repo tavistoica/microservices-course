@@ -5,6 +5,9 @@ import {
   Box,
   Heading,
   VStack,
+  HStack,
+  Text,
+  Link,
   FormControl,
   Input,
   Button,
@@ -16,6 +19,11 @@ import {
 
 const SignUp = () => {
   const navigation = useNavigation()
+
+  const onSignIn = React.useCallback(() => {
+    navigation.replace('signIn')
+  }, [navigation])
+
   return (
     <Center w="100%">
       <Box safeArea p="2" w="90%" py="8">
@@ -75,6 +83,27 @@ const SignUp = () => {
             Sign up
           </Button>
         </VStack>
+        <HStack mt="6" justifyContent="center">
+          <Text
+            fontSize="sm"
+            color="coolGray.600"
+            _dark={{
+              color: 'warmGray.200',
+            }}
+          >
+            I already have an account.{' '}
+          </Text>
+          <Link
+            _text={{
+              color: 'indigo.500',
+              fontWeight: 'medium',
+              fontSize: 'sm',
+            }}
+            onPress={onSignIn}
+          >
+            Sign In
+          </Link>
+        </HStack>
       </Box>
     </Center>
   )

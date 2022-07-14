@@ -7,7 +7,7 @@ const Tab = createBottomTabNavigator<any>()
 export const TabNavigator = function TabNavigator() {
   // return <Icon as={Entypo} name="user"></Icon>;
   return (
-    <Tab.Navigator>
+    <Tab.Navigator screenOptions={{ headerShown: false }}>
       <Tab.Screen
         name="homeTab"
         component={Homepage}

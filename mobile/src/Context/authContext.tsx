@@ -11,7 +11,6 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
   const [userData, setUserData] = React.useState<IUser | undefined>(undefined)
 
   const login = (user: IUser) => {
-    console.log(user.email)
     setUserData(user)
   }
 
