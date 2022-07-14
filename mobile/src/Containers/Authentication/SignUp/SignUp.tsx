@@ -1,6 +1,8 @@
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 
+import { createUser } from '../../../Utils/auth'
+
 import {
   Box,
   Heading,
@@ -79,7 +81,13 @@ const SignUp = () => {
               Please make a selection!
             </FormControl.ErrorMessage>
           </FormControl>
-          <Button mt="2" colorScheme="blue">
+          <Button
+            mt="2"
+            colorScheme="blue"
+            onPress={() => {
+              console.log('Sign up')
+            }}
+          >
             Sign up
           </Button>
         </VStack>
