@@ -1,9 +1,3 @@
-/**
- * The root navigator is used to switch between major navigation flows of your app.
- * Generally speaking, it will contain an auth flow (registration, login, forgot password)
- * and a "main" flow (which is contained in your MainNavigator) which the user
- * will use once logged in.
- */
 import React, { useContext } from 'react'
 
 import { AuthContext } from '../Context/authContext'
@@ -23,8 +17,7 @@ export const RootNavigator = () => {
       {userData === undefined ? (
         <Stack.Group
           screenOptions={{
-            headerShown: true,
-            headerTitle: '',
+            headerShown: false,
           }}
         >
           <Stack.Screen name="auth" component={AuthNavigator} />

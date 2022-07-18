@@ -16,7 +16,7 @@ import {
   Center,
 } from 'native-base'
 
-const Login = () => {
+const SignIn = () => {
   const navigation = useNavigation()
   const { login } = useContext(AuthContext) as AuthContextType
 
@@ -28,7 +28,7 @@ const Login = () => {
   }, [navigation])
 
   const onSignUp = React.useCallback(() => {
-    navigation.replace('signUp')
+    navigation.navigate('signUp')
   }, [navigation])
 
   const onSignIn = React.useCallback(() => {
@@ -117,4 +117,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default SignIn
