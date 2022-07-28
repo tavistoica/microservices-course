@@ -56,9 +56,9 @@ export const TabNavigator = function TabNavigator() {
         headerShown: false,
         tabBarActiveBackgroundColor: '#F9F9F9',
         tabBarInactiveBackgroundColor: 'white',
-        headerTintColor: 'blue',
-        tabBarActiveTintColor: 'blue',
-        tabBarInactiveTintColor: 'blue',
+        headerTintColor: 'black',
+        tabBarActiveTintColor: 'black',
+        tabBarInactiveTintColor: 'black',
       })}
     >
       <Tab.Screen
