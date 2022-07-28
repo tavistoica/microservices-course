@@ -11,10 +11,10 @@ import { AuthNavigator } from './AuthNavigator'
 const Stack = createNativeStackNavigator()
 
 export const RootNavigator = () => {
-  const { userData } = useContext(AuthContext) as AuthContextType
+  const { isAuthenticated } = useContext(AuthContext) as AuthContextType
   return (
     <Stack.Navigator>
-      {userData === undefined ? (
+      {isAuthenticated === false ? (
         <Stack.Group
           screenOptions={{
             headerShown: false,

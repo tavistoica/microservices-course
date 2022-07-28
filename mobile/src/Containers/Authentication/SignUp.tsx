@@ -1,5 +1,7 @@
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
+import { AuthContext } from '../../Context/authContext'
+import { AuthContextType } from '../../@types/auth'
 
 import {
   emailValidation,
@@ -29,6 +31,7 @@ import { Alert } from 'react-native'
 
 const SignUp = () => {
   const navigation = useNavigation()
+  const { login } = React.useContext(AuthContext) as AuthContextType
 
   const [formData, setData] = React.useState({})
   const [errors, setErrors] = React.useState({})
@@ -64,7 +67,12 @@ const SignUp = () => {
     if (validate() === true) {
       setIsAuthenticating(true)
       try {
-        await createUser(formData.email, formData.password, formData.role)
+        const token = await createUser(
+          formData.email,
+          formData.password,
+          formData.role,
+        )
+        login(token, formData.email)
       } catch (err) {
         Alert.alert(
           'Authentication failed',

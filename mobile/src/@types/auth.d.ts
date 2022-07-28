@@ -3,7 +3,9 @@ export interface IUser {
   token: string
 }
 export type AuthContextType = {
-  userData: IUSer
-  login: (user: IUSer) => void
+  email: string | undefined
+  token: string | undefined
+  isAuthenticated: boolean
+  login: (token: string, email: string) => void
   logout: () => void
 }

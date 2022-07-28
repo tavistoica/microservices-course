@@ -54,7 +54,8 @@ const SignIn = () => {
     if (validate() === true) {
       setIsAuthenticating(true)
       try {
-        await authenticate(formData.email, formData.password)
+        const token = await authenticate(formData.email, formData.password)
+        login(token, formData.email)
       } catch (err) {
         Alert.alert(
           'Authentication failed',

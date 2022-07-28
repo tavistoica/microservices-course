@@ -11,6 +11,9 @@ export const createUser = async (
     password: password,
     role: role,
   })
+
+  const token = response.headers['set-cookie']
+  return token
 }
 
 export const authenticate = async (email: string, password: string) => {
@@ -18,4 +21,7 @@ export const authenticate = async (email: string, password: string) => {
     email: email,
     password: password,
   })
+
+  const token = response.headers['set-cookie']
+  return token
 }

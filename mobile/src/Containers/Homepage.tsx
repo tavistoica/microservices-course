@@ -9,7 +9,7 @@ import { Box, Text, Button } from 'native-base'
 const Homepage = () => {
   const navigation = useNavigation()
 
-  const { logout } = useContext(AuthContext) as AuthContextType
+  const { logout, email } = useContext(AuthContext) as AuthContextType
 
   const onPress = useCallback(() => {
     logout()
@@ -17,7 +17,7 @@ const Homepage = () => {
 
   return (
     <Box flex={1} alignItems="center" justifyContent="center">
-      <Text>Welcome </Text>
+      <Text>Welcome {email}</Text>
       <Button mt="2" colorScheme="blue" onPress={onPress}>
         Logout
       </Button>
