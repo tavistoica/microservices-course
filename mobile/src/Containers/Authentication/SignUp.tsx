@@ -78,8 +78,8 @@ const SignUp = () => {
           'Authentication failed',
           'Could not create user. Please check your input and try again !',
         )
+        setIsAuthenticating(false)
       }
-      setIsAuthenticating(false)
     }
   }
 
