@@ -5,14 +5,14 @@ import AuthProvider from './Context/authContext'
 
 import { NativeBaseProvider } from 'native-base'
 import { NavigationContainer } from '@react-navigation/native'
-import { RootNavigator, MainNavigator } from './Navigators'
+import { RootNavigator } from './Navigators'
 
 const App = () => {
   return (
     <AuthProvider>
       <NativeBaseProvider>
         <NavigationContainer>
-          {false ? <MainNavigator /> : <RootNavigator />}
+          <RootNavigator />
         </NavigationContainer>
       </NativeBaseProvider>
     </AuthProvider>
