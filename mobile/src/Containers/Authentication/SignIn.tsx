@@ -4,6 +4,8 @@ import { AuthContext } from '../../Context/authContext'
 import { AuthContextType } from '../../@types/auth'
 import { emailValidation, passwordValidation } from '@/Utils/input-validation'
 
+import { authenticate } from '@/Utils/auth'
+
 import {
   Box,
   Text,
@@ -16,6 +18,7 @@ import {
   HStack,
   Center,
   WarningOutlineIcon,
+  Spinner,
 } from 'native-base'
 
 const SignIn = () => {
@@ -24,6 +27,7 @@ const SignIn = () => {
 
   const [formData, setData] = React.useState({})
   const [errors, setErrors] = React.useState({})
+  const [isAuthenticating, setIsAuthenticating] = React.useState(false)
 
   const onForgetPassword = React.useCallback(() => {
     navigation.navigate('forgetPassword')
@@ -46,13 +50,28 @@ const SignIn = () => {
     return true
   }
 
-  const onSubmit = () => {
-    validate() ? console.log(formData) : console.log(errors)
+  const onSubmit = async () => {
+    if (validate() === true) {
+      setIsAuthenticating(true)
+      await authenticate(formData.email, formData.password)
+      setIsAuthenticating(false)
+    }
   }
 
-  // const onSignIn = React.useCallback(() => {
-  //   login({ email: email, token: password })
-  // }, [email, login, password])
+  if (isAuthenticating) {
+    return (
+      <Center w="100%">
+        <Box safeArea p="2" w="90%" py="8">
+          <HStack space={2} justifyContent="center" alignItems="center">
+            <Spinner />
+            <Heading color="coolGray.600" fontSize="md">
+              Logging user in...
+            </Heading>
+          </HStack>
+        </Box>
+      </Center>
+    )
+  }
 
   return (
     <Center w="100%">

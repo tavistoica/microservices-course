@@ -75,7 +75,7 @@ const SignUp = () => {
     return (
       <Center w="100%">
         <Box safeArea p="2" w="90%" py="8">
-          <HStack space={2} justifyContent="center">
+          <HStack space={2} justifyContent="center" alignItems="center">
             <Spinner />
             <Heading color="coolGray.600" fontSize="md">
               Creating user...

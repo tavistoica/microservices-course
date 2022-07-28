@@ -12,3 +12,10 @@ export const createUser = async (
     role: role,
   })
 }
+
+export const authenticate = async (email: string, password: string) => {
+  const response = await axios.post(LOGIN, {
+    email: email,
+    password: password,
+  })
+}
