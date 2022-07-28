@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { AuthContext } from '../../Context/authContext'
 import { AuthContextType } from '../../@types/auth'
@@ -20,10 +20,11 @@ import {
   WarningOutlineIcon,
   Spinner,
 } from 'native-base'
+import { Alert } from 'react-native'
 
 const SignIn = () => {
   const navigation = useNavigation()
-  const { login } = useContext(AuthContext) as AuthContextType
+  const { login } = React.useContext(AuthContext) as AuthContextType
 
   const [formData, setData] = React.useState({})
   const [errors, setErrors] = React.useState({})
@@ -46,26 +47,32 @@ const SignIn = () => {
       setErrors({ ...errors, password: passwordValidation(formData.password) })
       return false
     }
-
     return true
   }
 
   const onSubmit = async () => {
     if (validate() === true) {
       setIsAuthenticating(true)
-      await authenticate(formData.email, formData.password)
+      try {
+        await authenticate(formData.email, formData.password)
+      } catch (err) {
+        Alert.alert(
+          'Authentication failed',
+          'Could not log you in. Please check your credentials and try again!',
+        )
+      }
       setIsAuthenticating(false)
     }
   }
 
   if (isAuthenticating) {
     return (
-      <Center w="100%">
+      <Center w="100%" h="100%">
         <Box safeArea p="2" w="90%" py="8">
           <HStack space={2} justifyContent="center" alignItems="center">
             <Spinner />
             <Heading color="coolGray.600" fontSize="md">
-              Logging user in...
+              Logging in...
             </Heading>
           </HStack>
         </Box>

@@ -25,6 +25,7 @@ import {
   WarningOutlineIcon,
   Spinner,
 } from 'native-base'
+import { Alert } from 'react-native'
 
 const SignUp = () => {
   const navigation = useNavigation()
@@ -62,7 +63,14 @@ const SignUp = () => {
   const onSubmit = async () => {
     if (validate() === true) {
       setIsAuthenticating(true)
-      await createUser(formData.email, formData.password, formData.role)
+      try {
+        await createUser(formData.email, formData.password, formData.role)
+      } catch (err) {
+        Alert.alert(
+          'Authentication failed',
+          'Could not create user. Please check your input and try again !',
+        )
+      }
       setIsAuthenticating(false)
     }
   }
@@ -73,7 +81,7 @@ const SignUp = () => {
 
   if (isAuthenticating) {
     return (
-      <Center w="100%">
+      <Center w="100%" h="100%">
         <Box safeArea p="2" w="90%" py="8">
           <HStack space={2} justifyContent="center" alignItems="center">
             <Spinner />
