@@ -9,7 +9,7 @@ import {
   MenuOutline,
   Person,
   PersonOutline,
-} from '../Assets/Images/Icons'
+} from '@/Assets/Images/Icons'
 
 const Tab = createBottomTabNavigator<any>()
 
