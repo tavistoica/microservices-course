@@ -74,6 +74,7 @@ const SignUp = () => {
         )
         login(token, formData.email)
       } catch (err) {
+        console.log(err)
         Alert.alert(
           'Authentication failed',
           'Could not create user. Please check your input and try again !',

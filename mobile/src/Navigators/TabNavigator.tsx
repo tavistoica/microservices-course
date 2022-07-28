@@ -2,28 +2,81 @@ import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Homepage } from '../Containers'
 
+import {
+  Home,
+  HomeOutline,
+  Menu,
+  MenuOutline,
+  Person,
+  PersonOutline,
+} from '../Assets/Images/Icons'
+
 const Tab = createBottomTabNavigator<any>()
 
 export const TabNavigator = function TabNavigator() {
-  // return <Icon as={Entypo} name="user"></Icon>;
+  const getIcon = (tab: string | undefined) => {
+    switch (tab) {
+      case 'home': {
+        return <Home />
+      }
+      case 'home-outline': {
+        return <HomeOutline />
+      }
+      case 'menu': {
+        return <Menu />
+      }
+      case 'menu-outline': {
+        return <MenuOutline />
+      }
+      case 'person-circle': {
+        return <Person />
+      }
+      case 'person-circle-outline': {
+        return <PersonOutline />
+      }
+    }
+  }
+
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName
+
+          if (route.name === 'home') {
+            iconName = focused ? 'home' : 'home-outline'
+          } else if (route.name === 'orders') {
+            iconName = focused ? 'menu' : 'menu-outline'
+          } else if (route.name === 'profile') {
+            iconName = focused ? 'person-circle' : 'person-circle-outline'
+          }
+
+          return getIcon(iconName)
+        },
+        headerShown: false,
+        tabBarActiveBackgroundColor: '#F9F9F9',
+        tabBarInactiveBackgroundColor: 'white',
+        headerTintColor: 'blue',
+        tabBarActiveTintColor: 'blue',
+        tabBarInactiveTintColor: 'blue',
+      })}
+    >
       <Tab.Screen
-        name="homeTab"
+        name="home"
         component={Homepage}
         options={{
           tabBarLabel: 'Home',
         }}
       />
       <Tab.Screen
-        name="ordersTab"
+        name="orders"
         component={Homepage}
         options={{
           tabBarLabel: 'Orders',
         }}
       />
       <Tab.Screen
-        name="profileTab"
+        name="profile"
         component={Homepage}
         options={{
           tabBarLabel: 'Profile',
