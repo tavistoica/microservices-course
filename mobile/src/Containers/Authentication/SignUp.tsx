@@ -23,6 +23,7 @@ import {
   Select,
   CheckIcon,
   WarningOutlineIcon,
+  Spinner,
 } from 'native-base'
 
 const SignUp = () => {
@@ -30,6 +31,7 @@ const SignUp = () => {
 
   const [formData, setData] = React.useState({})
   const [errors, setErrors] = React.useState({})
+  const [isAuthenticating, setIsAuthenticating] = React.useState(false)
 
   const validate = () => {
     if (emailValidation(formData.email) !== '') {
@@ -57,14 +59,32 @@ const SignUp = () => {
     return true
   }
 
-  const onSubmit = () => {
-    validate() ? console.log('Submitted') : console.log('Validation Failed')
-    console.log(errors)
+  const onSubmit = async () => {
+    if (validate() === true) {
+      setIsAuthenticating(true)
+      await createUser(formData.email, formData.password, formData.role)
+      setIsAuthenticating(false)
+    }
   }
 
   const onSignIn = React.useCallback(() => {
-    navigation.goBack()
+    navigation.replace('signIn')
   }, [navigation])
+
+  if (isAuthenticating) {
+    return (
+      <Center w="100%">
+        <Box safeArea p="2" w="90%" py="8">
+          <HStack space={2} justifyContent="center">
+            <Spinner />
+            <Heading color="coolGray.600" fontSize="md">
+              Creating user...
+            </Heading>
+          </HStack>
+        </Box>
+      </Center>
+    )
+  }
 
   return (
     <Center w="100%">
@@ -95,6 +115,8 @@ const SignUp = () => {
             <Input
               placeholder="Email"
               onChangeText={value => setData({ ...formData, email: value })}
+              autoCapitalize="none"
+              autoCorrect={false}
             />
             {'email' in errors ? (
               <FormControl.ErrorMessage
@@ -109,6 +131,9 @@ const SignUp = () => {
               type="password"
               placeholder="Password"
               onChangeText={value => setData({ ...formData, password: value })}
+              autoCapitalize="none"
+              autoCorrect={false}
+              secureTextEntry={true}
             />
             {'password' in errors ? (
               <FormControl.ErrorMessage
@@ -125,6 +150,8 @@ const SignUp = () => {
               onChangeText={value =>
                 setData({ ...formData, confirmPassword: value })
               }
+              autoCapitalize="none"
+              autoCorrect={false}
             />
             {'confirmPassword' in errors ? (
               <FormControl.ErrorMessage
@@ -148,9 +175,11 @@ const SignUp = () => {
                 endIcon: <CheckIcon size={5} />,
               }}
               mt="1"
+              onValueChange={value => setData({ ...formData, role: value })}
             >
               <Select.Item label="Client" value="client" />
               <Select.Item label="Restaurant" value="restaurant" />
+              <Select.Item label="Admin" value="admin" />
             </Select>
             <FormControl.ErrorMessage
               leftIcon={<WarningOutlineIcon size="xs" />}

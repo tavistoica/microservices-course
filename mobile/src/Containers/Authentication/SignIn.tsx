@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { AuthContext } from '../../Context/authContext'
 import { AuthContextType } from '../../@types/auth'
+import { emailValidation, passwordValidation } from '@/Utils/input-validation'
 
 import {
   Box,
@@ -14,26 +15,44 @@ import {
   Button,
   HStack,
   Center,
+  WarningOutlineIcon,
 } from 'native-base'
 
 const SignIn = () => {
   const navigation = useNavigation()
   const { login } = useContext(AuthContext) as AuthContextType
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [formData, setData] = React.useState({})
+  const [errors, setErrors] = React.useState({})
 
   const onForgetPassword = React.useCallback(() => {
     navigation.navigate('forgetPassword')
   }, [navigation])
 
   const onSignUp = React.useCallback(() => {
-    navigation.navigate('signUp')
+    navigation.replace('signUp')
   }, [navigation])
 
-  const onSignIn = React.useCallback(() => {
-    login({ email: email, token: password })
-  }, [email, login, password])
+  const validate = () => {
+    if (emailValidation(formData.email) !== '') {
+      setErrors({ ...errors, email: emailValidation(formData.email) })
+      return false
+    }
+    if (passwordValidation(formData.password) !== '') {
+      setErrors({ ...errors, password: passwordValidation(formData.password) })
+      return false
+    }
+
+    return true
+  }
+
+  const onSubmit = () => {
+    validate() ? console.log(formData) : console.log(errors)
+  }
+
+  // const onSignIn = React.useCallback(() => {
+  //   login({ email: email, token: password })
+  // }, [email, login, password])
 
   return (
     <Center w="100%">
@@ -61,16 +80,37 @@ const SignIn = () => {
         </Heading>
 
         <VStack space={3} mt="5">
-          <FormControl>
-            <Input placeholder="Email" value={email} onChangeText={setEmail} />
+          <FormControl isRequired isInvalid={'email' in errors}>
+            <Input
+              placeholder="Email"
+              onChangeText={value => setData({ ...formData, email: value })}
+              autoCapitalize="none"
+              autoCorrect={false}
+            />
+            {'email' in errors ? (
+              <FormControl.ErrorMessage
+                leftIcon={<WarningOutlineIcon size="xs" />}
+              >
+                {emailValidation(formData.email)}
+              </FormControl.ErrorMessage>
+            ) : null}
           </FormControl>
-          <FormControl>
+          <FormControl isRequired isInvalid={'password' in errors}>
             <Input
               type="password"
               placeholder="Password"
-              value={password}
-              onChangeText={setPassword}
+              onChangeText={value => setData({ ...formData, password: value })}
+              autoCapitalize="none"
+              autoCorrect={false}
+              secureTextEntry={true}
             />
+            {'password' in errors ? (
+              <FormControl.ErrorMessage
+                leftIcon={<WarningOutlineIcon size="xs" />}
+              >
+                {passwordValidation(formData.password)}
+              </FormControl.ErrorMessage>
+            ) : null}
             <Link
               _text={{
                 fontSize: 'xs',
@@ -84,7 +124,7 @@ const SignIn = () => {
               Forget Password?
             </Link>
           </FormControl>
-          <Button mt="2" colorScheme="blue" onPress={onSignIn}>
+          <Button mt="2" colorScheme="blue" onPress={onSubmit}>
             Sign in
           </Button>
           <Button mt="2" colorScheme="blue">

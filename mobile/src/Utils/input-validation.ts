@@ -14,7 +14,7 @@ export const passwordValidation = (password: string) => {
   const uppercaseRegExp = /(?=.*?[A-Z])/
   const lowercaseRegExp = /(?=.*?[a-z])/
   const digitsRegExp = /(?=.*?[0-9])/
-  const specialCharRegExp = /(?=.*?[#?!@$%^&*-])/
+  const specialCharRegExp = /(?=.*[!@#$%^&*])/
   const minLengthRegExp = /.{8,}/
   const uppercasePassword = uppercaseRegExp.test(password)
   const lowercasePassword = lowercaseRegExp.test(password)
