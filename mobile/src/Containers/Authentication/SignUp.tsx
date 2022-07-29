@@ -10,6 +10,7 @@ import {
 } from '@/Utils/input-validation'
 
 import { createUser } from '@/Utils/auth'
+import { getCurrentUser } from '@/Utils/user'
 
 import {
   Box,
@@ -72,9 +73,9 @@ const SignUp = () => {
           formData.password,
           formData.role,
         )
-        login(token, formData.email)
+        const currentUser = await getCurrentUser()
+        login(token, currentUser)
       } catch (err) {
-        console.log(err)
         Alert.alert(
           'Authentication failed',
           'Could not create user. Please check your input and try again !',

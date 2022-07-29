@@ -1,6 +1,6 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { Homepage } from '../Containers'
+import { Homepage, Profile } from '../Containers'
 
 import {
   Home,
@@ -77,7 +77,7 @@ export const TabNavigator = function TabNavigator() {
       />
       <Tab.Screen
         name="profile"
-        component={Homepage}
+        component={Profile}
         options={{
           tabBarLabel: 'Profile',
         }}
