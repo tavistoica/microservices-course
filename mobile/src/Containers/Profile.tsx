@@ -21,7 +21,9 @@ const Profile = () => {
       <Text fontSize="md" marginTop="5">
         Email: {userData.email}
       </Text>
-      <Text fontSize="md">Role: {userData.role}</Text>
+      <Text fontSize="md">
+        Role: {userData.role.charAt(0).toUpperCase() + userData.role.slice(1)}
+      </Text>
     </Box>
   )
 }
