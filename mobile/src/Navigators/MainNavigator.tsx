@@ -12,14 +12,18 @@ export function MainNavigator() {
       <Stack.Screen
         name="tabNavigator"
         component={TabNavigator}
-        options={{ headerShown: false }}
+        options={{ headerShown: true, headerTitle: 'Smart Food' }}
       />
-      <Stack.Screen name="home" component={Homepage} />
-      <Stack.Screen
-        name="mealDetails"
-        component={MealDetails}
-        options={{ headerShown: false }}
-      />
+      <Stack.Group
+        screenOptions={{
+          headerShown: true,
+          headerTitle: 'Smart Food',
+          headerBackTitle: 'Back',
+        }}
+      >
+        <Stack.Screen name="home" component={Homepage} />
+        <Stack.Screen name="mealDetails" component={MealDetails} />
+      </Stack.Group>
     </Stack.Navigator>
   )
 }

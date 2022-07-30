@@ -24,6 +24,16 @@ const MealDetails = ({ route }) => {
     getData()
   }, [id, meal])
 
+  const renderStock = (stock: number) => {
+    let stockArray = []
+    for (let i = 1; i <= stock; i++) {
+      stockArray.push(
+        <Select.Item key={i} value={i.toString()} label={i.toString()} />,
+      )
+    }
+    return stockArray
+  }
+
   return (
     <Box alignItems="center" justifyContent="center">
       <Text fontSize="xl" marginTop="5" bold>
@@ -46,9 +56,9 @@ const MealDetails = ({ route }) => {
         placeholder="Select quantity"
         marginBottom="2"
       >
-        <Select.Item label="1" value="1" />
+        {renderStock(meal?.stock)}
       </Select>
-      <Button colorScheme="light">Purchase</Button>
+      <Button colorScheme="blue">Purchase</Button>
     </Box>
   )
 }

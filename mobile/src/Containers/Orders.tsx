@@ -1,16 +1,14 @@
 import React from 'react'
 import { Box, Text } from 'native-base'
 import { StyleSheet, ScrollView } from 'react-native'
-import { Table, Row, Rows } from 'react-native-table-component'
+import { Table, Row } from 'react-native-table-component'
 
 const Orders = () => {
-  const [data, setData] = React.useState({
-    tableHead: ['Title', 'Status', 'Ammount', 'Price'],
-    tableData: [
-      ['Pizza', 'Created', '10', '50'],
-      ['Pizza', 'Canceled', '10', '50'],
-    ],
-  })
+  const tableHead = ['Title', 'Status', 'Ammount', 'Price']
+  const [data, setData] = React.useState([
+    ['Pizza', 'Created', '10', '50'],
+    ['Pizza', 'Canceled', '10', '50'],
+  ])
 
   return (
     <ScrollView>
@@ -19,21 +17,25 @@ const Orders = () => {
           Orders
         </Text>
       </Box>
-      <Table borderStyle={{ borderWidth: 2, borderColor: '#c8e1ff' }}>
-        <Row
-          data={data.tableHead}
-          style={styles.head}
-          textStyle={styles.text}
-        />
-        <Rows data={data.tableData} textStyle={styles.text} />
+      <Table borderStyle={styles.table}>
+        <Row data={tableHead} style={styles.head} textStyle={styles.text} />
+        {data.map((item, index) => {
+          return <Row key={index} data={item} textStyle={styles.text} />
+        })}
       </Table>
     </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff' },
-  head: { height: 40, backgroundColor: '#f1f8ff' },
+  container: {
+    flex: 1,
+    padding: 16,
+    paddingTop: 30,
+    backgroundColor: '#fff',
+  },
+  table: { borderWidth: 2, borderColor: 'black' },
+  head: { height: 40, backgroundColor: 'lightgrey' },
   text: { margin: 6 },
 })
 
