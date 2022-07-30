@@ -31,8 +31,7 @@ export const RootNavigator = () => {
       ) : (
         <Stack.Group
           screenOptions={{
-            headerShown: true,
-            headerTitle: 'Smart Food',
+            headerShown: false,
           }}
         >
           <Stack.Screen
