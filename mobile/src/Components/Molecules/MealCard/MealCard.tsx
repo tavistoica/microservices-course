@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigation } from '@react-navigation/native'
 import {
   Box,
   Heading,
@@ -19,8 +20,14 @@ export type Props = {
 }
 
 export const MealCard = ({ id, title, imagePath, price, stock }: Props) => {
+  const navigation = useNavigation()
+
+  const handlePress = () => {
+    navigation.navigate('mealDetails', { id })
+  }
+
   return (
-    <TouchableOpacity activeOpacity={0.8}>
+    <TouchableOpacity activeOpacity={0.8} onPress={handlePress}>
       <Box
         maxW="80"
         rounded="lg"

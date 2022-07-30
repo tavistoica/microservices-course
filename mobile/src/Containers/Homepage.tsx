@@ -1,12 +1,12 @@
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 
-import { AuthContext } from '../../Context/authContext'
-import { AuthContextType } from '../../@types/auth'
+import { AuthContext } from '../Context/authContext'
+import { AuthContextType } from '../@types/auth'
 
 import { Box, ScrollView, Text } from 'native-base'
 import { MealCard } from '@/Components'
-import { getAllMeals } from '@/Utils/API/meals'
+import { getAllMeals, getUsersMeals } from '@/Utils/API/meals'
 import { Alert } from 'react-native'
 
 const Homepage = () => {
@@ -16,7 +16,7 @@ const Homepage = () => {
   const [meals, setMeals] = React.useState([])
 
   React.useState(() => {
-    const getData = async () => {
+    const getClientData = async () => {
       try {
         const data = await getAllMeals()
         setMeals(data)
@@ -28,7 +28,23 @@ const Homepage = () => {
       }
     }
 
-    getData()
+    const getRestaurantData = async () => {
+      try {
+        const data = await getUsersMeals(userData?.id)
+        setMeals(data)
+      } catch (err) {
+        Alert.alert(
+          'Something went wrong',
+          'Please check your internet connection',
+        )
+      }
+    }
+
+    getClientData()
+
+    if (userData?.role === 'restaurant') {
+      getRestaurantData()
+    }
   }, [])
 
   return (

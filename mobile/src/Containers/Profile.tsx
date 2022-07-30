@@ -6,8 +6,6 @@ import { AuthContextType } from '../@types/auth'
 
 import { Box, Text } from 'native-base'
 
-import { getCurrentUser } from '@/Utils/API/users'
-
 const Profile = () => {
   const navigation = useNavigation()
 
@@ -15,7 +13,7 @@ const Profile = () => {
 
   return (
     <Box marginTop="5" alignItems="center" justifyContent="center">
-      <Text bold fontSize="xl">
+      <Text fontSize="xl" bold>
         Profile details
       </Text>
       <Text fontSize="md" marginTop="5">
