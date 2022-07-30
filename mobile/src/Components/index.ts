@@ -1,1 +1,1 @@
-export * from './'
+export { MealCard } from './Molecules/MealCard'

@@ -4,7 +4,8 @@ import { AuthContext } from '../../Context/authContext'
 import { AuthContextType } from '../../@types/auth'
 import { emailValidation, passwordValidation } from '@/Utils/input-validation'
 
-import { authenticate } from '@/Utils/auth'
+import { authenticate } from '@/Utils/API/auth'
+import { getCurrentUser } from '@/Utils/API/users'
 
 import {
   Box,
@@ -55,7 +56,8 @@ const SignIn = () => {
       setIsAuthenticating(true)
       try {
         const token = await authenticate(formData.email, formData.password)
-        login(token, formData.email)
+        const currentUser = await getCurrentUser()
+        login(token, currentUser)
       } catch (err) {
         Alert.alert(
           'Authentication failed',
