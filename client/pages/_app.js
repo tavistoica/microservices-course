@@ -1,7 +1,7 @@
-import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css";
-import buildClient from "../api/build-client";
+import axios from "../api/axios";
 import { Header } from "..//components/organisms/Header/Header";
+import { AuthProvider } from "../context/auth-provider";
 
 import "./styles.css";
 
@@ -10,7 +10,9 @@ const AppComponent = ({ Component, pageProps, currentUser }) => {
     <>
       <Header currentUser={currentUser} />
       <div className="container">
-        <Component currentUser={currentUser} {...pageProps} />
+        <AuthProvider>
+          <Component currentUser={currentUser} {...pageProps} />
+        </AuthProvider>
       </div>
     </>
   );
@@ -21,8 +23,7 @@ AppComponent.getInitialProps = async (appContext) => {
     // it runs on server side
     axios.defaults.headers.get.Cookie = appContext.ctx.req.headers.cookie;
   }
-  const client = buildClient(appContext.ctx);
-  const { data } = await client.get("/api/users/currentuser", {
+  const { data } = await axios.get("/api/users/currentuser", {
     withCredentials: true,
   });
 
@@ -30,7 +31,6 @@ AppComponent.getInitialProps = async (appContext) => {
   if (appContext.Component.getInitialProps) {
     pageProps = await appContext.Component.getInitialProps(
       appContext.ctx,
-      client,
       data.currentUser
     );
   }

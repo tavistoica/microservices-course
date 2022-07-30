@@ -1,8 +1,12 @@
 import { Request, Response } from "express";
-import { BadRequestError, UserEnum } from "@ostoica/common";
+import { BadRequestError } from "@ostoica/common";
 import { User } from "../models/user.model";
 import jwt from "jsonwebtoken";
 import { logger } from "../utils/logger";
+import {
+  generateAccessToken,
+  generateRefreshToken,
+} from "../utils/generateToken";
 
 export const registerController = async (req: Request, res: Response) => {
   logger.info(
@@ -33,8 +37,12 @@ export const registerController = async (req: Request, res: Response) => {
   );
   logger.info(`registerController - userJWT - ${userJwt}`);
 
-  //  Store it on session object
-  req.session = { jwt: userJwt };
+  //  @ts-ignore
+  const accessToken = await generateAccessToken(user);
+  const refreshToken = await generateRefreshToken(user);
 
-  res.status(201).send(user);
+  // //  Store it on session object
+  // req.session = { jwt: userJwt };
+
+  res.status(201).send({ accessToken, refreshToken });
 };

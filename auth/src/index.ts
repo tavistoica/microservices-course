@@ -21,8 +21,8 @@ const start = async () => {
     logger.info(err);
   }
 
-  app.listen(3000, () => {
-    logger.info("listening on port 3000");
+  app.listen(3001, () => {
+    logger.info("listening on port 3001");
   });
 };
 
