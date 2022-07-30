@@ -4,8 +4,8 @@ import { AuthContext } from '../../Context/authContext'
 import { AuthContextType } from '../../@types/auth'
 import { emailValidation, passwordValidation } from '@/Utils/input-validation'
 
-import { authenticate } from '@/Utils/auth'
-import { getCurrentUser } from '@/Utils/user'
+import { authenticate } from '@/Utils/API/auth'
+import { getCurrentUser } from '@/Utils/API/users'
 
 import {
   Box,

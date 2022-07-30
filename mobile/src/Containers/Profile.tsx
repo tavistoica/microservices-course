@@ -6,7 +6,7 @@ import { AuthContextType } from '../@types/auth'
 
 import { Box, Text } from 'native-base'
 
-import { getCurrentUser } from '@/Utils/user'
+import { getCurrentUser } from '@/Utils/API/users'
 
 const Profile = () => {
   const navigation = useNavigation()
@@ -14,7 +14,7 @@ const Profile = () => {
   const { userData } = React.useContext(AuthContext) as AuthContextType
 
   return (
-    <Box h="30%" alignItems="center" justifyContent="center">
+    <Box marginTop="5" alignItems="center" justifyContent="center">
       <Text bold fontSize="xl">
         Profile details
       </Text>

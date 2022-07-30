@@ -9,8 +9,8 @@ import {
   confirmPasswordValidation,
 } from '@/Utils/input-validation'
 
-import { createUser } from '@/Utils/auth'
-import { getCurrentUser } from '@/Utils/user'
+import { createUser } from '@/Utils/API/auth'
+import { getCurrentUser } from '@/Utils/API/users'
 
 import {
   Box,

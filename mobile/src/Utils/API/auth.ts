@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { LOGIN, LOGOUT, REGISTER } from './constants'
+import { LOGIN, LOGOUT, REGISTER } from '../constants'
 
 export const createUser = async (
   email: string,
