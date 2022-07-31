@@ -10,6 +10,7 @@ export const Login = ({
   errors,
   email,
   password,
+  persist,
   setEmail,
   setPassword,
   togglePersist,
