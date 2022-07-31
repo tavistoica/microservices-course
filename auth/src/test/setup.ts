@@ -6,10 +6,18 @@ import request from "supertest";
 declare global {
   namespace NodeJS {
     interface Global {
-      signin(): Promise<string[]>;
+      signin(): Promise<{ accessToken: string; refreshToken: string }>;
     }
   }
 }
+
+process.env.SALT = "TEST123";
+process.env.REFRESH_TOKEN_PRIVATE_KEY = "TEST123";
+process.env.ACCESS_TOKEN_PRIVATE_KEY = "TEST123";
+process.env.FACEBOOK_CLIENT_ID = "test";
+process.env.FACEBOOK_CLIENT_SECRET = "test";
+process.env.FACEBOOK_CALLBACK_URL = "test";
+process.env.MONGO_URI = "mongodb"; //localhost:27017
 
 const mockedUser = {
   email: "test@test.com",
@@ -49,7 +57,8 @@ global.signin = async () => {
     .send(mockedUser)
     .expect(201);
 
-  const cookie = response.get("Set-Cookie");
+  const refreshToken = response.body.refreshToken;
+  const accessToken = response.body.accessToken;
 
-  return cookie;
+  return { refreshToken, accessToken };
 };

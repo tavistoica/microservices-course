@@ -10,6 +10,7 @@ interface UserAttrs {
   lon?: number;
   lat?: number;
   profileImagePath?: string;
+  refreshToken?: string[];
 }
 
 interface RestaurantAttrs {
@@ -19,6 +20,7 @@ interface RestaurantAttrs {
   lon: number;
   lat: number;
   profileImagePath: string;
+  refreshToken?: string[];
 }
 
 interface UserModel extends mongoose.Model<UserDoc> {
@@ -32,6 +34,7 @@ interface UserDoc extends mongoose.Document {
   lon?: number;
   lat?: number;
   profileImagePath?: string;
+  refreshToken?: string[];
 }
 
 interface RestaurantDoc extends mongoose.Document {
@@ -41,6 +44,7 @@ interface RestaurantDoc extends mongoose.Document {
   lon: number;
   lat: number;
   profileImagePath?: string;
+  refreshToken?: string[];
 }
 
 const userSchema = new mongoose.Schema(
@@ -69,6 +73,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       require: false,
     },
+    refreshToken: {
+      type: [String],
+      require: false,
+    },
   },
   {
     toJSON: {
@@ -78,6 +86,7 @@ const userSchema = new mongoose.Schema(
         delete ret._id;
         delete ret.password;
         delete ret.__v;
+        delete ret.refreshToken;
       },
     },
   }

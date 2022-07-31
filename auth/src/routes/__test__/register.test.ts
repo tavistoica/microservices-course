@@ -7,6 +7,7 @@ it("returns a 201 on successful register", async () => {
     .send({
       email: "test@test.com",
       password: "password",
+      role: "User",
     })
     .expect(201);
 });
@@ -17,11 +18,23 @@ it("returns a 400 with an invalid email", async () => {
     .send({
       email: "testfefecom",
       password: "password",
+      role: "User",
     })
     .expect(400);
 });
 
 it("returns a 400 with an invalid password", async () => {
+  return request(app)
+    .post("/api/users/register")
+    .send({
+      email: "testfefecom",
+      password: "22",
+      role: "User",
+    })
+    .expect(400);
+});
+
+it("returns a 400 with `role` is not provided", async () => {
   return request(app)
     .post("/api/users/register")
     .send({
@@ -45,19 +58,20 @@ it("returns a 400 with missing email and password", async () => {
 it("disallows duplicate emails", async () => {
   await request(app)
     .post("/api/users/register")
-    .send({ email: "test@test.com", password: "password" })
+    .send({ email: "test@test.com", password: "password", role: "User" })
     .expect(201);
   await request(app)
     .post("/api/users/register")
-    .send({ email: "test@test.com", password: "password" })
+    .send({ email: "test@test.com", password: "password", role: "User" })
     .expect(400);
 });
 
-it("sets a cookie after succesful register", async () => {
+it("returns the accessToken and the refeshToken when successfull", async () => {
   const response = await request(app)
     .post("/api/users/register")
-    .send({ email: "test@test.com", password: "password" })
+    .send({ email: "test@test.com", password: "password", role: "User" })
     .expect(201);
 
-  expect(response.get("Set-Cookie")).toBeDefined();
+  expect(response.body.refreshToken).toBeDefined();
+  expect(response.body.accessToken).toBeDefined();
 });

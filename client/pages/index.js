@@ -1,3 +1,4 @@
+import axios from "../api/axios";
 import { MealList } from "../components/molecules/MealList/MealList";
 
 const LandingPage = ({ meals, currentUser }) => {
@@ -10,12 +11,12 @@ const LandingPage = ({ meals, currentUser }) => {
   );
 };
 
-LandingPage.getInitialProps = async (_context, client, currentUser) => {
+LandingPage.getInitialProps = async (_context, currentUser) => {
   if (currentUser?.role === "Resturant") {
-    const { data } = await client.get(`/api/meals/users/${currentUser.id}`);
+    const { data } = await axios.get(`/api/meals/users/${currentUser.id}`);
     return { meals: data };
   }
-  const { data } = await client.get("/api/meals");
+  const { data } = await axios.get("/api/meals");
 
   return { meals: data };
 };

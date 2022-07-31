@@ -4,12 +4,13 @@ import { json } from "body-parser";
 import cors from "cors";
 import cookieSession from "cookie-session";
 import passport from "passport";
+import cookieParser from "cookie-parser";
 
-import "./passport";
 import { currentUserRouter } from "./routes/current-user";
 import { loginRouter } from "./routes/login";
 import { logoutRouter } from "./routes/logout";
 import { registerRouter } from "./routes/register";
+import { refreshTokenRouter } from "./routes/refresh-token";
 import { errorHandler, NotFoundError } from "@ostoica/common";
 
 const app = express();
@@ -18,6 +19,7 @@ app.use(passport.initialize());
 
 app.set("trust proxy", true);
 app.use(json());
+app.use(cookieParser());
 app.use(cors({ exposedHeaders: ["set-cookie"], credentials: true }));
 app.use((req, res, next) => {
   return cookieSession({
@@ -42,6 +44,7 @@ app.use(currentUserRouter);
 app.use(loginRouter);
 app.use(logoutRouter);
 app.use(registerRouter);
+app.use(refreshTokenRouter);
 
 app.all("*", async () => {
   throw new NotFoundError();
