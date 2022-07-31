@@ -77,7 +77,7 @@ const OrderShow = ({ order }) => {
   );
 };
 
-OrderShow.getServerSideProps = async (context) => {
+export const getServerSideProps = async (context) => {
   const { auth } = useAuth();
   const { orderId } = context.query;
   const { data } = await axios.get(`/api/orders/${orderId}`, {
@@ -87,7 +87,7 @@ OrderShow.getServerSideProps = async (context) => {
     withCredentials: true,
   });
 
-  return { order: data };
+  return { props: { order: data } };
 };
 
 export default OrderShow;

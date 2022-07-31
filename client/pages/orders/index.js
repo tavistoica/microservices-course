@@ -19,7 +19,7 @@ const OrderIndex = ({ orders }) => {
   );
 };
 
-OrderIndex.getServerSideProps = async (_context, client) => {
+export const getServerSideProps = async (_context, client) => {
   const { auth } = useAuth();
   const { data } = await client.get("/api/orders", {
     headers: {
@@ -28,7 +28,7 @@ OrderIndex.getServerSideProps = async (_context, client) => {
     withCredentials: true,
   });
 
-  return { orders: data };
+  return { props: { orders: data } };
 };
 
 export default OrderIndex;
