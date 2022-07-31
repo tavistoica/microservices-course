@@ -12,9 +12,13 @@ import {
   mealPriceValidation,
   mealStockValidation,
 } from "../../utils/input-validation";
+import useAuth from "../../hooks/use-auth";
+
 import { HOST_URL } from "../../utils/constants";
 
 const newMeal = () => {
+  const { auth } = useAuth();
+
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
@@ -59,6 +63,7 @@ const newMeal = () => {
       .post(`${config.SERVER_URL}/api/meals`, createFormData(), {
         headers: {
           "Content-type": "multipart/form-data",
+          authorization: auth.accessToken,
         },
       })
       .then(() => {

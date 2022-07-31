@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "../../api/axios";
 import useRequest from "../../hooks/use-request";
+import useAuth from "../../hooks/use-auth";
 import Router from "next/router";
 
 import styles from "./meal.module.css";
@@ -18,11 +19,15 @@ const buildDropdown = (stock) => {
 };
 
 const MealShow = ({ meal }) => {
+  const { auth } = useAuth();
   const [itemAmount, setItemAmount] = useState(1);
 
   const { doRequest, errors } = useRequest({
     url: "/api/orders",
     method: "post",
+    headers: {
+      authorization: auth.accessToken,
+    },
     body: {
       mealId: meal.id,
       itemAmount,
