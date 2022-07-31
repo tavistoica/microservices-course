@@ -4,14 +4,15 @@ import { Header } from "..//components/organisms/Header/Header";
 import { AuthProvider } from "../context/auth-provider";
 
 import "./styles.css";
+import PersistLogin from "../components/atoms/PersistLogin/PersistLogin";
 
-const AppComponent = ({ Component, pageProps, currentUser }) => {
+const AppComponent = ({ Component, pageProps }) => {
   return (
     <>
       <AuthProvider>
-        <Header currentUser={currentUser} />
+        <Header />
         <div className="container">
-          <Component currentUser={currentUser} {...pageProps} />
+          <Component {...pageProps} />
         </div>
       </AuthProvider>
     </>

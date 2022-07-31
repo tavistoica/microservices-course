@@ -1,22 +1,17 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import useRequest from "../../hooks/use-request";
 
 import { LOGOUT_PAGE } from "../../utils/constants";
+import useLogout from "../../hooks/use-logout";
 
 const signout = () => {
   const router = useRouter();
-
-  const { doRequest } = useRequest({
-    url: "/api/users/logout",
-    method: "post",
-    body: { data: {} },
-    onSuccess: () => router.push("/"),
-  });
+  const logout = useLogout();
 
   useEffect(() => {
     setTimeout(() => {
-      doRequest();
+      logout();
+      router.push("/");
     }, 1000);
   }, []);
 
