@@ -3,19 +3,25 @@ import Router from "next/router";
 // import StripeCheckout from "react-stripe-checkout";
 import QRCode from "react-qr-code";
 import useRequest from "../../hooks/use-request";
+import axios from "../../api/axios";
 
 import { calculateTime } from "../../utils/utils";
 import { ORDER_PAGE, ORDER_TYPES } from "../../utils/constants";
 import styles from "./[orderId].module.css";
 import { Button } from "../../components/atoms/Button/Button";
+import useAuth from "../../hooks/use-auth";
 
 const mainClass = "oct-order";
 
 const OrderShow = ({ order }) => {
+  const { auth } = useAuth();
   const [timeLeft, setTimeLeft] = useState(0);
 
   const { doRequest, errors } = useRequest({
     url: `/api/orders/${order.id}`,
+    headers: {
+      authorization: auth.accessToken,
+    },
     method: "patch",
     onSuccess: () => Router.push("/"),
   });
@@ -71,9 +77,13 @@ const OrderShow = ({ order }) => {
   );
 };
 
-OrderShow.getInitialProps = async (context, client) => {
+OrderShow.getServerSideProps = async (context) => {
+  const { auth } = useAuth();
   const { orderId } = context.query;
-  const { data } = await client.get(`/api/orders/${orderId}`, {
+  const { data } = await axios.get(`/api/orders/${orderId}`, {
+    headers: {
+      authorization: auth.accessToken,
+    },
     withCredentials: true,
   });
 

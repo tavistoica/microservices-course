@@ -1,4 +1,5 @@
 import { ItemList } from "../../components/molecules/ItemList/ItemList";
+import useAuth from "../../hooks/use-auth";
 
 import styles from "./index.module.css";
 
@@ -18,8 +19,14 @@ const OrderIndex = ({ orders }) => {
   );
 };
 
-OrderIndex.getInitialProps = async (_context, client) => {
-  const { data } = await client.get("/api/orders", { withCredentials: true });
+OrderIndex.getServerSideProps = async (_context, client) => {
+  const { auth } = useAuth();
+  const { data } = await client.get("/api/orders", {
+    headers: {
+      authorization: auth.accessToken,
+    },
+    withCredentials: true,
+  });
 
   return { orders: data };
 };

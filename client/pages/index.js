@@ -14,7 +14,7 @@ const LandingPage = ({ meals, currentUser }) => {
   );
 };
 
-LandingPage.getInitialProps = async (_context, currentUser) => {
+LandingPage.getServerSideProps = async (_context, currentUser) => {
   if (currentUser?.role === "Resturant") {
     const { data } = await axios.get(`/api/meals/users/${currentUser.id}`);
     return { meals: data };
