@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import Router from "next/router";
+import { decode } from "jsonwebtoken";
 import useAuth from "../../hooks/use-auth";
 import useRequest from "../../hooks/use-request";
+import { PersistLogin } from "../../components/atoms/PersistLogin/PersistLogin";
 
 import { Login } from "../../components/organisms/Login/Login";
 
@@ -15,10 +17,15 @@ const login = () => {
     method: "post",
     body: { email, password },
     onSuccess: (response) => {
-      setAuth({
-        role: response?.data?.role,
-        accessToken: response?.data?.accessToken,
-      });
+      console.log("wtf", response, response?.accessToken);
+      if (response.accessToken) {
+        const user = decode(response.accessToken);
+        setAuth({
+          accessToken: response.accessToken,
+          role: user.role,
+          email: user.email,
+        });
+      }
       setEmail("");
       setPassword("");
       Router.push("/");
@@ -40,16 +47,18 @@ const login = () => {
   }, [persist]);
 
   return (
-    <Login
-      onSubmit={onSubmit}
-      errors={errors}
-      email={email}
-      password={password}
-      persist={persist}
-      setEmail={setEmail}
-      setPassword={setPassword}
-      togglePersist={togglePersist}
-    />
+    <PersistLogin>
+      <Login
+        onSubmit={onSubmit}
+        errors={errors}
+        email={email}
+        password={password}
+        persist={persist}
+        setEmail={setEmail}
+        setPassword={setPassword}
+        togglePersist={togglePersist}
+      />
+    </PersistLogin>
   );
 };
 

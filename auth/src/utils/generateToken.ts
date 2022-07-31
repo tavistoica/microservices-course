@@ -7,7 +7,7 @@ export const generateAccessToken = (user: {
   role: string;
 }): string => {
   try {
-    const payload = { email: user.email, roles: user.role };
+    const payload = { email: user.email, role: user.role };
     const accessToken = jwt.sign(
       payload,
       process.env.ACCESS_TOKEN_PRIVATE_KEY!,
@@ -25,7 +25,7 @@ export const generateRefreshToken = (user: {
   role: string;
 }): string => {
   try {
-    const payload = { email: user.email, roles: user.role };
+    const payload = { email: user.email, role: user.role };
 
     const refreshToken = jwt.sign(
       payload,
