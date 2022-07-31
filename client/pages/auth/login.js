@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Router from "next/router";
 import useAuth from "../../hooks/use-auth";
 import useRequest from "../../hooks/use-request";
@@ -45,6 +45,7 @@ const login = () => {
       errors={errors}
       email={email}
       password={password}
+      persist={persist}
       setEmail={setEmail}
       setPassword={setPassword}
       togglePersist={togglePersist}
