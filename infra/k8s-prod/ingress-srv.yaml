@@ -28,7 +28,7 @@ spec:
               service:
                 name: auth-srv
                 port:
-                  number: 3001
+                  number: 3000
           - path: /api/meals/?(.*)
             pathType: Prefix
             backend:
