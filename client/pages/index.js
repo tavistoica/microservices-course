@@ -1,13 +1,16 @@
 import axios from "../api/axios";
+import { PersistLogin } from "../components/atoms/PersistLogin/PersistLogin";
 import { MealList } from "../components/molecules/MealList/MealList";
 
 const LandingPage = ({ meals, currentUser }) => {
   return (
-    <div>
-      {currentUser?.role === "Resturant" && <h2>Published Meals</h2>}
-      <div className={"divider"} />
-      <MealList items={meals} />
-    </div>
+    <PersistLogin>
+      <div>
+        {currentUser?.role === "Resturant" && <h2>Published Meals</h2>}
+        <div className={"divider"} />
+        <MealList items={meals} />
+      </div>
+    </PersistLogin>
   );
 };
 
