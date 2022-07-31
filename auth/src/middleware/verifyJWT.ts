@@ -28,5 +28,7 @@ export const verifyJWT = (req: Request, res: Response, next: NextFunction) => {
       console.log("err", err);
       return res.sendStatus(403); //invalid token
     }
+  } else {
+    return res.sendStatus(403); //token not provided
   }
 };

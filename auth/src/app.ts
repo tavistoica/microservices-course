@@ -6,7 +6,6 @@ import cookieSession from "cookie-session";
 import passport from "passport";
 import cookieParser from "cookie-parser";
 
-import "./passport";
 import { currentUserRouter } from "./routes/current-user";
 import { loginRouter } from "./routes/login";
 import { logoutRouter } from "./routes/logout";

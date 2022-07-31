@@ -6,7 +6,6 @@ import { User } from "../models/user.model";
 import { CustomRequest } from "../middleware/verifyJWT";
 
 export const currentUserController = async (req: Request, res: Response) => {
-  console.log("req.token", (req as CustomRequest).token);
   // @ts-ignore
   if (!(req as CustomRequest).token || !(req as CustomRequest).token?.email) {
     throw new BadRequestError("Invalid credentials");

@@ -13,6 +13,8 @@ export const registerController = async (req: Request, res: Response) => {
     `registerController - existingUser - body: ${JSON.stringify(req.body)}`
   );
 
+  if (!req?.body?.role) throw new BadRequestError("Role was not provided");
+
   req.body.email = req.body.email.toLowerCase();
 
   const existingUser = await User.findOne({ email: req.body.email });
@@ -38,8 +40,8 @@ export const registerController = async (req: Request, res: Response) => {
   logger.info(`registerController - userJWT - ${userJwt}`);
 
   //  @ts-ignore
-  const accessToken = await generateAccessToken(user);
-  const refreshToken = await generateRefreshToken(user);
+  const accessToken = generateAccessToken(user);
+  const refreshToken = generateRefreshToken(user);
 
   // //  Store it on session object
   // req.session = { jwt: userJwt };

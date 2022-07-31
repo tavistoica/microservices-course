@@ -1,29 +1,24 @@
 import request from "supertest";
 import { app } from "../../app";
 
-const mockedUser = {
-  email: "test@test.com",
-  password: "password",
-  role: "Customer",
-};
+describe("GET /current-user", () => {
+  const mockedUser = {
+    email: "test@test.com",
+    password: "password",
+    role: "Customer",
+  };
 
-it("responds with details about the current user", async () => {
-  const cookie = await global.signin();
+  it("responds with details about the current user", async () => {
+    const tokens = await global.signin();
 
-  const response = await request(app)
-    .get("/api/users/currentuser")
-    .set("Cookie", cookie)
-    .send()
-    .expect(200);
+    const response = await request(app)
+      .get("/api/users/currentuser")
+      .set("authorization", tokens.accessToken);
 
-  expect(response.body.currentUser.email).toEqual(mockedUser.email);
-});
+    expect(response.body.currentUser.email).toEqual(mockedUser.email);
+  });
 
-it("return an empty object if the user is not logged in", async () => {
-  const response = await request(app)
-    .get("/api/users/currentuser")
-    .send()
-    .expect(200);
-
-  expect(response.body.currentUser).toEqual(null);
+  it("return an empty object if the user is not logged in", async () => {
+    await request(app).get("/api/users/currentuser").expect(403);
+  });
 });
