@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "../../api/axios";
 import useRequest from "../../hooks/use-request";
 import Router from "next/router";
 
@@ -7,7 +8,11 @@ import styles from "./meal.module.css";
 const buildDropdown = (stock) => {
   const response = [];
   for (let i = 1; i <= stock; i++) {
-    response.push(<option value={i}>{i}</option>);
+    response.push(
+      <option value={i} key={i}>
+        {i}
+      </option>
+    );
   }
   return response;
 };
@@ -52,13 +57,13 @@ const MealShow = ({ meal }) => {
   );
 };
 
-MealShow.getInitialProps = async (context, client) => {
+export const getServerSideProps = async (context) => {
   const { mealId } = context.query;
-  const { data } = await client.get(`/api/meals/${mealId}`, {
+  const { data } = await axios.get(`/api/meals/${mealId}`, {
     withCredentials: true,
   });
 
-  return { meal: data };
+  return { props: { meal: data } };
 };
 
 export default MealShow;
