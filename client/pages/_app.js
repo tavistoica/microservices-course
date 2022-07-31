@@ -19,7 +19,7 @@ const AppComponent = ({ Component, pageProps }) => {
   );
 };
 
-AppComponent.getServerSideProps = async (context) => {
+export const getServerSideProps = async (context) => {
   if (context?.ctx?.req?.headers?.cookie) {
     // it runs on server side
     axios.defaults.headers.get.Cookie = context.ctx.req.headers.cookie;
@@ -44,7 +44,7 @@ AppComponent.getServerSideProps = async (context) => {
   //     data ? data?.currentUser : null
   //   );
   // }
-  return { pageProps, ...data };
+  return { props: data };
 };
 
 export default AppComponent;

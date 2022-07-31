@@ -14,14 +14,14 @@ const LandingPage = ({ meals, currentUser }) => {
   );
 };
 
-LandingPage.getServerSideProps = async (_context, currentUser) => {
+export const getServerSideProps = async (_context, currentUser) => {
   if (currentUser?.role === "Resturant") {
     const { data } = await axios.get(`/api/meals/users/${currentUser.id}`);
     return { meals: data };
   }
   const { data } = await axios.get("/api/meals");
 
-  return { meals: data };
+  return { props: { meals: data } };
 };
 
 export default LandingPage;
