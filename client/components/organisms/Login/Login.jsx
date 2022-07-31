@@ -12,6 +12,7 @@ export const Login = ({
   password,
   setEmail,
   setPassword,
+  togglePersist,
 }) => {
   return (
     <>
@@ -38,6 +39,15 @@ export const Login = ({
             stylesProp={styles.margintop}
             message={LOGIN_PAGE.LOGIN_MESSAGE}
           />
+          <div className="persistCheck">
+            <input
+              type="checkbox"
+              id="persist"
+              onChange={togglePersist}
+              checked={persist}
+            />
+            <label htmlFor="persist">Trust This Device</label>
+          </div>
         </form>
       </div>
       <div className={`${styles.margintop} d-flex justify-content-center`}>

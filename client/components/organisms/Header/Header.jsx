@@ -1,32 +1,36 @@
 import { useState } from "react";
 import Link from "next/link";
+import useAuth from "../../../hooks/use-auth";
 import { HEADER } from "../../../utils/constants";
 import { slide as Menu } from "react-burger-menu";
 import { UserEnum } from "@ostoica/common/build/types/user.types";
 
 import styles from "./Header.module.css";
 
-const generateNavBar = (currentUser, setCloseSideBar = null) => {
+const generateNavBar = (setCloseSideBar = null) => {
+  const { auth } = useAuth();
+  const isAuth = !!auth.accessToken;
+
   const links = [
-    !currentUser && { label: HEADER.REGISTER, href: "/auth/register" },
-    !currentUser && { label: HEADER.LOGIN, href: "/auth/login" },
-    currentUser && { label: HEADER.PROFILE, href: "/auth/profile" },
-    currentUser &&
-      currentUser.role === UserEnum.Restaurant && {
+    !isAuth && { label: HEADER.REGISTER, href: "/auth/register" },
+    !isAuth && { label: HEADER.LOGIN, href: "/auth/login" },
+    isAuth && { label: HEADER.PROFILE, href: "/auth/profile" },
+    isAuth &&
+      auth.role === UserEnum.Restaurant && {
         label: HEADER.SELL,
         href: "/meals/new",
       },
-    currentUser &&
-      currentUser.role === UserEnum.Restaurant && {
+    isAuth &&
+      auth.role === UserEnum.Restaurant && {
         label: HEADER.SCAN,
         href: "/orders/scan",
       },
-    currentUser &&
-      currentUser.role === UserEnum.Customer && {
+    isAuth &&
+      auth.role === UserEnum.Customer && {
         label: HEADER.ORDERS,
         href: "/orders",
       },
-    currentUser && { label: HEADER.LOGOUT, href: "/auth/signout" },
+    isAuth && { label: HEADER.LOGOUT, href: "/auth/signout" },
   ]
     .filter((linkConfig) => linkConfig)
     .map(({ label, href }) => {
@@ -46,16 +50,11 @@ const generateNavBar = (currentUser, setCloseSideBar = null) => {
   return links;
 };
 
-export const Header = ({ currentUser }) => {
+export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleIsOpen = () => setIsOpen(!isOpen);
   const setCloseSideBar = () => setIsOpen(false);
-
-  const bmStyles = {
-    ["bmMenu"]: styles["bm-menu"],
-    ["bmBurgerBarsHover"]: styles["bm-burger-bars-hover"],
-  };
 
   return (
     <nav className="navbar-light bg-light">
@@ -71,7 +70,7 @@ export const Header = ({ currentUser }) => {
           itemListClassName={styles["bm-menu"]}
           crossClassName={styles["cross-button"]}
         >
-          {generateNavBar(currentUser, setCloseSideBar)}
+          {generateNavBar(setCloseSideBar)}
         </Menu>
       </div>
       <div className={`${styles.container} ${styles.navigation}`}>
@@ -79,7 +78,7 @@ export const Header = ({ currentUser }) => {
           <a className="navbar-brand">{HEADER.LOGO}</a>
         </Link>
         <div className={`d-flex justify-content-end`}>
-          <ul className={`nav d-flex`}>{generateNavBar(currentUser)}</ul>
+          <ul className={`nav d-flex`}>{generateNavBar()}</ul>
         </div>
       </div>
     </nav>

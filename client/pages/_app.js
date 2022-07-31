@@ -8,12 +8,12 @@ import "./styles.css";
 const AppComponent = ({ Component, pageProps, currentUser }) => {
   return (
     <>
-      <Header currentUser={currentUser} />
-      <div className="container">
-        <AuthProvider>
+      <AuthProvider>
+        <Header currentUser={currentUser} />
+        <div className="container">
           <Component currentUser={currentUser} {...pageProps} />
-        </AuthProvider>
-      </div>
+        </div>
+      </AuthProvider>
     </>
   );
 };

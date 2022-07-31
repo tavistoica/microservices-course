@@ -20,7 +20,13 @@ app.use(passport.initialize());
 app.set("trust proxy", true);
 app.use(json());
 app.use(cookieParser());
-app.use(cors({ exposedHeaders: ["set-cookie"], credentials: true }));
+app.use(
+  cors({
+    exposedHeaders: ["set-cookie"],
+    credentials: true,
+    origin: ["https://localhost:3000", "https://www.tavistoica.xyz"],
+  })
+);
 app.use((req, res, next) => {
   return cookieSession({
     signed: false,
