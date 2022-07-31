@@ -42,7 +42,9 @@ export const handleRefreshToken = async (req: Request, res: Response) => {
     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_PRIVATE_KEY!);
     // @ts-ignore
     if (foundUser) {
+      // @ts-ignore
       const accessToken = generateAccessToken(foundUser);
+      // @ts-ignore
       const newRefreshToken = generateRefreshToken(foundUser);
 
       foundUser.refreshToken = [

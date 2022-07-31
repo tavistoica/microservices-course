@@ -26,7 +26,9 @@ export const loginController = async (req: Request, res: Response) => {
     throw new BadRequestError("Invalid Credentials");
   }
 
+  // @ts-ignore
   const accessToken = generateAccessToken(existingUser);
+  // @ts-ignore
   const refreshToken = generateRefreshToken(existingUser);
 
   let newRefreshTokenArray = !cookies?.refreshToken

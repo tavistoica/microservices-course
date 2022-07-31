@@ -41,6 +41,7 @@ export const registerController = async (req: Request, res: Response) => {
 
   //  @ts-ignore
   const accessToken = generateAccessToken(user);
+  // @ts-ignore
   const refreshToken = generateRefreshToken(user);
 
   // //  Store it on session object
