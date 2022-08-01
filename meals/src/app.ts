@@ -16,7 +16,13 @@ const app = express();
 console.log("test secure response", process.env.NODE_ENV);
 app.set("trust proxy", true);
 app.use(json());
-app.use(cors({ exposedHeaders: ["set-cookie"], credentials: true }));
+app.use(
+  cors({
+    exposedHeaders: ["set-cookie"],
+    credentials: true,
+    origin: ["https://localhost:3000", "https://www.tavistoica.xyz"],
+  })
+);
 app.use(
   cookieSession({
     signed: false,
