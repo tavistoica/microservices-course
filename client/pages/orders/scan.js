@@ -12,7 +12,7 @@ const ScanOrder = ({ currentUser }) => {
 
   const { doRequest, errors } = useRequest({
     url: `/api/orders/${data}/${currentUser?.id}`,
-    headers: { authorization: auth.accessToken },
+    headers: { authorization: `Bearer ${auth.accessToken}` },
     method: "patch",
     onSuccess: (res) => setResData(res),
   });
