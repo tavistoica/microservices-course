@@ -7,6 +7,7 @@ import {
   OrderStatus,
   BadRequestError,
   natsWrapper,
+  CustomRequest,
 } from "@ostoica/common";
 import { body } from "express-validator";
 import mongoose from "mongoose";
@@ -57,7 +58,7 @@ router.post(
 
     //  Build the order and save it to the database
     const order = Order.build({
-      userId: req.currentUser!.id,
+      userId: (req as CustomRequest).token!.id,
       status: OrderStatus.Pending,
       expiresAt: expiration,
       meal,

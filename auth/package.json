@@ -19,7 +19,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@ostoica/common": "^1.0.38",
+    "@ostoica/common": "^1.0.41",
     "@types/bcrypt": "^5.0.0",
     "@types/cookie-parser": "^1.4.3",
     "bcrypt": "^5.0.1",
