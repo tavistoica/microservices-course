@@ -21,6 +21,11 @@ spec:
                 secretKeyRef:
                   name: jwt-secret
                   key: JWT_KEY
+            - name: ACCESS_TOKEN_PRIVATE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: access-token-key
+                  key: ACCESS_TOKEN_PRIVATE_KEY
       restartPolicy: Always
 ---
 apiVersion: v1
