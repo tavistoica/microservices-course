@@ -36,6 +36,11 @@ spec:
                 secretKeyRef:
                   name: cloudinary-id
                   key: CLOUDINARY_URL
+            - name: ACCESS_TOKEN_PRIVATE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: access-token-key
+                  key: ACCESS_TOKEN_PRIVATE_KEY
 ---
 apiVersion: v1
 kind: Service
