@@ -8,7 +8,6 @@ export const PersistLogin = ({ children }) => {
   const { auth, persist } = useAuth();
 
   useEffect(() => {
-    console.log("yep, intra");
     let isMounted = true;
 
     const verifyRefreshToken = async () => {

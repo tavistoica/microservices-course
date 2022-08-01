@@ -29,7 +29,7 @@ const MealShow = ({ meal }) => {
     url: "/api/orders",
     method: "post",
     headers: {
-      authorization: auth.accessToken,
+      authorization: `Bearer ${auth.accessToken}`,
     },
     body: {
       mealId: meal.id,
