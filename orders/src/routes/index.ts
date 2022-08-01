@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { requireAuth } from "@ostoica/common";
+import { requireAuth, CustomRequest } from "@ostoica/common";
 import { Order } from "../model/order.model";
 import { Meal } from "../model/meal.model";
 import { logger } from "../utils/logger";
@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.get("/api/orders", requireAuth, async (req: Request, res: Response) => {
   const orders = await Order.find({
-    userId: req.currentUser!.id,
+    userId: (req as CustomRequest).token!.id,
   });
 
   logger.info(`orders: ${JSON.stringify(orders)}`);

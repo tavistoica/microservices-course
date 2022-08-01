@@ -3,6 +3,7 @@ import {
   NotFoundError,
   requireAuth,
   NotAuthorizedError,
+  CustomRequest,
 } from "@ostoica/common";
 import { Order, OrderStatus } from "../model/order.model";
 import { OrderCancelledPublisher } from "../events/publishers/order-cancelled-publisher";
@@ -22,7 +23,7 @@ router.patch(
       throw new NotFoundError();
     }
 
-    if (order.userId !== req.currentUser!.id) {
+    if (order.userId !== (req as CustomRequest).token!.id) {
       throw new NotAuthorizedError();
     }
 

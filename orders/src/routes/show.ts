@@ -3,6 +3,7 @@ import {
   NotFoundError,
   requireAuth,
   NotAuthorizedError,
+  CustomRequest,
 } from "@ostoica/common";
 import { Order } from "../model/order.model";
 import { logger } from "../utils/logger";
@@ -21,11 +22,11 @@ router.get(
     }
 
     logger.info(
-      `/api/orders/:orderId - order.userId: ${
-        order.userId
-      } - req.currentUser!.id - ${req.currentUser!.id}`
+      `/api/orders/:orderId - order.userId: ${order.userId} - req.token!.id - ${
+        (req as CustomRequest).token!.id
+      }`
     );
-    if (order.userId !== req.currentUser!.id) {
+    if (order.userId !== (req as CustomRequest).token!.id) {
       throw new NotAuthorizedError();
     }
 
