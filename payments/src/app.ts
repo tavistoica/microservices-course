@@ -10,7 +10,13 @@ import { createChargeRouter } from "./routes/new";
 const app = express();
 app.set("trust proxy", true);
 app.use(json());
-app.use(cors({ exposedHeaders: ["set-cookie"], credentials: true }));
+app.use(
+  cors({
+    exposedHeaders: ["set-cookie"],
+    credentials: true,
+    origin: ["https://localhost:3000", "https://www.tavistoica.xyz"],
+  })
+);
 app.use(
   cookieSession({
     signed: false,

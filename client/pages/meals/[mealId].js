@@ -5,6 +5,7 @@ import useAuth from "../../hooks/use-auth";
 import Router from "next/router";
 
 import styles from "./meal.module.css";
+import { PersistLogin } from "../../components/atoms/PersistLogin/PersistLogin";
 
 const buildDropdown = (stock) => {
   const response = [];
@@ -22,6 +23,8 @@ const MealShow = ({ meal }) => {
   const { auth } = useAuth();
   const [itemAmount, setItemAmount] = useState(1);
 
+  console.log("access Token", auth.accessToken);
+
   const { doRequest, errors } = useRequest({
     url: "/api/orders",
     method: "post",
@@ -37,28 +40,30 @@ const MealShow = ({ meal }) => {
   });
 
   return (
-    <div className={styles["meal-page"]}>
-      <h1>{meal.title}</h1>
-      <h4>{meal.price}$</h4>
-      <div>
-        <img src={meal.imagePath} width="300px" />
-      </div>
-      <div>
-        <select
-          value={itemAmount}
-          onChange={(event) => setItemAmount(event.target.value)}
+    <PersistLogin>
+      <div className={styles["meal-page"]}>
+        <h1>{meal.title}</h1>
+        <h4>{meal.price}$</h4>
+        <div>
+          <img src={meal.imagePath} width="300px" />
+        </div>
+        <div>
+          <select
+            value={itemAmount}
+            onChange={(event) => setItemAmount(event.target.value)}
+          >
+            {buildDropdown(meal.stock)}
+          </select>
+        </div>
+        {errors}
+        <button
+          className={`btn btn-primary ${styles["purchase-btn"]}`}
+          onClick={() => doRequest()}
         >
-          {buildDropdown(meal.stock)}
-        </select>
+          Purchase
+        </button>
       </div>
-      {errors}
-      <button
-        className={`btn btn-primary ${styles["purchase-btn"]}`}
-        onClick={() => doRequest()}
-      >
-        Purchase
-      </button>
-    </div>
+    </PersistLogin>
   );
 };
 
