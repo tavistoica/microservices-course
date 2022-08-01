@@ -23,7 +23,7 @@ export const getServerSideProps = async (_context, client) => {
   const { auth } = useAuth();
   const { data } = await client.get("/api/orders", {
     headers: {
-      authorization: auth.accessToken,
+      authorization: `Bearer ${auth.accessToken}`,
     },
     withCredentials: true,
   });
