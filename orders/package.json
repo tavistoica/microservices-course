@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npm run build && npx cross-env ENV_CONFIG_PATH=config/.env JWT_KEY=test MONGO_URI=mongodb://localhost:27017 NATS_CLIENT_ID=test NATS_URL=http//localhost:3000 NATS_CLUSTER_ID=test node build/server.js",
+    "dev": "npm run build && npx cross-env ENV_CONFIG_PATH=config/.env JWT_KEY=test MONGO_URI=mongodb://localhost:27017 NATS_CLIENT_ID=test NATS_URL=http://localhost:3000 NATS_CLUSTER_ID=test node build/server.js",
     "start": "npx cross-env NODE_ENV=production node build/server.js",
     "build": "webpack",
     "test": "jest --watchAll --no-cache",
@@ -20,7 +20,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@ostoica/common": "^1.0.37",
+    "@ostoica/common": "^1.0.38",
     "cookie-session": "^1.4.0",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
