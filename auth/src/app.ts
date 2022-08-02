@@ -20,6 +20,12 @@ app.use(passport.initialize());
 app.set("trust proxy", true);
 app.use(json());
 app.use(cookieParser());
+app.use((_req, res) => {
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+});
 app.use(
   cors({
     exposedHeaders: ["set-cookie"],
