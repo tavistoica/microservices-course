@@ -20,7 +20,7 @@ const OrderShow = ({ order }) => {
   const { doRequest, errors } = useRequest({
     url: `/api/orders/${order.id}`,
     headers: {
-      authorization: `Bearer ${auth.accessToken}`,
+      Authorization: `Bearer ${auth.accessToken}`,
     },
     method: "patch",
     onSuccess: () => Router.push("/"),
@@ -82,7 +82,7 @@ export const getServerSideProps = async (context) => {
   const { orderId } = context.query;
   const { data } = await axios.get(`/api/orders/${orderId}`, {
     headers: {
-      authorization: `Bearer ${auth.accessToken}`,
+      Authorization: `Bearer ${auth.accessToken}`,
     },
     withCredentials: true,
   });

@@ -63,7 +63,7 @@ const newMeal = () => {
       .post(`${config.SERVER_URL}/api/meals`, createFormData(), {
         headers: {
           "Content-type": "multipart/form-data",
-          authorization: `Bearer ${auth.accessToken}`,
+          Authorization: `Bearer ${auth.accessToken}`,
         },
       })
       .then(() => {
