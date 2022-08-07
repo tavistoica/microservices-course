@@ -27,7 +27,7 @@ const useRequest = ({ url, method, body, onSuccess }) => {
           ...body,
           ...props,
         },
-        { withCredentials: true }
+        { withCredentials: true, ...props }
       );
       if (onSuccess) {
         onSuccess(response.data);
