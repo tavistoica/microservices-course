@@ -14,9 +14,8 @@ const useRequest = ({ url, method, body, onSuccess, headers }) => {
       if (method === "get") {
         const response = await axios[method](`${config.SERVER_URL}${url}`, {
           withCredentials: true,
-          headers,
           ...props,
-        });
+        }, {withCredentials: true, headers});
         if (onSuccess) {
           onSuccess(response.data);
         }
@@ -25,10 +24,9 @@ const useRequest = ({ url, method, body, onSuccess, headers }) => {
       const response = await axios[method](
         `${config.SERVER_URL}${url}`,
         {
-          ...body,
-          headers
+          ...body
         },
-        { withCredentials: true, ...props }
+        { withCredentials: true, ...props, headers }
       );
       if (onSuccess) {
         onSuccess(response.data);
