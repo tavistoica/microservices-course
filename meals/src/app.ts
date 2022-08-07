@@ -23,12 +23,7 @@ app.use(
     origin: ["https://localhost:3000", "https://www.tavistoica.xyz"],
   })
 );
-// app.use((_req, res) => {
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-// });
+
 app.use(
   cookieSession({
     signed: false,
