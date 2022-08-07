@@ -13,8 +13,20 @@ import useAuth from "../../hooks/use-auth";
 
 const mainClass = "oct-order";
 
-const OrderShow = ({ order }) => {
+const OrderShow = ({ orderId }) => {
   const { auth } = useAuth();
+  const [order, setOrder] = useState([]);
+  
+  useEffect(() => {
+    const { data } = await axios.get(`/api/orders/${orderId}`, {
+      headers: {
+        Authorization: `Bearer ${auth.accessToken}`,
+      },
+      withCredentials: true,
+    });
+    setOrder(data)
+  }, [])
+
   const [timeLeft, setTimeLeft] = useState(0);
 
   const { doRequest, errors } = useRequest({
@@ -78,16 +90,10 @@ const OrderShow = ({ order }) => {
 };
 
 export const getServerSideProps = async (context) => {
-  const { auth } = useAuth();
   const { orderId } = context.query;
-  const { data } = await axios.get(`/api/orders/${orderId}`, {
-    headers: {
-      Authorization: `Bearer ${auth.accessToken}`,
-    },
-    withCredentials: true,
-  });
 
-  return { props: { order: data } };
+
+  return { props: { orderId } };
 };
 
 export default OrderShow;
