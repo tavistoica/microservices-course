@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import { HOST_URL } from "../utils/constants";
 
-const useRequest = ({ url, method, body, onSuccess }) => {
+const useRequest = ({ url, method, body, onSuccess, headers }) => {
   const [errors, setErrors] = useState(null);
   const config =
     process?.env?.IS_PRODUCTION !== "false" ? HOST_URL.PROD : HOST_URL.DEV;
@@ -14,6 +14,7 @@ const useRequest = ({ url, method, body, onSuccess }) => {
       if (method === "get") {
         const response = await axios[method](`${config.SERVER_URL}${url}`, {
           withCredentials: true,
+          headers,
           ...props,
         });
         if (onSuccess) {
@@ -25,7 +26,7 @@ const useRequest = ({ url, method, body, onSuccess }) => {
         `${config.SERVER_URL}${url}`,
         {
           ...body,
-          ...props,
+          headers
         },
         { withCredentials: true, ...props }
       );
