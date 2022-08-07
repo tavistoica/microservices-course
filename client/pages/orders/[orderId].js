@@ -17,7 +17,7 @@ const OrderShow = ({ orderId }) => {
   const { auth } = useAuth();
   const [order, setOrder] = useState([]);
   
-  useEffect(() => {
+  useEffect(async () => {
     const { data } = await axios.get(`/api/orders/${orderId}`, {
       headers: {
         Authorization: `Bearer ${auth.accessToken}`,
