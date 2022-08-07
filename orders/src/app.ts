@@ -17,7 +17,7 @@ app.set("trust proxy", true);
 app.use(json());
 app.use(
   cors({
-    exposedHeaders: ["set-cookie"],
+    exposedHeaders: ["set-cookie", "authorization"],
     credentials: true,
     origin: ["https://localhost:3000", "https://www.tavistoica.xyz"],
   })

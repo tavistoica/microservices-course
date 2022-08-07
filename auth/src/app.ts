@@ -1,4 +1,4 @@
-import express from "express";
+import express, {Request, Response, NextFunction} from "express";
 import "express-async-errors";
 import { json } from "body-parser";
 import cors from "cors";
@@ -22,12 +22,12 @@ app.use(json());
 app.use(cookieParser());
 app.use(
   cors({
-    exposedHeaders: ["set-cookie"],
+    exposedHeaders: ["set-cookie", "authorization"],
     credentials: true,
     origin: ["https://localhost:3000", "https://www.tavistoica.xyz"],
   })
 );
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
   return cookieSession({
     signed: false,
     // domain: req.get("origin")?.slice(0, 17).includes("localhost")
@@ -40,7 +40,7 @@ app.use((req, res, next) => {
 });
 
 // enable the "secure" flag on the sessionCookies object
-app.use((req, _res, next) => {
+app.use((req: Request, _res: Response, next: NextFunction) => {
   // @ts-ignore
   req["sessionCookies"].secure = true;
   next();
