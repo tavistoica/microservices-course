@@ -20,7 +20,7 @@ export class MealCreatedListener extends Listener<MealCreatedEvent> {
       title,
       price,
       stock,
-      userId,
+      userId: userId ? userId : "test", // to be removed
       imagePath,
     });
     logger.info(`MealCreatedListener - meal created - ${JSON.stringify(meal)}`);
