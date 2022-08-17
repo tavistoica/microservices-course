@@ -1,8 +1,8 @@
 import axios from "axios";
-import { HOST_URL } from "../utils/constants";
+// import { HOST_URL } from "../utils/constants";
 
-const config =
-  process?.env?.IS_PRODUCTION !== "false" ? HOST_URL.PROD : HOST_URL.DEV;
+// const config =
+//   process?.env?.IS_PRODUCTION !== "false" ? HOST_URL.PROD : HOST_URL.DEV;
 
 export default axios.create({
   baseURL: "https://www.tavistoica.xyz",

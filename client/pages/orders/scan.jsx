@@ -33,11 +33,11 @@ const ScanOrder = ({ currentUser }) => {
         {!data && (
           <QrReader
             onResult={(result, error) => {
-              if (!result) {
+              if (!!result) {
                 setData(result?.text);
               }
 
-              if (!error) {
+              if (!!error) {
                 console.info("err: ", error);
               }
             }}
