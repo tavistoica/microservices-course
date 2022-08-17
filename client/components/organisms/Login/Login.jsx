@@ -38,6 +38,7 @@ export const Login = ({
           />
         </div>
         <Button
+          type="submit"
           stylesProp={styles.margintop}
           message={LOGIN_PAGE.LOGIN_MESSAGE}
         />
@@ -55,6 +56,7 @@ export const Login = ({
     <div className={`${styles.margintop} d-flex justify-content-center`}>
       <Button
         message="Facebook"
+        type="submit"
         onClick={() => Router.push("/api/users/facebook")}
       />
     </div>
