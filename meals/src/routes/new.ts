@@ -5,6 +5,7 @@ import {
   natsWrapper,
   requireRestaurant,
   BadRequestError,
+  CustomRequest,
 } from "@ostoica/common";
 import { Meal } from "../models/meal.model";
 import { MealCreatedPublisher } from "../events/publishers/meal-created-publisher";
@@ -61,7 +62,7 @@ router.post(
         //  @ts-ignore
         price: parseInt(price),
         //  @ts-ignore
-        userId: req.currentUser?.id || "",
+        userId: (req as CustomRequest).token!.id,
         //  @ts-ignore
         stock: parseInt(stock),
         imagePath,
