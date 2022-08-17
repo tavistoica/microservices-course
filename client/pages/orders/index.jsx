@@ -17,7 +17,6 @@ const OrderIndex = () => {
       headers: {
         Authorization: `Bearer ${auth.accessToken}`,
       },
-      withCredentials: true,
     });
     setOrders(data);
   }, []);
