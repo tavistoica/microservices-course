@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ItemList } from "../../components/molecules/ItemList/ItemList";
 
 import useAuth from "../../hooks/use-auth";
-import { axiosPrivate } from "../../api/axios";
+import useAxiosPrivate from "../../hooks/use-axios-private";
 
 import { PersistLogin } from "../../components/atoms/PersistLogin/PersistLogin";
 
@@ -12,12 +12,8 @@ const OrderIndex = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(async () => {
-    const { auth } = useAuth();
-    const { data } = await axiosPrivate.get("/api/orders", {
-      headers: {
-        Authorization: `Bearer ${auth.accessToken}`,
-      },
-    });
+    const axiosPrivate = useAxiosPrivate();
+    const { data } = await axiosPrivate.get("/api/orders");
     setOrders(data);
   }, []);
 

@@ -3,7 +3,7 @@ import Router from "next/router";
 // import StripeCheckout from "react-stripe-checkout";
 import QRCode from "react-qr-code";
 import useRequest from "../../hooks/use-request";
-import { axiosPrivate } from "../../api/axios";
+import useAxiosPrivate from "../../hooks/use-axios-private";
 
 import { calculateTime } from "../../utils/utils";
 import { ORDER_PAGE, ORDER_TYPES } from "../../utils/constants";
@@ -19,6 +19,7 @@ const OrderShow = ({ orderId }) => {
   const [order, setOrder] = useState([]);
 
   useEffect(async () => {
+    const axiosPrivate = useAxiosPrivate();
     const { data } = await axiosPrivate.get(`/api/orders/${orderId}`, {
       headers: {
         Authorization: `Bearer ${auth.accessToken}`,
