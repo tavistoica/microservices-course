@@ -27,6 +27,7 @@ const OrderIndex = () => {
 
   return (
     <PersistLogin>
+      {console.log("orders", orders)}
       <div className={styles["orders-list"]}>
         <ItemList
           orders={orders}
