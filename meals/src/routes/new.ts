@@ -55,6 +55,8 @@ router.post(
       }
       logger.info("image was set in cloudinary");
 
+      console.log("new order with userId: ", (req as CustomRequest).token!.id);
+
       const { title, price, stock } = fields;
       const meal = Meal.build({
         //  @ts-ignore
