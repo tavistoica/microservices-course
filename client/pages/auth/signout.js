@@ -3,6 +3,7 @@ import { useEffect } from "react";
 
 import { LOGOUT_PAGE } from "../../utils/constants";
 import useLogout from "../../hooks/use-logout";
+import { PersistLogin } from "../../components/atoms/PersistLogin/PersistLogin";
 
 const signout = () => {
   const router = useRouter();
@@ -15,7 +16,7 @@ const signout = () => {
     }, 1000);
   }, []);
 
-  return <div>{LOGOUT_PAGE.MESSAGE}</div>;
+  return <PersistLogin>{LOGOUT_PAGE.MESSAGE}</PersistLogin>;
 };
 
 export default signout;

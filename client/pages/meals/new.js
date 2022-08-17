@@ -13,6 +13,7 @@ import {
   mealStockValidation,
 } from "../../utils/input-validation";
 import useAuth from "../../hooks/use-auth";
+import { PersistLogin } from "../../components/atoms/PersistLogin/PersistLogin";
 
 import { HOST_URL } from "../../utils/constants";
 
@@ -74,51 +75,53 @@ const newMeal = () => {
   };
 
   return (
-    <div>
-      <h1>Publich a Meal</h1>
-      <form onSubmit={onSubmit}>
-        <div className={styles.margintop}>
-          <FormField
-            placeholder="Enter Meal Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            label="Title"
-            getError={mealTitleValidation}
-            required
-          />
-        </div>
-        <div className={styles.margintop}>
-          <FormField
-            type="number"
-            placeholder="99.99"
-            value={price}
-            onBlur={onBlur}
-            onChange={(e) => setPrice(e.target.value)}
-            label="Price"
-            getError={mealPriceValidation}
-            required
-          />
-        </div>
-        <div className={styles.margintop}>
-          <FormField
-            type="number"
-            placeholder="Stock amount"
-            value={stock}
-            onBlur={onBlur}
-            onChange={(e) => setStock(e.target.value)}
-            label="Stock"
-            getError={mealStockValidation}
-            required
-          />
-        </div>
-        <div className={styles.margintop}>
-          <label>Image</label>
-          <FileUploader onFileSelect={(file) => setImage(file)} />
-        </div>
-        {/* {errors} */}
-        <button className="btn btn-primary">Submit</button>
-      </form>
-    </div>
+    <PersistLogin>
+      <div>
+        <h1>Publich a Meal</h1>
+        <form onSubmit={onSubmit}>
+          <div className={styles.margintop}>
+            <FormField
+              placeholder="Enter Meal Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              label="Title"
+              getError={mealTitleValidation}
+              required
+            />
+          </div>
+          <div className={styles.margintop}>
+            <FormField
+              type="number"
+              placeholder="99.99"
+              value={price}
+              onBlur={onBlur}
+              onChange={(e) => setPrice(e.target.value)}
+              label="Price"
+              getError={mealPriceValidation}
+              required
+            />
+          </div>
+          <div className={styles.margintop}>
+            <FormField
+              type="number"
+              placeholder="Stock amount"
+              value={stock}
+              onBlur={onBlur}
+              onChange={(e) => setStock(e.target.value)}
+              label="Stock"
+              getError={mealStockValidation}
+              required
+            />
+          </div>
+          <div className={styles.margintop}>
+            <label>Image</label>
+            <FileUploader onFileSelect={(file) => setImage(file)} />
+          </div>
+          {/* {errors} */}
+          <button className="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </PersistLogin>
   );
 };
 

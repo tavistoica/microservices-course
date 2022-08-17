@@ -1,5 +1,6 @@
 import { ItemList } from "../../components/molecules/ItemList/ItemList";
 import useAuth from "../../hooks/use-auth";
+import { PersistLogin } from "../../components/atoms/PersistLogin/PersistLogin";
 
 import styles from "./index.module.css";
 
@@ -21,6 +22,7 @@ const OrderIndex = ({ orders }) => {
   const headers = ["Title", "Status", "Amount", "Price"];
 
   return (
+    <PersistLogin>
     <div className={styles["orders-list"]}>
       <ItemList
         orders={orders}
@@ -29,6 +31,7 @@ const OrderIndex = ({ orders }) => {
         baseURL="/orders"
       />
     </div>
+    </PersistLogin>
   );
 };
 
