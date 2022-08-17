@@ -4,7 +4,6 @@ import { Header } from "..//components/organisms/Header/Header";
 import { AuthProvider } from "../context/auth-provider";
 
 import "./styles.css";
-import PersistLogin from "../components/atoms/PersistLogin/PersistLogin";
 
 const AppComponent = ({ Component, pageProps }) => {
   return (

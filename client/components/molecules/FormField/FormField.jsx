@@ -1,6 +1,7 @@
-import { useState } from "react";
-import { useDidMountEffect } from "../../../hooks/use-did-mount-effect";
+import React, { useState } from "react";
 import classnames from "classnames";
+
+import { useDidMountEffect } from "../../../hooks/use-did-mount-effect";
 import styles from "./FormField.module.css";
 import { Text } from "../../atoms/Text/Text";
 import { TEXT_SIZES } from "../../../utils/constants";
@@ -12,7 +13,6 @@ export const FormField = ({
   value,
   label,
   onChange,
-  className = "",
   type = null,
   getError = null,
   placeholder = "",

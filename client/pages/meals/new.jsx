@@ -1,5 +1,6 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import React, { useState } from "react";
 import Router from "next/router";
-import { useState } from "react";
 import FormData from "form-data";
 import axios from "axios";
 
@@ -46,7 +47,7 @@ const newMeal = () => {
   const onBlur = () => {
     const value = parseFloat(price);
 
-    if (isNaN(value)) {
+    if (Number.isNaN(value)) {
       setPrice("");
       return;
     }
@@ -118,7 +119,9 @@ const newMeal = () => {
             <FileUploader onFileSelect={(file) => setImage(file)} />
           </div>
           {/* {errors} */}
-          <button className="btn btn-primary">Submit</button>
+          <button type="button" className="btn btn-primary">
+            Submit
+          </button>
         </form>
       </div>
     </PersistLogin>

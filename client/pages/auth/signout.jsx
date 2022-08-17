@@ -1,5 +1,5 @@
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 
 import { LOGOUT_PAGE } from "../../utils/constants";
 import useLogout from "../../hooks/use-logout";

@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./Button.module.css";
 
 export const Button = ({
@@ -6,14 +7,13 @@ export const Button = ({
   stylesProp = "",
   onClick = null,
   disable = false,
-}) => {
-  return (
-    <button
-      className={`${stylesProp} ${styles.button} btn btn-${type}`}
-      onClick={onClick}
-      disabled={disable}
-    >
-      {message}
-    </button>
-  );
-};
+}) => (
+  <button
+    type="button"
+    className={`${stylesProp} ${styles.button} btn btn-${type}`}
+    onClick={onClick}
+    disabled={disable}
+  >
+    {message}
+  </button>
+);
