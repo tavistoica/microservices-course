@@ -56,6 +56,8 @@ router.post(
     const expiration = new Date();
     expiration.setSeconds(expiration.getSeconds() + EXPIRATION_WINDOW_SECONDS);
 
+    console.log("new order with userId: ", (req as CustomRequest).token!.id);
+
     //  Build the order and save it to the database
     const order = Order.build({
       userId: (req as CustomRequest).token!.id,
