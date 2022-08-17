@@ -10,13 +10,14 @@ import { ORDER_PAGE, ORDER_TYPES } from "../../utils/constants";
 import styles from "./[orderId].module.css";
 import { Button } from "../../components/atoms/Button/Button";
 import useAuth from "../../hooks/use-auth";
+import { PersistLogin } from "../../components/atoms/PersistLogin/PersistLogin";
 
 const mainClass = "oct-order";
 
 const OrderShow = ({ orderId }) => {
   const { auth } = useAuth();
   const [order, setOrder] = useState([]);
-  
+
   useEffect(async () => {
     const { data } = await axios.get(`/api/orders/${orderId}`, {
       headers: {
@@ -24,8 +25,8 @@ const OrderShow = ({ orderId }) => {
       },
       withCredentials: true,
     });
-    setOrder(data)
-  }, [])
+    setOrder(data);
+  }, []);
 
   const [timeLeft, setTimeLeft] = useState(0);
 
@@ -52,46 +53,47 @@ const OrderShow = ({ orderId }) => {
   }, [order]);
 
   return (
-    <div className={styles[mainClass]}>
-      <div className={styles[`${mainClass}__errors`]}>{errors}</div>
-      {order.status === ORDER_TYPES.CREATED && (
-        <div className={styles[`${mainClass}__created`]}>
-          <div className={styles[`${mainClass}__qr-code`]}>
-            <QRCode value={order.id} />
+    <PersistLogin>
+      <div className={styles[mainClass]}>
+        <div className={styles[`${mainClass}__errors`]}>{errors}</div>
+        {order.status === ORDER_TYPES.CREATED && (
+          <div className={styles[`${mainClass}__created`]}>
+            <div className={styles[`${mainClass}__qr-code`]}>
+              <QRCode value={order.id} />
+            </div>
+            <div className={styles[`${mainClass}__cancel-button`]}>
+              <Button
+                message={ORDER_PAGE.CANCEL_BUTTON_TEXT}
+                type="danger"
+                onClick={() => doRequest()}
+              />
+            </div>
           </div>
-          <div className={styles[`${mainClass}__cancel-button`]}>
-            <Button
-              message={ORDER_PAGE.CANCEL_BUTTON_TEXT}
-              type="danger"
-              onClick={() => doRequest()}
-            />
+        )}
+        {(!timeLeft || order.status === ORDER_TYPES.CANCELLED) && (
+          <div className={styles[`${mainClass}__cancelled`]}>
+            {ORDER_PAGE.CANCELLED_MESSAGE}
           </div>
-        </div>
-      )}
-      {(!timeLeft || order.status === ORDER_TYPES.CANCELLED) && (
-        <div className={styles[`${mainClass}__cancelled`]}>
-          {ORDER_PAGE.CANCELLED_MESSAGE}
-        </div>
-      )}
-      {timeLeft && order.status === ORDER_TYPES.CREATED && (
-        <div className={styles[`${mainClass}__time`]}>
-          <h5>{ORDER_PAGE.LEFT_TO_PAY_MESSAGE}</h5>
-          <h6>{timeLeft}</h6>
-        </div>
-      )}
-      {/* <StripeCheckout
+        )}
+        {timeLeft && order.status === ORDER_TYPES.CREATED && (
+          <div className={styles[`${mainClass}__time`]}>
+            <h5>{ORDER_PAGE.LEFT_TO_PAY_MESSAGE}</h5>
+            <h6>{timeLeft}</h6>
+          </div>
+        )}
+        {/* <StripeCheckout
         token={({ id }) => doRequest({ token: id })}
         stripeKey="pk_test_51JGhaeAltPmlu6DoHAGEQpvnVASrUHXMRFpAem4B3IVL03sEe4qveWi8NHOI9XsSGFfuLmH4tqVqrJ9J1BLoimVe00WW87uYDR"
         amount={order.meal.price * 100}
         email={currentUser.email}
       /> */}
-    </div>
+      </div>
+    </PersistLogin>
   );
 };
 
 export const getServerSideProps = async (context) => {
   const { orderId } = context.query;
-
 
   return { props: { orderId } };
 };
