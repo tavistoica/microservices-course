@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Router from "next/router";
 // import StripeCheckout from "react-stripe-checkout";
 import QRCode from "react-qr-code";
@@ -83,7 +83,6 @@ const OrderShow = ({ orderId }) => {
         )}
         {/* <StripeCheckout
         token={({ id }) => doRequest({ token: id })}
-        stripeKey="pk_test_51JGhaeAltPmlu6DoHAGEQpvnVASrUHXMRFpAem4B3IVL03sEe4qveWi8NHOI9XsSGFfuLmH4tqVqrJ9J1BLoimVe00WW87uYDR"
         amount={order.meal.price * 100}
         email={currentUser.email}
       /> */}

@@ -1,8 +1,10 @@
-import { useState } from "react";
+/* eslint-disable no-plusplus */
+import React, { useState } from "react";
+import Router from "next/router";
+
 import axios from "../../api/axios";
 import useRequest from "../../hooks/use-request";
 import useAuth from "../../hooks/use-auth";
-import Router from "next/router";
 
 import styles from "./meal.module.css";
 import { PersistLogin } from "../../components/atoms/PersistLogin/PersistLogin";
@@ -45,7 +47,7 @@ const MealShow = ({ meal }) => {
         <h1>{meal.title}</h1>
         <h4>{meal.price}$</h4>
         <div>
-          <img src={meal.imagePath} width="300px" />
+          <img alt="Meal" src={meal.imagePath} width="300px" />
         </div>
         <div>
           <select
@@ -57,6 +59,7 @@ const MealShow = ({ meal }) => {
         </div>
         {errors}
         <button
+          type="button"
           className={`btn btn-primary ${styles["purchase-btn"]}`}
           onClick={() => doRequest()}
         >

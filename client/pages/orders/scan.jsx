@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import useRequest from "../../hooks/use-request";
+import React, { useState, useEffect } from "react";
 import { QrReader } from "react-qr-reader";
+import useRequest from "../../hooks/use-request";
 
 import styles from "./index.module.css";
 import useAuth from "../../hooks/use-auth";
@@ -33,11 +33,11 @@ const ScanOrder = ({ currentUser }) => {
         {!data && (
           <QrReader
             onResult={(result, error) => {
-              if (!!result) {
+              if (!result) {
                 setData(result?.text);
               }
 
-              if (!!error) {
+              if (!error) {
                 console.info("err: ", error);
               }
             }}
@@ -50,7 +50,7 @@ const ScanOrder = ({ currentUser }) => {
             <h1>{resData.meal?.title}</h1>
             <h4>Status: {resData.status}</h4>
             <h4>Amount: {resData.itemAmount}</h4>
-            <h4>{resData.meal?.price * resData.itemAmount}$</h4>
+            <h4>{resData.meal?.price || 0 * resData.itemAmount}$</h4>
           </>
         )}
       </div>

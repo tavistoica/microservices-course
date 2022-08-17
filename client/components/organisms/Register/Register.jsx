@@ -1,17 +1,17 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
-import { UserEnum } from '@ostoica/common/build/types/user.types';
-import { REGISTER_PAGE } from '../../../utils/constants';
+import { UserEnum } from "@ostoica/common/build/types/user.types";
+import { REGISTER_PAGE } from "../../../utils/constants";
 import {
   emailValidation,
   passwordValidation,
   confirmPasswordValidation,
-} from '../../../utils/input-validation';
+} from "../../../utils/input-validation";
 
-import { Button } from '../../atoms/Button/Button';
-import { FormField } from '../../molecules/FormField/FormField';
+import { Button } from "../../atoms/Button/Button";
+import { FormField } from "../../molecules/FormField/FormField";
 
-import styles from './Register.module.css';
+import styles from "./Register.module.css";
 
 export const Register = ({
   onSubmit,
@@ -23,7 +23,7 @@ export const Register = ({
   setPassword,
   setRole,
 }) => {
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [isConfirmEqual, setIsConfirmEqual] = useState(true);
   const [isSubmittable, setIsSubmittable] = useState(false);
 
@@ -59,7 +59,7 @@ export const Register = ({
             placeholder={REGISTER_PAGE.EMAIL_PLACEHOLDER}
             getError={emailValidation}
             required
-            label={'Email'}
+            label="Email"
           />
         </div>
         <div className={styles.margintop}>
@@ -69,7 +69,7 @@ export const Register = ({
             value={password}
             placeholder={REGISTER_PAGE.PASSWORD_PLACEHOLDER}
             required
-            label={'Password'}
+            label="Password"
             getError={passwordValidation}
           />
         </div>
@@ -79,11 +79,11 @@ export const Register = ({
             onChange={(e) => setConfirmPassword(e.target.value)}
             value={confirmPassword}
             placeholder={REGISTER_PAGE.CONFIRM_PASSWORD_PLACEHOLDER}
-            getError={(confirmPassword) =>
-              confirmPasswordValidation(confirmPassword, password)
+            getError={(confirmPasswordErr) =>
+              confirmPasswordValidation(confirmPasswordErr, password)
             }
             required
-            label={'Confirm Password'}
+            label="Confirm Password"
           />
         </div>
         <div className={styles.margintop}>

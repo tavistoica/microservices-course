@@ -1,5 +1,6 @@
+import React, { useState } from "react";
+
 import axios from "../api/axios";
-import { useState } from "react";
 
 import { HOST_URL } from "../utils/constants";
 
@@ -12,10 +13,14 @@ const useRequest = ({ url, method, body, onSuccess, headers }) => {
     try {
       setErrors(null);
       if (method === "get") {
-        const response = await axios[method](`${config.SERVER_URL}${url}`, {
-          withCredentials: true,
-          ...props,
-        }, {withCredentials: true, headers});
+        const response = await axios[method](
+          `${config.SERVER_URL}${url}`,
+          {
+            withCredentials: true,
+            ...props,
+          },
+          { withCredentials: true, headers }
+        );
         if (onSuccess) {
           onSuccess(response.data);
         }
@@ -24,7 +29,7 @@ const useRequest = ({ url, method, body, onSuccess, headers }) => {
       const response = await axios[method](
         `${config.SERVER_URL}${url}`,
         {
-          ...body
+          ...body,
         },
         { withCredentials: true, ...props, headers }
       );
@@ -36,8 +41,8 @@ const useRequest = ({ url, method, body, onSuccess, headers }) => {
       setErrors(
         <div className="alert alert-danger">
           <ul className="my-0">
-            {err.response?.data?.errors?.map((err) => (
-              <li key={err.message}>{err.message}</li>
+            {err.response?.data?.errors?.map((error) => (
+              <li key={error.message}>{error.message}</li>
             ))}
           </ul>
         </div>
