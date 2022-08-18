@@ -17,15 +17,25 @@ const mainClass = "oct-order";
 const OrderShow = ({ orderId }) => {
   const { auth } = useAuth();
   const [order, setOrder] = useState([]);
+  const { doRequest: getOrder, errors: getOrderErrors } = useRequest({
+    url: `/api/orders/${orderId}`,
+    method: "get",
+    headers: {
+      Authorization: `Bearer ${auth.accessToken}`,
+    },
+    onSuccess: (res) => setOrder(res),
+  });
 
   useEffect(async () => {
-    const axiosPrivate = useAxiosPrivate();
-    const { data } = await axiosPrivate.get(`/api/orders/${orderId}`, {
-      headers: {
-        Authorization: `Bearer ${auth.accessToken}`,
-      },
-    });
-    setOrder(data);
+    getOrder();
+
+    // const axiosPrivate = useAxiosPrivate();
+    // const { data } = await axiosPrivate.get(`/api/orders/${orderId}`, {
+    //   headers: {
+    //     Authorization: `Bearer ${auth.accessToken}`,
+    //   },
+    // });
+    // setOrder(data);
   }, []);
 
   const [timeLeft, setTimeLeft] = useState(0);
