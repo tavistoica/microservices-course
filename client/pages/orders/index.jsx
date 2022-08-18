@@ -10,13 +10,15 @@ import { PersistLogin } from "../../components/atoms/PersistLogin/PersistLogin";
 import styles from "./index.module.css";
 
 const OrderIndex = () => {
-  const [orders, setOrders] = useState([]);
   const { auth } = useAuth();
+  const [orders, setOrders] = useState([]);
 
   const { doRequest, errors } = useRequest({
-    url: `/api/orders`,
-    headers: { Authorization: `Bearer ${auth.accessToken}` },
+    url: "/api/orders",
     method: "get",
+    headers: {
+      Authorization: `Bearer ${auth.accessToken}`,
+    },
     onSuccess: (res) => setOrders(res),
   });
 

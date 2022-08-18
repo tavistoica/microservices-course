@@ -13,14 +13,11 @@ const useRequest = ({ url, method, body, onSuccess, headers }) => {
     try {
       setErrors(null);
       if (method === "get") {
-        const response = await axios[method](
-          `${config.SERVER_URL}${url}`,
-          {
-            withCredentials: true,
-            ...props,
-          },
-          { withCredentials: true, headers }
-        );
+        const response = await axios[method](`${config.SERVER_URL}${url}`, {
+          withCredentials: true,
+          ...props,
+          headers,
+        });
         if (onSuccess) {
           onSuccess(response.data);
         }
