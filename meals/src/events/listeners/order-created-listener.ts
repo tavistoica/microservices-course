@@ -29,7 +29,7 @@ export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
     logger.info(
       `OrderCreatedEvent - orderId - ${JSON.stringify(orderId)} - stock - ${
         meal.stock - data.itemAmount
-      }`
+      } - userId - ${meal.userId}`
     );
 
     meal.set({ orderId, stock: meal.stock - data.itemAmount });

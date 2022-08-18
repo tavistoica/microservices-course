@@ -69,6 +69,8 @@ router.post(
 
     await order.save();
 
+    logger.info(`new order has expiration time: ${order.expiresAt}`);
+
     //  Publish an event saying that the order was created
     new OrderCreatedPublisher(natsWrapper.client).publish({
       id: order.id,
