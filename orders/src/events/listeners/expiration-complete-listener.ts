@@ -27,6 +27,8 @@ export class ExpirationCompleteListener extends Listener<ExpirationCompleteEvent
       return msg.ack();
     }
 
+    logger.info(`Order cancelled - id - ${order.id} - user =${order.userId}`);
+
     order.set({
       status: OrderStatus.Cancelled,
     });

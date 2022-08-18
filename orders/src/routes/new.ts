@@ -18,7 +18,7 @@ import { logger } from "../utils/logger";
 
 const router = express.Router();
 
-const EXPIRATION_WINDOW_SECONDS = 60 * 60; // * 24 - for now is just an hour
+const EXPIRATION_WINDOW_SECONDS = 60 * 5; // * 60 * 24 - for now is just 5 mins
 
 router.post(
   "/api/orders",
