@@ -6,11 +6,7 @@ import styles from "./ItemList.module.css";
 
 export const ItemList = ({ orders, headers, baseURL, fields }) => {
   const mealList = orders.map((item) => (
-    <Link
-      href={`${baseURL}/[itemId]`}
-      as={`${baseURL}/${item.id}`}
-      key={item.id}
-    >
+    <Link href="/orders/[orderId]" as={`/orders/${item.id}`} key={item.id}>
       <tr key={item.id}>
         {fields.map((field) => {
           if (field.includes(".")) {
