@@ -4,11 +4,7 @@ import { app } from "../app";
 import request from "supertest";
 
 declare global {
-  namespace NodeJS {
-    interface Global {
-      signin(): Promise<{ accessToken: string; refreshToken: string }>;
-    }
-  }
+  function signin(): Promise<{ accessToken: string; refreshToken: string }>;
 }
 
 process.env.SALT = "TEST123";
