@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response, CookieOptions } from "express";
 import { BadRequestError } from "@ostoica/common";
 import { User } from "../models/user.model";
 import jwt from "jsonwebtoken";
@@ -7,13 +7,14 @@ import {
   generateAccessToken,
   generateRefreshToken,
 } from "../utils/generateToken";
+import { COOKIE_CREATE_CONFIG, COOKIE_DELETE_CONFIG } from "../utils/constants";
 
 export const registerController = async (req: Request, res: Response) => {
   logger.info(
     `registerController - existingUser - body: ${JSON.stringify(req.body)}`
   );
 
-  if (!req?.body?.role) throw new BadRequestError("Role was not provided");
+  const cookies = req.cookies;
 
   req.body.email = req.body.email.toLowerCase();
 
@@ -26,7 +27,21 @@ export const registerController = async (req: Request, res: Response) => {
   }
 
   const user = User.build(req.body);
-  await user.save();
+
+  let newRefreshTokenArray = !cookies?.refreshToken
+    ? user.refreshToken
+    : user.refreshToken?.filter((item) => item !== cookies.refreshToken);
+
+  if (cookies?.refreshToken) {
+    const foundToken = await User.findOne({
+      refreshToken: cookies.refreshToken,
+    }).exec();
+    if (!foundToken) {
+      newRefreshTokenArray = [];
+    }
+
+    res.clearCookie("refreshToken", COOKIE_DELETE_CONFIG);
+  }
 
   //  Generate JWT
   const userJwt = jwt.sign(
@@ -44,8 +59,18 @@ export const registerController = async (req: Request, res: Response) => {
   // @ts-ignore
   const refreshToken = generateRefreshToken(user);
 
+  if (!user.refreshToken) user.refreshToken = [];
+  user.refreshToken = [...(newRefreshTokenArray || []), refreshToken];
+
+  await user.save();
+
   // //  Store it on session object
   // req.session = { jwt: userJwt };
 
+  res.cookie(
+    "refreshToken",
+    refreshToken,
+    COOKIE_CREATE_CONFIG as CookieOptions
+  );
   res.status(201).send({ accessToken, refreshToken });
 };

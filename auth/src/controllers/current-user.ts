@@ -15,6 +15,7 @@ export const currentUserController = async (req: Request, res: Response) => {
     // @ts-ignore
     email: (req as CustomRequest).token.email,
   });
+  console.log("current user", currentUser);
   logger.info(`currentUser ${JSON.stringify(currentUser).slice(0, 30)}`);
   return res.send({ currentUser });
 };

@@ -1,0 +1,389 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "auth MX - OpenAPI 3.0",
+    "version": "0.0.1"
+  },
+  "servers": [
+    {
+      "url": "https://www.tavistoica.xyz"
+    }
+  ],
+  "tags": [
+    {
+      "name": "auth MX"
+    }
+  ],
+  "paths": {
+    "/api/users/currentuser": {
+      "get": {
+        "tags": ["auth MX"],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "example": "Bearer 2134oi3531on1o35o13j351"
+            },
+            "required": true
+          }
+        ],
+        "summary": "Get authenticated user data",
+        "description": "Use this route to get data about the logged user",
+        "operationId": "currentUser",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessCurrentUserResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Client Error"
+          },
+          "401": {
+            "description": "authorization token not valid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Technical Error"
+          }
+        }
+      }
+    },
+    "/api/users/login": {
+      "post": {
+        "tags": ["auth MX"],
+        "summary": "Logs the user inside the application",
+        "operationId": "loginUser",
+        "responses": {
+          "200": {
+            "description": "Posted a new todo succesfuly",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessLoginResponse"
+                }
+              }
+            },
+            "headers": {
+              "Set-Cookie": {
+                "description": "Contains the session cookie named `refreshToken`. Pass this cookie back in subsequent requests.\n",
+                "schema": {
+                  "$ref": "#/components/schemas/RefreshTokenSetCookie"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Client Error"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Technical Error"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequestBody"
+              }
+            }
+          },
+          "required": true
+        }
+      }
+    },
+    "/api/users/logout": {
+      "post": {
+        "tags": ["auth MX"],
+        "summary": "Logs the user out of the application",
+        "operationId": "logoutUser",
+        "parameters": [
+          {
+            "name": "Cookie",
+            "in": "header",
+            "description": "refreshToken provided in the cookie header",
+            "example": "refreshToken=eteoigtjo13j513;",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/api/users/refresh-token": {
+      "post": {
+        "tags": ["auth MX"],
+        "summary": "Generates a new Refresh Token to the user",
+        "operationId": "refreshToken",
+        "parameters": [
+          {
+            "name": "Cookie",
+            "in": "header",
+            "description": "refreshToken provided in the cookie header",
+            "example": "refreshToken=eteoigtjo13j513;",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "headers": {
+              "Set-Cookie": {
+                "description": "Contains the session cookie named `refreshToken`. Pass this cookie back in subsequent requests.\n",
+                "schema": {
+                  "$ref": "#/components/schemas/RefreshTokenSetCookie"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RefreshTokenSuccess"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Authorization Error"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Forbidden Error"
+          }
+        }
+      }
+    },
+    "/api/users/register": {
+      "post": {
+        "tags": ["auth MX"],
+        "summary": "Creates a new account inside the application",
+        "operationId": "registerUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterRequestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "headers": {
+              "Set-Cookie": {
+                "description": "Contains the session cookie named `refreshToken`. Pass this cookie back in subsequent requests.\n",
+                "schema": {
+                  "$ref": "#/components/schemas/RefreshTokenSetCookie"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessRegisterResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Client Error"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Technical Error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "RefreshTokenSetCookie": {
+        "type": "string",
+        "example": "refreshToken=abcde12345; Path=/; HttpOnly"
+      },
+      "RefreshTokenSuccess": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": ["Customer", "Restaurant"]
+          },
+          "accessToken": {
+            "type": "string"
+          }
+        },
+        "required": ["role", "accessToken"]
+      },
+      "SuccessCurrentUserResponse": {
+        "type": "object",
+        "properties": {
+          "currentUser": {
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "string"
+              },
+              "role": {
+                "type": "string",
+                "enum": ["Customer", "Restaurant"]
+              },
+              "id": {
+                "type": "string"
+              }
+            },
+            "required": ["email", "role", "id"]
+          }
+        }
+      },
+      "SuccessRegisterResponse": {
+        "type": "object",
+        "required": ["accessToken", "refreshToken"],
+        "properties": {
+          "accessToken": {
+            "type": "string"
+          },
+          "refreshToken": {
+            "type": "string"
+          }
+        }
+      },
+      "SuccessLoginResponse": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string"
+          }
+        },
+        "required": ["accessToken"]
+      },
+      "LoginRequestBody": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "description": "Optional text that describes the error in more detail",
+            "type": "string"
+          }
+        },
+        "required": ["message"]
+      },
+      "RegisterRequestBody": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string",
+            "enum": ["Customer", "Restaurant"]
+          }
+        },
+        "required": ["email", "role", "password"]
+      }
+    }
+  }
+}
