@@ -1,10 +1,10 @@
-import express from "express";
-import { body } from "express-validator";
+import express, { CookieOptions } from "express";
 import passport from "passport";
 import { validateRequest } from "@ostoica/common";
 import { loginController } from "../controllers/login";
 import { resHandler } from "../utils/res-handler";
 import { logger } from "../utils/logger";
+import { COOKIE_CREATE_CONFIG, CURRENT_PROD_URL } from "../utils/constants";
 
 const router = express.Router();
 
@@ -26,11 +26,18 @@ router.get(
   passport.authenticate("facebook"),
   (req, res) => {
     logger.info("goes in next middleware");
-    // @ts-ignore
-    const token = req.authInfo?.jwtToken;
-    logger.info(`token ${token}`);
-    req.session = { jwt: token };
-    resHandler(res, null, null, "https://www.tavistoica.xyz/");
+    const { accessToken, refreshToken } = req.authInfo as {
+      accessToken: string;
+      refreshToken: string;
+    };
+
+    res.cookie(
+      "refreshToken",
+      refreshToken,
+      COOKIE_CREATE_CONFIG as CookieOptions
+    );
+    res.send({ accessToken });
+    resHandler(res, null, null, CURRENT_PROD_URL);
   }
 );
 
@@ -38,8 +45,8 @@ router.get(
   "/api/users/callback",
   passport.authenticate("facebook", {
     session: true,
-    successRedirect: "https://www.tavistoica.xyz/",
-    failureRedirect: "https://www.tavistoica.xyz/auth/login",
+    successRedirect: CURRENT_PROD_URL,
+    failureRedirect: `${CURRENT_PROD_URL}/auth/login`,
   })
 );
 

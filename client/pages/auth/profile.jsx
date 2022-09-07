@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import Router from "next/router";
-import useAuth from "../../hooks/use-auth";
 import { decode } from "jsonwebtoken";
+
+import useAuth from "../../hooks/use-auth";
 import { PersistLogin } from "../../components/atoms/PersistLogin/PersistLogin";
 
 import styles from "./profile.module.css";
@@ -11,7 +12,6 @@ const profile = () => {
   const userData = decode(auth.accessToken);
 
   useEffect(() => {
-    console.log("userData", userData);
     if (!userData?.email) {
       Router.push("/");
     }
@@ -19,9 +19,9 @@ const profile = () => {
 
   return (
     <PersistLogin>
-      <div className={styles["container"]}>
-        <div className={styles["row"]}>{`Email: ${userData?.email}`}</div>
-        <div className={styles["row"]}>{`Role: ${userData?.role}`}</div>
+      <div className={styles.container}>
+        <div className={styles.row}>{`Email: ${userData?.email}`}</div>
+        <div className={styles.row}>{`Role: ${userData?.role}`}</div>
       </div>
     </PersistLogin>
   );

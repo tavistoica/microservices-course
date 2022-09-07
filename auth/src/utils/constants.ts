@@ -9,3 +9,5 @@ export const COOKIE_CREATE_CONFIG = {
   ...COOKIE_DELETE_CONFIG,
   maxAge: 24 * 60 * 60 * 1000,
 };
+
+export const CURRENT_PROD_URL = "https://www.tavistoica.xyz/";

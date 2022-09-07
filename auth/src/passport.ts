@@ -52,18 +52,18 @@ passport.use(
         return;
       }
 
-      const jwtToken = jwt.sign(
-        {
-          id: checkUser!._id,
-          email: checkUser!.email,
-          role: checkUser!.role,
-        },
-        process.env.JWT_KEY!
+      // @ts-ignore
+      const accessToken = generateAccessToken(checkUser);
+      // @ts-ignore
+      const refreshToken = generateRefreshToken(checkUser);
+
+      logger.info(
+        `data in checkUser ${accessToken} ${refreshToken} ${JSON.stringify(
+          profile
+        )}`
       );
 
-      logger.info(`data in checkUser ${jwtToken} ${JSON.stringify(profile)}`);
-
-      done(null, profile, { jwtToken });
+      done(null, profile, { accessToken, refreshToken });
     }
   )
 );

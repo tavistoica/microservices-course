@@ -7,6 +7,7 @@ import passport from "passport";
 import cookieParser from "cookie-parser";
 import * as OpenApiValidator from "express-openapi-validator";
 import { serve, setup } from "swagger-ui-express";
+import "./passport";
 
 import { currentUserRouter } from "./routes/current-user";
 import { loginRouter } from "./routes/login";
@@ -57,13 +58,13 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 //   next();
 // });
 
-app.use(
-  OpenApiValidator.middleware({
-    apiSpec: swaggerDocument as OpenAPIV3.Document,
-    validateRequests: true,
-    validateResponses: true,
-  })
-);
+// app.use(
+//   OpenApiValidator.middleware({
+//     apiSpec: swaggerDocument as OpenAPIV3.Document,
+//     validateRequests: true,
+//     validateResponses: true,
+//   })
+// );
 
 app.use(currentUserRouter);
 app.use(loginRouter);
