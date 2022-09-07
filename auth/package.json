@@ -7,7 +7,7 @@
     "start": "npx cross-env NODE_ENV=production node build/server.js --resolveJsonModule",
     "test": "jest --watchAll --no-cache",
     "build": "webpack",
-    "dev": "npx cross-env npx cross-env ACCESS_TOKEN_PRIVATE_KEY=test ACCESS_TOKEN_TIME=1000 REFRESH_TOKEN_PRIVATE_KEY=test REFRESH_TOKEN_TIME=1000  ENV_CONFIG_PATH=config/.env JWT_KEY=test MONGO_URI=mongodb://localhost:27017 NATS_CLIENT_ID=test NATS_URL=http://localhost:3000 NATS_CLUSTER_ID=test CLOUDINARY_URL=cloudinary://test ts-node-dev --poll src/index.ts",
+    "dev": "npx cross-env npx cross-env ACCESS_TOKEN_PRIVATE_KEY=test ACCESS_TOKEN_TIME=1000 REFRESH_TOKEN_PRIVATE_KEY=test REFRESH_TOKEN_TIME=1000  ENV_CONFIG_PATH=config/.env JWT_KEY=test MONGO_URI=mongodb://localhost:27017 NATS_CLIENT_ID=test NATS_URL=http://localhost:3000 NATS_CLUSTER_ID=test CLOUDINARY_URL=cloudinary://test FACEBOOK_CLIENT_ID=test  FACEBOOK_CLIENT_SECRET=test  FACEBOOK_CALLBACK_URL=test ts-node-dev --poll src/index.ts",
     "test:ci": "jest"
   },
   "jest": {
