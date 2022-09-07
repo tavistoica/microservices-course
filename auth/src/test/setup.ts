@@ -13,7 +13,7 @@ process.env.ACCESS_TOKEN_PRIVATE_KEY = "TEST123";
 process.env.FACEBOOK_CLIENT_ID = "test";
 process.env.FACEBOOK_CLIENT_SECRET = "test";
 process.env.FACEBOOK_CALLBACK_URL = "test";
-process.env.MONGO_URI = "mongodb"; //localhost:27017
+process.env.MONGO_URI = "localhost:27017"; //localhost:27017
 
 const mockedUser = {
   email: "test@test.com",
@@ -21,12 +21,12 @@ const mockedUser = {
   role: "Customer",
 };
 
-let mongo: any;
+let mongo: MongoMemoryServer | null;
 beforeAll(async () => {
   process.env.JWT_KEY = "asdefge";
 
-  mongo = new MongoMemoryServer();
-  const mongoUri = await mongo.getUri();
+  mongo = await MongoMemoryServer.create();
+  const mongoUri = mongo.getUri();
 
   await mongoose.connect(mongoUri, {
     useNewUrlParser: true,
@@ -43,7 +43,9 @@ beforeEach(async () => {
 });
 
 afterAll(async () => {
-  await mongo.stop();
+  if (mongo) {
+    await mongo.stop();
+  }
   await mongoose.connection.close();
 });
 

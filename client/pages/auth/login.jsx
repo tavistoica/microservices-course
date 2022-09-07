@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Router from "next/router";
 import { decode } from "jsonwebtoken";
 import useAuth from "../../hooks/use-auth";
@@ -17,7 +17,6 @@ const login = () => {
     method: "post",
     body: { email, password },
     onSuccess: (response) => {
-      console.log("wtf", response, response?.accessToken);
       if (response.accessToken) {
         const user = decode(response.accessToken);
         setAuth({
