@@ -21,9 +21,15 @@ router.post(
   loginController
 );
 
+router.get("/api/users/facebook", passport.authenticate("facebook"));
+
 router.get(
-  "/api/users/facebook",
-  passport.authenticate("facebook"),
+  "/api/users/callback",
+  passport.authenticate("facebook", {
+    session: true,
+    successRedirect: `${CURRENT_PROD_URL}/auth/profile`,
+    failureRedirect: `${CURRENT_PROD_URL}/auth/login`,
+  }),
   (req, res) => {
     logger.info("goes in next middleware");
     const { accessToken, refreshToken } = req.authInfo as {
@@ -39,15 +45,6 @@ router.get(
     res.send({ accessToken });
     resHandler(res, null, null, CURRENT_PROD_URL);
   }
-);
-
-router.get(
-  "/api/users/callback",
-  passport.authenticate("facebook", {
-    session: true,
-    successRedirect: CURRENT_PROD_URL,
-    failureRedirect: `${CURRENT_PROD_URL}/auth/login`,
-  })
 );
 
 export { router as loginRouter };
