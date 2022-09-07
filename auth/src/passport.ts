@@ -6,6 +6,11 @@ import { logger } from "./utils/logger";
 import { User } from "./models/user.model";
 import { UserType, UserEnum } from "@ostoica/common";
 
+import {
+  generateAccessToken,
+  generateRefreshToken,
+} from "./utils/generateToken";
+
 const FacebookStrategy = strategy.Strategy;
 
 passport.serializeUser(function (user, done) {
@@ -38,23 +43,24 @@ passport.use(
       if (!checkUser) {
         const user = await User.build(userData).save();
 
-        const jwtToken = jwt.sign(
-          {
-            id: user.id,
-            email: user.email,
-            role: user.role,
-          },
-          process.env.JWT_KEY!
-        );
-        logger.info(`!checkUser ${jwtToken} ${JSON.stringify(profile)}`);
+        //  @ts-ignore
+        const accessToken = generateAccessToken(user);
+        //  @ts-ignore
+        const refreshToken = generateRefreshToken(user);
 
-        done(null, profile, { jwtToken });
+        logger.info(
+          `data in checkUser ${accessToken} ${refreshToken} ${JSON.stringify(
+            profile
+          )}`
+        );
+
+        done(null, profile, { accessToken, refreshToken });
         return;
       }
 
-      // @ts-ignore
+      //  @ts-ignore
       const accessToken = generateAccessToken(checkUser);
-      // @ts-ignore
+      //  @ts-ignore
       const refreshToken = generateRefreshToken(checkUser);
 
       logger.info(
