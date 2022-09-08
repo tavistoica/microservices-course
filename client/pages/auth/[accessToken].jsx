@@ -31,4 +31,10 @@ const oauth = ({ accessToken }) => {
   );
 };
 
+export const getServerSideProps = async (context) => {
+  const { accessToken } = context.query;
+
+  return { props: { accessToken } };
+};
+
 export default oauth;
