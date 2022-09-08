@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "info": {
     "title": "auth MX - OpenAPI 3.0",
-    "version": "0.0.3"
+    "version": "0.0.4"
   },
   "servers": [
     {
@@ -145,6 +145,16 @@
         "summary": "Authenticates the user through Facebook",
         "description": "This route is called by facebook after authenticating a user",
         "operationId": "facebookLoginCallback",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "code",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Facebook code ID"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Posted a new todo succesfuly",
