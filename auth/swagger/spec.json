@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "info": {
     "title": "auth MX - OpenAPI 3.0",
-    "version": "0.0.2"
+    "version": "0.0.3"
   },
   "servers": [
     {
@@ -98,6 +98,70 @@
               }
             },
             "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "redirect to the main page"
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Client Error"
+          },
+          "401": {
+            "description": "authorization token not valid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Technical Error"
+          }
+        }
+      }
+    },
+    "/api/users/callback": {
+      "get": {
+        "tags": ["auth MX"],
+        "summary": "Authenticates the user through Facebook",
+        "description": "This route is called by facebook after authenticating a user",
+        "operationId": "facebookLoginCallback",
+        "responses": {
+          "200": {
+            "description": "Posted a new todo succesfuly",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessLoginResponse"
+                }
+              }
+            },
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "redirect to the main page"
+              },
               "Set-Cookie": {
                 "description": "Contains the session cookie named `refreshToken`. Pass this cookie back in subsequent requests.\n",
                 "schema": {
