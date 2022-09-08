@@ -26,24 +26,21 @@ router.get("/api/users/facebook", passport.authenticate("facebook"));
 router.get(
   "/api/users/callback",
   passport.authenticate("facebook", {
-    session: true,
-    successRedirect: `${CURRENT_PROD_URL}/auth/profile`,
+    session: false,
     failureRedirect: `${CURRENT_PROD_URL}/auth/login`,
   }),
   (req, res) => {
-    logger.info("goes in next middleware");
+    logger.info(`goes in next middleware - ${req.authInfo} - ${req}`);
     const { accessToken, refreshToken } = req.authInfo as {
       accessToken: string;
       refreshToken: string;
     };
-
     res.cookie(
       "refreshToken",
       refreshToken,
       COOKIE_CREATE_CONFIG as CookieOptions
     );
-    res.send({ accessToken });
-    resHandler(res, null, null, CURRENT_PROD_URL);
+    resHandler(res, null, { accessToken }, CURRENT_PROD_URL);
   }
 );
 
