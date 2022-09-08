@@ -58,13 +58,13 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 //   next();
 // });
 
-// app.use(
-//   OpenApiValidator.middleware({
-//     apiSpec: swaggerDocument as OpenAPIV3.Document,
-//     validateRequests: true,
-//     validateResponses: true,
-//   })
-// );
+app.use(
+  OpenApiValidator.middleware({
+    apiSpec: swaggerDocument as OpenAPIV3.Document,
+    validateRequests: true,
+    validateResponses: true,
+  })
+);
 
 app.use(currentUserRouter);
 app.use(loginRouter);

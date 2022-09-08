@@ -23,6 +23,7 @@ const start = async () => {
 
   app.listen(3001, () => {
     logger.info("listening on port 3001");
+    logger.info(`facebook callback - ${process.env.FACEBOOK_CALLBACK_URL}`);
   });
 };
 
