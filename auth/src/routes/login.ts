@@ -40,7 +40,7 @@ router.get(
       refreshToken,
       COOKIE_CREATE_CONFIG as CookieOptions
     );
-    resHandler(res, null, { accessToken }, CURRENT_PROD_URL);
+    resHandler(res, null, `${CURRENT_PROD_URL}/auth/${accessToken}`);
   }
 );
 
