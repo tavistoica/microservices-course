@@ -30,11 +30,7 @@ router.get(
     failureRedirect: `${CURRENT_PROD_URL}/auth/login`,
   }),
   (req, res) => {
-    logger.info(
-      `goes in next middleware - ${JSON.stringify(
-        req.authInfo
-      )} - ${JSON.stringify(req)}`
-    );
+    logger.info(`goes in next middleware - ${req.authInfo} `);
     const { accessToken, refreshToken } = req.authInfo as {
       accessToken: string;
       refreshToken: string;
@@ -44,7 +40,7 @@ router.get(
       refreshToken,
       COOKIE_CREATE_CONFIG as CookieOptions
     );
-    logger.info(`res after setting the cookie - ${JSON.stringify(res)}`);
+    logger.info(`res after setting the cookie - ${res}`);
     resHandler(res, null, null, `${CURRENT_PROD_URL}/auth/${accessToken}`);
   }
 );
